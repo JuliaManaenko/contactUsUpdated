@@ -30,7 +30,7 @@ public class TurnOffAccessDealers extends TestBase {
         Thread.sleep(1000);
         Dealers dealers = dmsHome2.clickOnDealersMenu();
         wait.until(jsLoad);
-        Thread.sleep(1000);
+        Thread.sleep(1100);
         /*turn off Contact Us page from access*/
         SitePackage editor = dealers.turnOnAccess();
         wait.until(editor.isEditorVisible());
