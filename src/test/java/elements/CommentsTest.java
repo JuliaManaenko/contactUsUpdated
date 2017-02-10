@@ -22,7 +22,7 @@ public class CommentsTest extends TestBase2 {
     @Test(priority = 1)
     public void emptyCommentsClass() throws InterruptedException {
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(contactUs.getCommentInputClass(), PropertyLoader.loadProperty("inputClassValid2"));
     }
 
@@ -117,16 +117,16 @@ public class CommentsTest extends TestBase2 {
     @Test(priority = 16, enabled = false)
     public void loginToDms() {
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dmsHome = PageFactory.initElements(driver, dms.dmsHome.class);
         dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 17, dataProvider = "comments")
     public void commentsinLead(String comment1, String comment2) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -138,19 +138,19 @@ public class CommentsTest extends TestBase2 {
         driver.findElement(By.name("comments")).sendKeys(comment1);
         Thread.sleep(1000);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
 
         Thread.sleep(1000);
         dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getComments(), comment2);
         Thread.sleep(3000);
         driver.close();

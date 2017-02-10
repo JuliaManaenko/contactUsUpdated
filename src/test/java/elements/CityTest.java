@@ -24,7 +24,7 @@ public class CityTest extends TestBase2 {
     public void cityEmptyValue() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getCityInputClass(), PropertyLoader.loadProperty("inputClassValid2"));
     }
@@ -41,7 +41,7 @@ public class CityTest extends TestBase2 {
         driver.findElement(By.name("city")).clear();
         driver.findElement(By.name("city")).sendKeys(city);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getCityInputClass(), PropertyLoader.loadProperty("inputClassValid"));
     }
@@ -52,7 +52,7 @@ public class CityTest extends TestBase2 {
         driver.findElement(By.name("city")).clear();
         driver.findElement(By.name("city")).sendKeys(city);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getCityInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
@@ -68,7 +68,7 @@ public class CityTest extends TestBase2 {
     public void cityCorrectCharinLead(String city) throws InterruptedException {
         Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -77,18 +77,18 @@ public class CityTest extends TestBase2 {
         driver.findElement(By.name("city")).clear();
         driver.findElement(By.name("city")).sendKeys(city);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getCity(), city);
         Thread.sleep(1000);
         driver.close();

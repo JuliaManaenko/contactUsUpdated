@@ -36,9 +36,9 @@ public class EmailInputTest {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         map2.clickContactTab();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
@@ -47,7 +47,7 @@ public class EmailInputTest {
         Thread.sleep(2000);
         editor.addWidget();
         editor.activatePage();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         if (driver != null) {
             //   LOG.info("Killing web driver");
@@ -73,10 +73,10 @@ public class EmailInputTest {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome dmsHome1 = PageFactory.initElements(driver, dms.dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome1.loginToDms();
-        // wait.until(jsLoad);
+        // waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        //  wait.until(jsLoad);
+        //  waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         map2.clickContactTab();
         Thread.sleep(3000);
@@ -208,10 +208,30 @@ public class EmailInputTest {
                 {PropertyLoader.loadProperty("nEmail19")},};
     }
 
-    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-        }
-    };
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+    /*method for execute Java Script: page should be loaded*/
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
 }

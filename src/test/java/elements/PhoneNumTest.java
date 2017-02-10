@@ -28,25 +28,25 @@ public class PhoneNumTest extends TestBase3 {
     public void inputMaskCheck(String inputMask, String phone) throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
-        Thread.sleep(1500);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(2000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOnForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         //fill phone input mask, it get not via page objects for using data provider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_edit notranslate']")).click();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).clear();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).sendKeys(inputMask); //'inputMask' variable is from datap rovider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_save']")).click();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         contactUs.fillFirstName();
         contactUs.fillLastName();
@@ -55,17 +55,17 @@ public class PhoneNumTest extends TestBase3 {
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(phone);//'phone' variable is from data provider
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getPhoneNum(), phone); //'phone' variable is from data provider
     }
 
@@ -75,25 +75,25 @@ public class PhoneNumTest extends TestBase3 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 10);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOnForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         //fill phone input mask, it get not via page objects for using data provider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_edit notranslate']")).click();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).clear();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).sendKeys(inputMask); //'inputMask' variable is from datap rovider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_save']")).click();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -101,7 +101,7 @@ public class PhoneNumTest extends TestBase3 {
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(phone);//'phone' variable is from data provider
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         Assert.assertEquals(contactUs.getPhoneNumInputClass(), "form-control text-uppercase error");
     }
@@ -113,25 +113,25 @@ public class PhoneNumTest extends TestBase3 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 10);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOnForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         //fill phone input mask, it get not via page objects for using data provider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_edit notranslate']")).click();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).clear();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).sendKeys(inputMask); //'inputMask' variable is from datap rovider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_save']")).click();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -139,7 +139,7 @@ public class PhoneNumTest extends TestBase3 {
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(phone);//'phone' variable is from data provider
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         Assert.assertEquals(contactUs.getPhoneNumInputBorderColor(), "rgb(132, 53, 52)");
     }
@@ -150,22 +150,22 @@ public class PhoneNumTest extends TestBase3 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 10);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOffForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(PropertyLoader.loadProperty("phoneAll"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getPhoneNumInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
@@ -175,22 +175,22 @@ public class PhoneNumTest extends TestBase3 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 10);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOffForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(PropertyLoader.loadProperty("phoneAll"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getPhoneNumInputClass(), "form-control text-uppercase valid");
     }
@@ -200,18 +200,18 @@ public class PhoneNumTest extends TestBase3 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 10);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOffForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         contactUs.fillFirstName();
         contactUs.fillLastName();
@@ -220,17 +220,17 @@ public class PhoneNumTest extends TestBase3 {
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(PropertyLoader.loadProperty("phoneAll"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getPhoneNum(), PropertyLoader.loadProperty("phoneAll"));
     }
 
@@ -256,7 +256,7 @@ public class PhoneNumTest extends TestBase3 {
     public Object[][] getIncorrectPhone() {
         return new Object[][]{{PropertyLoader.loadProperty("inputMaskL1"), PropertyLoader.loadProperty("phoneMix1")},
                 {PropertyLoader.loadProperty("inputMaskL2"), PropertyLoader.loadProperty("phoneLSN2")},
-                {PropertyLoader.loadProperty("inputMaskN1"), PropertyLoader.loadProperty("phoneMix2")},
+                {PropertyLoader.loadProperty("inputMaskN1"), PropertyLoader.loadProperty("phoneL2")},
                 {PropertyLoader.loadProperty("inputMaskN2"), PropertyLoader.loadProperty("phoneS2")},
                 {PropertyLoader.loadProperty("inputMaskNLS1"), PropertyLoader.loadProperty("phoneS1")},
                 {PropertyLoader.loadProperty("inputMaskNLS2"), PropertyLoader.loadProperty("phoneLSN1")},

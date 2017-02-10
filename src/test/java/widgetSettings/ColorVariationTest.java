@@ -51,19 +51,19 @@ public class ColorVariationTest {
     @Test(dataProvider = "colors")
     public void checkColorClass(String colorValue, String colorClass) throws InterruptedException {
         wait = new WebDriverWait(driver, 20);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         map2.clickContactTab();
         wait.until(ExpectedConditions.textToBe(By.xpath("//div[@class='pull-left']/span"), "Contact_us"));
         Thread.sleep(1000);
         ContactEditor editor = map2.clickAddPage();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         editor.addWidget();
         Thread.sleep(1000);
         ContactUsWidgetSettings settings = editor.openWidgetSettings();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         settings.setAnimationDisabled();
         Thread.sleep(1000);
@@ -71,18 +71,18 @@ public class ColorVariationTest {
         Select options = new Select(select);
         options.selectByValue(colorValue);
         editor2 = settings.clickOK();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         editor2.activatePage();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='jGrowl-notification ui-state-highlight ui-corner-all jgrowl_default_alert']/div[@class='message'][contains(text(), 'Page activated')]"))));
         Thread.sleep(2000);
         PreviewPage previewPage = editor2.clickOnPreview();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
         Thread.sleep(1000);
         ContactUs contactUs2 = previewPage.clickOnVisitWebsite();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs3 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs3.get(2));
         Thread.sleep(500);
@@ -99,7 +99,7 @@ public class ColorVariationTest {
         driver.switchTo().window(tabs2.get(0));
         Thread.sleep(1000);
         MAP2 map21 = editor2.backToMap();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         map21.deletePage();
     }
@@ -124,10 +124,30 @@ public class ColorVariationTest {
                 {PropertyLoader.loadProperty("colorVarValueTransparent"), PropertyLoader.loadProperty("colorClassTransparent")}};
     }
 
-    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-        }
-    };
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+    /*method for execute Java Script: page should be loaded*/
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
 }

@@ -16,15 +16,15 @@ public class ReCaptcha2Test extends TestBase4 {
     @Test(priority = 1)
     public void securityTitleExists(){
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         website.enableCaptcha();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='forms_captcha']//a[@class='button-style b_edit notranslate']"))));
         website.setReCaptcha2Type();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='type_of_captcha']//a[@class='button-style b_edit notranslate']"))));
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertTrue(contactUs.isSecurityTitleDisplayed());
     }
 

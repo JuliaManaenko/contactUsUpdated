@@ -34,7 +34,7 @@ public class MAP2 extends Page {
     @FindBy(how = How.XPATH, using = "(//span[@class='ui-button ui-state-default'])[last()]")
     private WebElement deleteLastPageBtn;
 
-    @FindBy(how = How.CSS, using = "a[href='/dms/admin']")
+    @FindBy(how = How.XPATH, using = "(//a[contains(text(), 'Admin')])[1]")
     private WebElement adminMenuItem;
 
     @FindBy(how = How.CSS, using = "a[href='/dms/admin/dealers']")
@@ -69,7 +69,7 @@ public class MAP2 extends Page {
 
     }
 
-    /*ckeck if Contact Us tab exists in pages tree*/
+    /*check if Contact Us tab exists in pages tree*/
     public boolean isContactTabExists() {
         try {
             contactUsTab.isDisplayed();

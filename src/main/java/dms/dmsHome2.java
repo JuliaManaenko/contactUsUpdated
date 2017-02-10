@@ -15,6 +15,7 @@ import page.Page;
 import settings.Sites;
 import settings.Users;
 import settings.Website;
+import webmail.EmailsList;
 import webmail.WebmailLogin;
 
 /**
@@ -27,7 +28,7 @@ public class dmsHome2 extends Page {
 
   /*declare elements on the page*/
 
-    @FindBy(how = How.CSS, using = "a[href='/dms/admin']")
+    @FindBy(how = How.XPATH, using = "(//a[contains(text(), 'Admin')])[1]")
     private WebElement adminMenuItem;
 
     @FindBy(how = How.CSS, using = "a[href='/dms/admin/dealers']")
@@ -122,9 +123,15 @@ public class dmsHome2 extends Page {
         return PageFactory.initElements(driver, Leads.class);
     }
 
-    /*go to Webmail page*/
+    /*go to Webmail login page*/
     public WebmailLogin clickOnWebmailMenu() {
         webmailMenuItem.click();
         return PageFactory.initElements(driver, WebmailLogin.class);
+    }
+
+    /*go to Webmail page*/
+    public EmailsList clickOnWebmailMenu2() {
+        webmailMenuItem.click();
+        return PageFactory.initElements(driver, EmailsList.class);
     }
 }

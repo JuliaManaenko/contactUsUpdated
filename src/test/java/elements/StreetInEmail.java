@@ -20,9 +20,8 @@ import java.util.ArrayList;
 public class StreetInEmail extends TestBase5 {
     @Test(dataProvider = "street")
     public void strCorrectCharinEmail(String street) throws InterruptedException {
-        Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -31,27 +30,27 @@ public class StreetInEmail extends TestBase5 {
         driver.findElement(By.name("street")).clear();
         driver.findElement(By.name("street")).sendKeys(street);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
-        Thread.sleep(3000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome2.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
-        Assert.assertEquals(emailDetails.getState(), street);
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        Assert.assertEquals(emailDetails.getStreet(), street);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @DataProvider(name = "street")

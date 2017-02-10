@@ -47,9 +47,9 @@ public class TestBase4 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
         dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         map2.clickContactTab();
         wait.until(isAddPageVisible());
@@ -70,9 +70,9 @@ public class TestBase4 {
     public void tearDown() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         map2.clickContactTab();
         wait.until(isLoadingInvisible());
@@ -107,11 +107,30 @@ public class TestBase4 {
         return ExpectedConditions.invisibilityOfElementLocated(By.className("mask"));
     }
 
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
     /*method for execute Java Script: page should be loaded*/
-    public ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-        }
-    };
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
 }

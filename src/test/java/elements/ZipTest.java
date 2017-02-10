@@ -33,9 +33,11 @@ public class ZipTest extends TestBase {
     public void loginToDms() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         map2.clickContactTab();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
         Thread.sleep(1000);
@@ -43,7 +45,8 @@ public class ZipTest extends TestBase {
         Thread.sleep(1000);
         editor.addWidget();
         editor.activatePage();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         Thread.sleep(2000);
     }
 
@@ -51,13 +54,16 @@ public class ZipTest extends TestBase {
     public void setZipN3() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         localization.allowNumZip();
         //Thread.sleep(1500);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
@@ -120,12 +126,15 @@ public class ZipTest extends TestBase {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         // dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         localization.allowNumZip();
         // Thread.sleep(1500);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
@@ -179,9 +188,11 @@ public class ZipTest extends TestBase {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //   dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
@@ -238,12 +249,15 @@ public class ZipTest extends TestBase {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         localization.allowNumZip();
         // Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
@@ -295,12 +309,15 @@ public class ZipTest extends TestBase {
     public void setZipL3() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         localization.allowCharNumZip();
         // Thread.sleep(1500);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
@@ -363,12 +380,15 @@ public class ZipTest extends TestBase {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         // dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         localization.allowCharNumZip();
         // Thread.sleep(1500);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
@@ -421,9 +441,11 @@ public class ZipTest extends TestBase {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //   dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
@@ -479,12 +501,15 @@ public class ZipTest extends TestBase {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         localization.allowCharNumZip();
         // Thread.sleep(2000);
@@ -536,9 +561,11 @@ public class ZipTest extends TestBase {
     @Test(priority = 44)
     public void deleteMap2Page() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         map2.clickContactTab();
         Thread.sleep(1000);
         map2.deletePage();

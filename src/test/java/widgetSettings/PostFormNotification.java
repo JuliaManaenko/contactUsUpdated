@@ -24,7 +24,7 @@ public class PostFormNotification extends TestBase2 {
         contactUs.fillEmail();
         contactUs.fillZip();
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         Assert.assertEquals(contactUs.postFormGetText(), "Your request has been received.\n" +
                 "A customer service representative will contact you shortly to complete the transaction.\n" +
@@ -39,9 +39,9 @@ public class PostFormNotification extends TestBase2 {
         wait = new WebDriverWait(driver, 20);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         map2.clickContactTab();
         Thread.sleep(2000);
         ContactEditor editor = map2.clickAddPage();
@@ -61,12 +61,12 @@ public class PostFormNotification extends TestBase2 {
         editor2.activatePage();
         Thread.sleep(2000);
         PreviewPage previewPage = editor2.clickOnPreview();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
         ContactUs contactUs2 = previewPage.clickOnVisitWebsite();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs3 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs3.get(2));
         contactUs2.fillFirstName();
@@ -75,15 +75,15 @@ public class PostFormNotification extends TestBase2 {
         contactUs2.fillEmail();
         contactUs2.fillZip();
         contactUs2.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         Assert.assertEquals(contactUs2.postFormGetText(), PropertyLoader.loadProperty("text50")+ "\n" + "OK");
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map21 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         map21.clickContactTab();
         Thread.sleep(3000);
         map21.deletePage();

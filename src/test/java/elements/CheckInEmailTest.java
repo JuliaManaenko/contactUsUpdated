@@ -19,20 +19,20 @@ public class CheckInEmailTest extends TestBase4 {
     public void testInEmail() throws InterruptedException {
         wait = new WebDriverWait(driver, 20);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum1();
         contactUs.fillEmail();
         contactUs.fillZip();
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         EmailsList emailsList = webmailLogin.loginToWebmail();
         Thread.sleep(2000);
         emailsList.clickDateColumn();

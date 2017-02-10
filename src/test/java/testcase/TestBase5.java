@@ -19,11 +19,13 @@ import settings.LeadsEmail;
 import settings.Website;
 import utility.PropertyLoader;
 import webdriver.WebDriverFactory;
+import webmail.WebmailLogin;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Julia on 07.02.2017.
+ * Used for tests in webmail
  */
 public class TestBase5 {
     protected WebDriver driver;
@@ -40,62 +42,79 @@ public class TestBase5 {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 20);
         driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
         driver.manage().deleteAllCookies();
         dmsHome = PageFactory.initElements(driver, dms.dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         map2.clickContactTab();
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(isAddPageVisible());
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         ContactEditor editor = map2.clickAddPage();
         wait.until(isLoadingInvisible());
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         editor.addWidget();
+        waitForJSandJQueryToLoad();
         Thread.sleep(500);
         editor.activatePage();
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(isPageActivatedTooltipVisible());
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         Website website = map2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         LeadsEmail leadsEmail = website.clickOnLeadsTab();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         leadsEmail.addEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        WebmailLogin webmailLogin = leadsEmail.clickOnWebmailMenu();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        webmailLogin.loginToWebmail();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
+        waitForJSandJQueryToLoad();
         contactUs = PageFactory.initElements(driver, ContactUs.class);
     }
 
     /*delete Contact Us page in MAP2, close browser*/
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         map2.clickContactTab();
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(getConditionForTitle());
-        Thread.sleep(1500);
+        Thread.sleep(2000);
         map2.deletePage();
+        waitForJSandJQueryToLoad();
         wait.until(isPageDeletedTooltipVisible());
         Thread.sleep(1000);
         Website website = map2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         LeadsEmail leadsEmail = website.clickOnLeadsTab();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         leadsEmail.removeEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         if (driver != null) {
             //   LOG.info("Killing web driver");
             WebDriverFactory.killDriverInstance();
@@ -122,11 +141,30 @@ public class TestBase5 {
         return ExpectedConditions.invisibilityOfElementLocated(By.className("mask"));
     }
 
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
     /*method for execute Java Script: page should be loaded*/
-    public ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-        }
-    };
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
 }

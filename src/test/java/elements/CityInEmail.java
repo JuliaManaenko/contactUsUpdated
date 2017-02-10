@@ -21,9 +21,8 @@ public class CityInEmail extends TestBase5 {
 
     @Test( dataProvider = "city")
     public void cityCorrectCharinEmail(String city) throws InterruptedException {
-        Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -32,27 +31,27 @@ public class CityInEmail extends TestBase5 {
         driver.findElement(By.name("city")).clear();
         driver.findElement(By.name("city")).sendKeys(city);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
-        Thread.sleep(3000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome2.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getCity(), city);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @DataProvider(name = "city")

@@ -22,7 +22,7 @@ public class StateProvinceTest extends TestBase2 {
     public void sEmptyValueClass() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getStateInputClass(), PropertyLoader.loadProperty("inputClassValid"));
     }
@@ -37,7 +37,7 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state1"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getStateInputClass(), PropertyLoader.loadProperty("inputClassValid"));
     }
@@ -52,7 +52,7 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state10"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getStateInputClass(), PropertyLoader.loadProperty("inputClassValid"));
     }
@@ -67,7 +67,7 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state20"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getStateInputClass(), PropertyLoader.loadProperty("inputClassValid"));
     }
@@ -82,7 +82,7 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state21"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getStateInputClass(), PropertyLoader.loadProperty("inputClassValid"));
     }
@@ -99,7 +99,7 @@ public class StateProvinceTest extends TestBase2 {
 
     @Test(priority = 12)
     public void sEmptyValueinLead() throws InterruptedException {
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -107,18 +107,18 @@ public class StateProvinceTest extends TestBase2 {
         contactUs.fillPhoneNum();
         driver.findElement(By.name("state")).clear();
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         // dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getState(), "");
         Thread.sleep(3000);
         driver.close();
@@ -129,7 +129,7 @@ public class StateProvinceTest extends TestBase2 {
     public void sOneCharinLead() throws InterruptedException {
         Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -138,17 +138,17 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state1"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getState(), PropertyLoader.loadProperty("state1"));
         Thread.sleep(1000);
         driver.close();
@@ -159,7 +159,7 @@ public class StateProvinceTest extends TestBase2 {
     public void sTenCharsinLead() throws InterruptedException {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -168,18 +168,18 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state10"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getState(), PropertyLoader.loadProperty("state10"));
         Thread.sleep(1000);
         driver.close();
@@ -190,7 +190,7 @@ public class StateProvinceTest extends TestBase2 {
     public void sTwentyCharsinLead() throws InterruptedException {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -199,18 +199,18 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state20"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         // dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getState(), PropertyLoader.loadProperty("state20"));
         Thread.sleep(1000);
         driver.close();
@@ -221,7 +221,7 @@ public class StateProvinceTest extends TestBase2 {
     public void sTwentyoneCharsinLead() throws InterruptedException {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -230,18 +230,18 @@ public class StateProvinceTest extends TestBase2 {
         driver.findElement(By.name("state")).clear();
         driver.findElement(By.name("state")).sendKeys(PropertyLoader.loadProperty("state21"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         // dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getState(), PropertyLoader.loadProperty("state20"));
         Thread.sleep(1000);
         driver.close();

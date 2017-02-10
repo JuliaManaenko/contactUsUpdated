@@ -27,21 +27,21 @@ public class ZipInLeadTest extends TestBase4 {
    /* private void loginToDms(){
         wait = new WebDriverWait(driver, 10);
         dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
     }*/
 
     @Test(priority = 1)
     public void setZipN3() throws InterruptedException {
         wait = new WebDriverWait(driver, 20);
         // dmsHome2 = dmsHome.loginToDms();
-        // wait.until(jsLoad);
+        // waitForJSandJQueryToLoad();
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
        // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -57,7 +57,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "zipN3", priority = 2)
     public void correctZipN3inLead(String zip1, String zip2) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -65,16 +65,16 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip1);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
         Thread.sleep(1000);
@@ -90,7 +90,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(priority = 3)
     public void cutZipN3inLead() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -98,16 +98,16 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
         Thread.sleep(1000);
@@ -124,12 +124,12 @@ public class ZipInLeadTest extends TestBase4 {
     public void setZipN4() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -142,7 +142,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "zipN4", priority = 5)
     public void correctZipN4inLead(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -150,20 +150,20 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), zip);
         Thread.sleep(5000);
@@ -177,7 +177,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(priority = 6)
     public void cutZipN4inLead() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -185,19 +185,19 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
         Thread.sleep(5000);
@@ -212,12 +212,12 @@ public class ZipInLeadTest extends TestBase4 {
     public void setZipN5() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -230,7 +230,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "zipN5", priority = 8)
     public void correctZipN5inLead(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -238,19 +238,19 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), zip);
         Thread.sleep(5000);
@@ -264,7 +264,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(priority = 9)
     public void cutZipN5inLead() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -272,19 +272,19 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
         Thread.sleep(5000);
@@ -299,12 +299,12 @@ public class ZipInLeadTest extends TestBase4 {
     public void setZipN6() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -317,7 +317,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(priority = 11)
     public void correctZipN6inLead() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -325,19 +325,19 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN6"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
         Thread.sleep(3000);
         driver.close();
@@ -350,7 +350,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(priority = 12)
     public void cutZipN6inLead() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -358,19 +358,19 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
         Thread.sleep(3000);
@@ -385,12 +385,12 @@ public class ZipInLeadTest extends TestBase4 {
     public void setZipL3() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -403,7 +403,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "zipL3", priority = 14)
     public void correctZipL3inLead(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -411,18 +411,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), zip);
         Thread.sleep(3000);
@@ -436,7 +436,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "Zip7", priority = 15)
     public void cutZipL3inLead(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -444,18 +444,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), zip6);
         Thread.sleep(3000);
@@ -470,12 +470,12 @@ public class ZipInLeadTest extends TestBase4 {
     public void setZipL4() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
        // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -488,7 +488,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "zipL4", priority = 17)
     public void correctZipL4inLead(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -496,18 +496,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), zip);
         Thread.sleep(3000);
@@ -521,7 +521,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "Zip7", priority = 18)
     public void cutZipL4inLead(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -529,18 +529,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), zip6);
         Thread.sleep(3000);
@@ -555,12 +555,12 @@ public class ZipInLeadTest extends TestBase4 {
     public void setZipL5() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
        //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -573,7 +573,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "zipL5", priority = 20)
     public void correctZipL5inLead(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -581,18 +581,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(leadDetails.getZip(), zip);
         Thread.sleep(3000);
@@ -606,7 +606,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "Zip7", priority = 21)
     public void cutZipL5inLead(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -614,18 +614,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getZip(), zip6);
         Thread.sleep(3000);
         driver.close();
@@ -639,12 +639,12 @@ public class ZipInLeadTest extends TestBase4 {
     public void setZipL6() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
        // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
@@ -657,7 +657,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "zipL6", priority = 23)
     public void correctZipL6inLead(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -665,18 +665,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getZip(), zip);
         Thread.sleep(3000);
         driver.close();
@@ -689,7 +689,7 @@ public class ZipInLeadTest extends TestBase4 {
     @Test(dataProvider = "Zip7", priority = 24)
     public void cutZipL6inLead(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -697,18 +697,18 @@ public class ZipInLeadTest extends TestBase4 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getZip(), zip6);
         Thread.sleep(3000);
         driver.close();

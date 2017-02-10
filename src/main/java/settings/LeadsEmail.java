@@ -3,11 +3,10 @@ package settings;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.*;
 import page.Page;
+import utility.PropertyLoader;
+import webmail.WebmailLogin;
 
 import java.util.List;
 
@@ -41,6 +40,9 @@ public class LeadsEmail extends Page {
     @FindBy(how = How.XPATH, using = "(//tr[@id='leads_email_contactus']//span[@class='gl_button save_btn'])[2]")
     private WebElement contactSave;
 
+    @FindBy(how = How.CSS, using = "a[href='/dms/email']")
+    private WebElement webmailMenuItem;
+
     /*not ready yet*/
     public void ifEmailPresent() {
         for (int i = 0; i < emailContexts.size(); i++) {
@@ -67,7 +69,7 @@ contactSave.click();
         contactEdit.click();
         contactAdd.click();
         contactInput.clear();
-        contactInput.sendKeys("test_1@dxloo.com");
+        contactInput.sendKeys(PropertyLoader.loadProperty("webmail.user"));
         htmlChckbox.click();
         contactSave.click();
     }
@@ -77,5 +79,11 @@ contactSave.click();
         contactEdit.click();
         htmlChckbox.click();
         contactSave.click();
+    }
+
+    /*go to Webmail login page*/
+    public WebmailLogin clickOnWebmailMenu() {
+        webmailMenuItem.click();
+        return PageFactory.initElements(driver, WebmailLogin.class);
     }
 }

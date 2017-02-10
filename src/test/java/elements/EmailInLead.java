@@ -23,17 +23,17 @@ public class EmailInLead extends TestBase2 {
         contactUs.fillZip();
         contactUs.fillEmail2();
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome21.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         LeadDetails leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getEmail(), PropertyLoader.loadProperty("Email1"));
         Thread.sleep(3000);
         driver.close();

@@ -42,9 +42,9 @@ public class TestBase2 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         Thread.sleep(2000);
         map2.clickContactTab();
@@ -61,7 +61,7 @@ public class TestBase2 {
         wait.until(isPageActivatedTooltipVisible());
         Thread.sleep(2000);
         Website website = map2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         Localization localization = website.clickOnLocalizationTab();
         Thread.sleep(2000);
@@ -72,14 +72,14 @@ public class TestBase2 {
     }
 
     /*delete Contact Us page in MAP2, close browser*/
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         try {
             MAP2 map2 = dmsHome2.clickOnMap2Menu();
-            wait.until(jsLoad);
+            waitForJSandJQueryToLoad();
             wait.until(isLoadingInvisible());
             map2.clickContactTab();
             wait.until(isLoadingInvisible());
@@ -121,13 +121,32 @@ public class TestBase2 {
         return ExpectedConditions.invisibilityOfElementLocated(By.className("mask"));
     }
 
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
     /*method for execute Java Script: page should be loaded*/
-    public ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-        }
-    };
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
 
 
 }

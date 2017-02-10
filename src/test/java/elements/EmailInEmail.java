@@ -26,25 +26,25 @@ public class EmailInEmail extends TestBase5 {
         contactUs.fillZip();
         contactUs.fillEmail2();
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+        EmailsList emailsList = dmsHome21.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
       /*  emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
         Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getEmail(), PropertyLoader.loadProperty("Email1"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 }

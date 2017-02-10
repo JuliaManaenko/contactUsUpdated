@@ -27,18 +27,19 @@ public class PhoneNumInEmail extends TestBase5 {
     public void setinputMaskDefault() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOnForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         localization.fillInputMaskStar1();
         Thread.sleep(2000);
+       // driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "phones")
@@ -46,25 +47,25 @@ public class PhoneNumInEmail extends TestBase5 {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOnForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         //fill phone input mask, it get not via page objects for using data provider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_edit notranslate']")).click();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).clear();
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//input")).sendKeys(inputMask); //'inputMask' variable is from datap rovider
         driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_save']")).click();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         contactUs.fillFirstName();
         contactUs.fillLastName();
@@ -73,46 +74,47 @@ public class PhoneNumInEmail extends TestBase5 {
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(phone);//'phone' variable is from data provider
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
-        Thread.sleep(3000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome2.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         Assert.assertEquals(emailDetails.getPhone(), phone);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         EmailsList emailsList1 = emailDetails.removeEmail();
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+       // driver.manage().deleteAllCookies();
     }
 
     @Test
     public void forceValidOffInEmail() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 10);
-     //   driver.manage().deleteAllCookies();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Website website = dmsHome2.clickOnWebsiteMenu2();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.turnOffForceValid();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         contactUs.fillFirstName();
         contactUs.fillLastName();
@@ -121,27 +123,27 @@ public class PhoneNumInEmail extends TestBase5 {
         driver.findElement(By.name("phone")).clear();
         driver.findElement(By.name("phone")).sendKeys(PropertyLoader.loadProperty("phoneAll"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome2.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        wait.until(jsLoad);
-        Thread.sleep(3000);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList =  dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
        /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
         Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getPhone(), PropertyLoader.loadProperty("phoneAll"));
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     /*1st element - phone input mask (diff variants), 2nd element - phone number in form and lead details*/

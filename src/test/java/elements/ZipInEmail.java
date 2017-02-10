@@ -29,32 +29,34 @@ public class ZipInEmail extends TestBase5 {
     public void setZipN3() throws InterruptedException {
         wait = new WebDriverWait(driver, 20);
         // dmsHome2 = dmsHome.loginToDms();
-        // wait.until(jsLoad);
+        // waitForJSandJQueryToLoad();
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
+        waitForJSandJQueryToLoad();
         // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip3();
+        waitForJSandJQueryToLoad();
         //  wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         localization.fillInputMaskNum1();
+        waitForJSandJQueryToLoad();
         //  wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_phone_mask_input']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isPhoneInputMaskEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "zipN3", priority = 2)
-    public void correctZipN3inLead(String zip1, String zip2) throws InterruptedException {
+    public void correctZipN3inEmail(String zip1, String zip2) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -62,34 +64,35 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip1);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
+        Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip2);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 3)
-    public void cutZipN3inLead() throws InterruptedException {
+    public void cutZipN3inEmail() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -97,54 +100,56 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        Thread.sleep(2000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+      /*  emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 4)
     public void setZipN4() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip4();
+        waitForJSandJQueryToLoad();
         // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "zipN4", priority = 5)
-    public void correctZipN4inLead(String zip) throws InterruptedException {
+    public void correctZipN4inEmail(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -152,34 +157,35 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
         Thread.sleep(1000);
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 6)
-    public void cutZipN4inLead() throws InterruptedException {
+    public void cutZipN4inEmail() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -187,54 +193,56 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
+        Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 7)
     public void setZipN5() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1500);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip5();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "zipN5", priority = 8)
-    public void correctZipN5inLead(String zip) throws InterruptedException {
+    public void correctZipN5inEmail(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -242,34 +250,35 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+      /*  emailsList.clickDateColumn();
+        Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 9)
-    public void cutZipN5inLead() throws InterruptedException {
+    public void cutZipN5inEmail() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -277,54 +286,56 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
+        Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 10)
     public void setZipN6() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowNumZip();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip6();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(priority = 11)
-    public void correctZipN6inLead() throws InterruptedException {
+    public void correctZipN6inEmail() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -332,34 +343,35 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN6"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+     /*   emailsList.clickDateColumn();
+        Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 12)
-    public void cutZipN6inLead() throws InterruptedException {
+    public void cutZipN6inEmail() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -367,54 +379,56 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
+        Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), PropertyLoader.loadProperty("zipN6"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 13)
     public void setZipL3() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip3();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "zipL3", priority = 14)
-    public void correctZipL3inLead(String zip) throws InterruptedException {
+    public void correctZipL3inEmail(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -422,33 +436,34 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(dataProvider = "Zip7", priority = 15)
-    public void cutZipL3inLead(String zip7, String zip6) throws InterruptedException {
+    public void cutZipL3inEmail(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -456,53 +471,55 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip6);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 16)
     public void setZipL4() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
+        waitForJSandJQueryToLoad();
         // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip4();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "zipL4", priority = 17)
-    public void correctZipL4inLead(String zip) throws InterruptedException {
+    public void correctZipL4inEmail(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -510,33 +527,34 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        /*emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(dataProvider = "Zip7", priority = 18)
-    public void cutZipL4inLead(String zip7, String zip6) throws InterruptedException {
+    public void cutZipL4inEmail(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -544,53 +562,55 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip6);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 19)
     public void setZipL5() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
+        waitForJSandJQueryToLoad();
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip5();
+        waitForJSandJQueryToLoad();
         // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "zipL5", priority = 20)
-    public void correctZipL5inLead(String zip) throws InterruptedException {
+    public void correctZipL5inEmail(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -598,33 +618,34 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(dataProvider = "Zip7", priority = 21)
-    public void cutZipL5inLead(String zip7, String zip6) throws InterruptedException {
+    public void cutZipL5inEmail(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -632,53 +653,55 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+      //  dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+      /*  emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip6);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 22)
     public void setZipL6() throws InterruptedException {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Localization localization = website.clickOnLocalizationTab();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         localization.allowCharNumZip();
+        waitForJSandJQueryToLoad();
         // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_zipcode_system']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isLetterZipEditBtnVisible());
         localization.setMinZip6();
+        waitForJSandJQueryToLoad();
         // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='localization_website_characters']//a[@class='button-style b_edit notranslate']"))));
         wait.until(localization.isMinNumZipEditBtnVisible());
         Thread.sleep(1000);
-        driver.manage().deleteAllCookies();
     }
 
     @Test(dataProvider = "zipL6", priority = 23)
-    public void correctZipL6inLead(String zip) throws InterruptedException {
+    public void correctZipL6inEmail(String zip) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -686,33 +709,34 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(dataProvider = "Zip7", priority = 24)
-    public void cutZipL6inLead(String zip7, String zip6) throws InterruptedException {
+    public void cutZipL6inEmail(String zip7, String zip6) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
@@ -720,27 +744,28 @@ public class ZipInEmail extends TestBase5 {
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
-        dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome21.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+       /* emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getZip(), zip6);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @DataProvider(name = "zipN3")

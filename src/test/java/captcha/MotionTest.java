@@ -16,15 +16,15 @@ public class MotionTest extends TestBase4 {
     @Test(priority = 1)
     public void securityTitleExists() {
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Website website = dmsHome2.clickOnWebsiteMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         website.enableCaptcha();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='forms_captcha']//a[@class='button-style b_edit notranslate']"))));
         website.setMotionCaptchaType();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//tr[@id='type_of_captcha']//a[@class='button-style b_edit notranslate']"))));
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertTrue(contactUs.isSecurityTitleDisplayed());
     }
 
@@ -40,12 +40,12 @@ public class MotionTest extends TestBase4 {
 
     @Test(priority = 4)
     public void motionCaptchaClass() {
-        Assert.assertEquals(contactUs.getMotionCaptchaClass(), PropertyLoader.loadProperty("motionCaptchaClass"));
+        Assert.assertTrue(contactUs.getMotionCaptchaClass(PropertyLoader.loadProperty("motionCaptchaClass")));
     }
 
     @Test(priority = 5)
     public void motionCaptchaClassError() {
         contactUs.clickOnSubmit();
-        Assert.assertEquals(contactUs.getMotionCaptchaClass(), PropertyLoader.loadProperty("motioncaptchaClassError"));
+        Assert.assertTrue(contactUs.getMotionCaptchaClass(PropertyLoader.loadProperty("motioncaptchaClassError")));
     }
 }

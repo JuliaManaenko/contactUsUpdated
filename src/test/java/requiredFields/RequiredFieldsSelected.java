@@ -23,7 +23,7 @@ public class RequiredFieldsSelected extends TestBase2 {
     @Test(groups = "dws")
     public void firstNameSelected() throws InterruptedException, IOException {
         driver.navigate().refresh();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.clickOnSubmit();
         Thread.sleep(2000);
         Assert.assertTrue(contactUs.isFirstNameSelected());
@@ -32,7 +32,7 @@ public class RequiredFieldsSelected extends TestBase2 {
     @Test(groups = "dws")
     public void lastNameSelected() throws InterruptedException, IOException {
         driver.navigate().refresh();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.clickOnSubmit();
         Thread.sleep(2000);
@@ -42,7 +42,7 @@ public class RequiredFieldsSelected extends TestBase2 {
     @Test(groups = "dws")
     public void phoneNumSelected() throws InterruptedException, IOException {
         driver.navigate().refresh();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.clickOnSubmit();
@@ -53,7 +53,7 @@ public class RequiredFieldsSelected extends TestBase2 {
     @Test(groups = "dws")
     public void emailSelected() throws InterruptedException, IOException {
         driver.navigate().refresh();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum1();
@@ -65,7 +65,7 @@ public class RequiredFieldsSelected extends TestBase2 {
     @Test(groups = "dws")
     public void zipSelected() throws InterruptedException, IOException {
         driver.navigate().refresh();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum1();

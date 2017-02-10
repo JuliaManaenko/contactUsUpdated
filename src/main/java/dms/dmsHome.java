@@ -30,7 +30,9 @@ public class dmsHome extends Page {
 
     /*method of logging to dms*/
     public dmsHome2 loginToDms() {
+        loginInput.clear();
         loginInput.sendKeys(PropertyLoader.loadProperty("super.login")); //login is taken from environment.properties file
+        pwInput.clear();
         pwInput.sendKeys(PropertyLoader.loadProperty("super.pw")); //password is taken from environment.properties file
         signInButton.click();
         return PageFactory.initElements(driver, dmsHome2.class);

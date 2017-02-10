@@ -23,9 +23,9 @@ public class IntPhoneNumTest extends TestBase2 {
     @Test(priority = 1)
     public void emptyValueClass() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getIntPhoneInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
@@ -37,7 +37,7 @@ public class IntPhoneNumTest extends TestBase2 {
 
     @Test(priority = 12)
     public void emptyValueinLead() throws InterruptedException {
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -45,20 +45,20 @@ public class IntPhoneNumTest extends TestBase2 {
         contactUs.fillPhoneNum();
         driver.findElement(By.name("international_phone")).clear();
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
 //        dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getIntPhoneNum(), "");
         Thread.sleep(3000);
         driver.close();
@@ -70,7 +70,7 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone1"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getIntPhoneInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
@@ -80,7 +80,7 @@ public class IntPhoneNumTest extends TestBase2 {
       /*  driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone1"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);*/
         Assert.assertEquals(contactUs.getIntPhoneInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
@@ -89,7 +89,7 @@ public class IntPhoneNumTest extends TestBase2 {
     public void oneCharinLead() throws InterruptedException {
         Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -98,19 +98,19 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone1"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getIntPhoneNum(), PropertyLoader.loadProperty("intPhone1"));
         Thread.sleep(1000);
         driver.close();
@@ -122,7 +122,7 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone10"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getIntPhoneInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
@@ -136,7 +136,7 @@ public class IntPhoneNumTest extends TestBase2 {
     public void tenCharsinLead() throws InterruptedException {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -145,20 +145,20 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone10"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getIntPhoneNum(), PropertyLoader.loadProperty("intPhone10"));
         Thread.sleep(1000);
         driver.close();
@@ -170,7 +170,7 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone20"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getIntPhoneInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
@@ -184,7 +184,7 @@ public class IntPhoneNumTest extends TestBase2 {
     public void twentyCharsinLead() throws InterruptedException {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -193,20 +193,20 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone20"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         // dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getIntPhoneNum(), PropertyLoader.loadProperty("intPhone20"));
         Thread.sleep(1000);
         driver.close();
@@ -218,7 +218,7 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone21"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getIntPhoneInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
@@ -237,7 +237,7 @@ public class IntPhoneNumTest extends TestBase2 {
     public void twentyoneCharsinLead() throws InterruptedException {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillEmail();
@@ -246,20 +246,20 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.findElement(By.name("international_phone")).clear();
         driver.findElement(By.name("international_phone")).sendKeys(PropertyLoader.loadProperty("intPhone21"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
         // dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getIntPhoneNum(), PropertyLoader.loadProperty("intPhone20"));
     }
 }

@@ -68,9 +68,9 @@ public class WowAnimation {
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
         contactUs = PageFactory.initElements(driver, ContactUs.class);
         dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         map2.clickContactTab();
         wait.until(isLoadingInvisible());
@@ -82,13 +82,13 @@ public class WowAnimation {
         editor.addWidget();
         Thread.sleep(1000);
         ContactUsWidgetSettings settings = editor.openWidgetSettings();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         WebElement select = driver.findElement(By.xpath("//div[@data-option='wow']//select"));
         Select options = new Select(select);
         options.selectByValue(wowValue);
         editor2 = settings.clickOK();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         //need to add wait.until()
         editor2.activatePage();
@@ -96,17 +96,17 @@ public class WowAnimation {
         wait.until(isPageActivatedTooltipVisible());
         Thread.sleep(2000);
         PreviewPage previewPage = editor2.clickOnPreview();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
         Thread.sleep(1000);
         ContactUs contactUs2 = previewPage.clickOnVisitWebsite();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         ArrayList<String> tabs3 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs3.get(2));
         Thread.sleep(500);
-        Assert.assertEquals(contactUs2.getWidgetClass(), wowClass);
-
+       // Assert.assertEquals(contactUs2.getWidgetClass(), wowClass);
+        Assert.assertTrue(contactUs2.getWidgetClassWow(wowClass));
     }
 
     @AfterMethod
@@ -119,7 +119,7 @@ public class WowAnimation {
         driver.switchTo().window(tabs2.get(0));
         Thread.sleep(1000);
         MAP2 map21 = editor2.backToMap();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         map21.deletePage();
         Thread.sleep(2000);
@@ -128,6 +128,33 @@ public class WowAnimation {
 
     @DataProvider(name = "wows")
     public Object[][] getWow() {
+        return new Object[][]{{PropertyLoader.loadProperty("animValueDisabled"),PropertyLoader.loadProperty("animValueDisabled2")},
+                {PropertyLoader.loadProperty("animValueBounceIn"),PropertyLoader.loadProperty("animValueBounceIn2")},
+                {PropertyLoader.loadProperty("animValueBounceInDown"), PropertyLoader.loadProperty("animValueBounceInDown2")},
+                {PropertyLoader.loadProperty("animValueBounceInLeft"), PropertyLoader.loadProperty("animValueBounceInLeft2")},
+                {PropertyLoader.loadProperty("animValueBounceInRight"), PropertyLoader.loadProperty("animValueBounceInRight2")},
+                {PropertyLoader.loadProperty("animValueFadeIn"), PropertyLoader.loadProperty("animValueFadeIn2")},
+                {PropertyLoader.loadProperty("animValueFadeInDown"), PropertyLoader.loadProperty("animValueFadeInDown2")},
+                {PropertyLoader.loadProperty("animValueFadeInDownBig"), PropertyLoader.loadProperty("animValueFadeInDownBig2")},
+                {PropertyLoader.loadProperty("animValueFadeInLeft"), PropertyLoader.loadProperty("animValueFadeInLeft2")},
+                {PropertyLoader.loadProperty("animValueFadeInLeftBig"), PropertyLoader.loadProperty("animValueFadeInLeftBig2")},
+                {PropertyLoader.loadProperty("animValueFadeInRight"), PropertyLoader.loadProperty("animValueFadeInRight2")},
+                {PropertyLoader.loadProperty("animValueFadeInRightBig"), PropertyLoader.loadProperty("animValueFadeInRightBig2")},
+                {PropertyLoader.loadProperty("animValueFadeInUp"), PropertyLoader.loadProperty("animValueFadeInUp2")},
+                {PropertyLoader.loadProperty("animValueFadeInUpBig"), PropertyLoader.loadProperty("animValueFadeInUpBig2")},
+                {PropertyLoader.loadProperty("animValueFlipInX"), PropertyLoader.loadProperty("animValueFlipInX2")},
+                {PropertyLoader.loadProperty("animValueFlipInY"), PropertyLoader.loadProperty("animValueFlipInY2")},
+                {PropertyLoader.loadProperty("animValueLightSpeedIn"), PropertyLoader.loadProperty("animValueLightSpeedIn2")},
+                {PropertyLoader.loadProperty("animValueRotateIn"), PropertyLoader.loadProperty("animValueRotateIn2")},
+                {PropertyLoader.loadProperty("animValueRotateInDownLeft"), PropertyLoader.loadProperty("animValueRotateInDownLeft2")},
+                {PropertyLoader.loadProperty("animValueRotateInDownRight"), PropertyLoader.loadProperty("animValueRotateInDownRight2")},
+                {PropertyLoader.loadProperty("animValueRotateInUpLeft"), PropertyLoader.loadProperty("animValueRotateInUpLeft2")},
+                {PropertyLoader.loadProperty("animValueRotateInUpRight"), PropertyLoader.loadProperty("animValueRotateInUpRight2")},
+                {PropertyLoader.loadProperty("animValueRollIn"), PropertyLoader.loadProperty("animValueRollIn2")}};
+    }
+
+    @DataProvider(name = "wows2")
+    public Object[][] getWow2() {
         return new Object[][]{{PropertyLoader.loadProperty("animValueDisabled"), PropertyLoader.loadProperty("animClassDisabled")},
                 {PropertyLoader.loadProperty("animValueBounceIn"), PropertyLoader.loadProperty("animClassBounceIn")},
                 {PropertyLoader.loadProperty("animValueBounceInDown"), PropertyLoader.loadProperty("animClassBounceInDown")},
@@ -153,13 +180,6 @@ public class WowAnimation {
                 {PropertyLoader.loadProperty("animValueRollIn"), PropertyLoader.loadProperty("animClassRollIn")}};
     }
 
-    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-        }
-    };
-
     protected ExpectedCondition<Boolean> isLoadingInvisible() {
         return ExpectedConditions.invisibilityOfElementLocated(By.className("mask"));
     }
@@ -170,5 +190,32 @@ public class WowAnimation {
 
     protected ExpectedCondition<WebElement> isPageActivatedTooltipVisible() {
         return ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@id='jGrowl']//div[@class='message'][contains(text(), 'Page activated')]")));
+    }
+
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+    /*method for execute Java Script: page should be loaded*/
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 }

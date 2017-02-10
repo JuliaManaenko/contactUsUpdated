@@ -462,8 +462,11 @@ public class ContactUs extends Page {
         return commentTextArea.getAttribute("class");
     }
 
-    public String getWidgetClass() {
-        return widget.getAttribute("class");
+    public String getWidgetClass() { return widget.getAttribute("class");  }
+
+    public boolean getWidgetClassWow(String wowClass)
+    {
+        return widget.getAttribute("class").contains(wowClass);
     }
 
     public String getWidgetClassColor() {
@@ -474,8 +477,9 @@ public class ContactUs extends Page {
         return reCaptcha2Checkbox.getAttribute("class");
     }
 
-    public String getMotionCaptchaClass() {
-        return motionCaptchaCanvas.getAttribute("class");
+    public boolean getMotionCaptchaClass(String motionClass)
+    {
+        return motionCaptchaCanvas.getAttribute("class").contains(motionClass);
     }
 
     /*methods for check if cursor is in input*/

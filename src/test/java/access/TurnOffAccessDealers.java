@@ -26,10 +26,12 @@ public class TurnOffAccessDealers extends TestBase {
         wait = new WebDriverWait(driver, 20);
         /*navigate to dms-Dealers*/
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         Thread.sleep(1000);
         Dealers dealers = dmsHome2.clickOnDealersMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         Thread.sleep(1100);
         /*turn off Contact Us page from access*/
         SitePackage editor = dealers.turnOnAccess();
@@ -38,9 +40,11 @@ public class TurnOffAccessDealers extends TestBase {
         /*wait until editor will be closed*/
         wait.until(dealers2.isEditorInvisible());
         dealers2.clickSave();
+        waitForJSandJQueryToLoad();
        // wait.until(absenceOfElementLocated(By.id("idBackCont")));
-        Thread.sleep(15000);
+      //  Thread.sleep(15000);
         map2 = dealers2.goToMAP2();
+        waitForJSandJQueryToLoad();
         Assert.assertFalse(map2.isContactTabExists());
 
     }
@@ -49,10 +53,12 @@ public class TurnOffAccessDealers extends TestBase {
     @Test(priority = 2)
     public void widgetDoesntExist() throws InterruptedException {
         wait = new WebDriverWait(driver, 20);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+       // wait.until(jsLoad);
         /*navigate to dms-Dealers*/
         Dealers dealers = map2.clickOnDealersMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Thread.sleep(1000);
         /*turn on Contact Us page from access*/
         SitePackage editor = dealers.turnOnAccess();
@@ -66,13 +72,17 @@ public class TurnOffAccessDealers extends TestBase {
         Dealers dealers3 = editor.turnOffWidgetDealers();
         wait.until(dealers3.isEditorInvisible());
         dealers2.clickSave();
+        waitForJSandJQueryToLoad();
        // wait.until(absenceOfElementLocated(By.id("idBackCont")));
-        Thread.sleep(15000);
+      //  Thread.sleep(15000);
         map2 = dealers2.goToMAP2();
+        waitForJSandJQueryToLoad();
         map2.clickContactTab();
+        waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
         Thread.sleep(1000);
         contactEditor = map2.clickAddPage();
+        waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         Assert.assertFalse(contactEditor.isContactWidgetExists());
     }
@@ -81,7 +91,8 @@ public class TurnOffAccessDealers extends TestBase {
     @Test(priority = 3)
     public void dwsWidgetDoesntExist() throws InterruptedException {
         driver.get("http://www.tacker.ixloo.com/contactus2");
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
+        //wait.until(jsLoad);
         Assert.assertFalse(contactUs.isWidgetExists());
     }
 

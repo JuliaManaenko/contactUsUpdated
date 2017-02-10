@@ -22,7 +22,7 @@ public class LastNameTest extends TestBase2 {
     public void lEmptyValueClass() throws InterruptedException {
         //   driver.get(PropertyLoader.loadProperty("dws.url"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getLastNameInputClass(), PropertyLoader.loadProperty("inputClassError"));
     }
@@ -38,7 +38,7 @@ public class LastNameTest extends TestBase2 {
         driver.findElement(By.name("last_name")).clear();
         driver.findElement(By.name("last_name")).sendKeys(lName);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getLastNameInputClass(), PropertyLoader.loadProperty("inputClassValid"));
     }
@@ -48,7 +48,7 @@ public class LastNameTest extends TestBase2 {
         driver.findElement(By.name("last_name")).clear();
         driver.findElement(By.name("last_name")).sendKeys(lName);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getLastNameInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
@@ -58,7 +58,7 @@ public class LastNameTest extends TestBase2 {
         driver.findElement(By.name("last_name")).clear();
         driver.findElement(By.name("last_name")).sendKeys(PropertyLoader.loadProperty("text31"));
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(contactUs.getLastNameInputClass(), PropertyLoader.loadProperty("inputClassError"));
     }
@@ -73,7 +73,7 @@ public class LastNameTest extends TestBase2 {
     public void lCorrectCharinLead(String lName) throws InterruptedException {
         Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillEmail();
         contactUs.fillZip();
@@ -81,18 +81,18 @@ public class LastNameTest extends TestBase2 {
         driver.findElement(By.name("last_name")).clear();
         driver.findElement(By.name("last_name")).sendKeys(lName);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Leads leads = dmsHome2.clickOnLeadsMenu();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         leadDetails = leads.openFirstLead();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getLastName(), lName);
         Thread.sleep(1000);
         driver.close();

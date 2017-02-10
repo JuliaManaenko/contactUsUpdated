@@ -22,40 +22,38 @@ public class CommentsInEmail extends TestBase5 {
     @Test(dataProvider = "comments")
     public void commentsinEmail(String comment1, String comment2) throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dws.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         contactUs.fillFirstName();
         contactUs.fillLastName();
         contactUs.fillPhoneNum();
         contactUs.fillEmail();
         contactUs.fillZip();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         driver.findElement(By.name("comments")).clear();
         Thread.sleep(1000);
         driver.findElement(By.name("comments")).sendKeys(comment1);
         Thread.sleep(1000);
         contactUs.clickOnSubmit();
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        wait.until(jsLoad);
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        wait.until(jsLoad);
-        WebmailLogin webmailLogin = dmsHome2.clickOnWebmailMenu();
-        wait.until(jsLoad);
-        EmailsList emailsList = webmailLogin.loginToWebmail();
-        Thread.sleep(3000);
-        emailsList.clickDateColumn();
+        waitForJSandJQueryToLoad();
+        EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        /*emailsList.clickDateColumn();
         Thread.sleep(1000);
         emailsList.clickDateColumn();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getComments(), comment2);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
-        Thread.sleep(2000);
-        driver.manage().deleteAllCookies();
+        Thread.sleep(1000);
     }
 
     @DataProvider(name = "comments")
