@@ -49,11 +49,20 @@ public class CommentsInEmail extends TestBase5 {
         emailsList.clickDateColumn();
         Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getComments(), comment2);
         Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+       /* driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome21.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();*/
     }
 
     @DataProvider(name = "comments")

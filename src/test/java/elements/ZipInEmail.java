@@ -1,35 +1,181 @@
 package elements;
 
+import contactUsPage.ContactUs;
 import customers.LeadDetails;
 import customers.Leads;
+import map2.ContactEditor;
+import map2.MAP2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import settings.LeadsEmail;
 import settings.Localization;
 import settings.Website;
 import testcase.TestBase5;
 import utility.PropertyLoader;
+import webdriver.WebDriverFactory;
 import webmail.EmailDetails;
 import webmail.EmailsList;
 import webmail.WebmailLogin;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Julia on 07.02.2017.
  */
-public class ZipInEmail extends TestBase5 {
-    WebDriverWait wait;
-    private dms.dmsHome2 dmsHome2;
+public class ZipInEmail  {
 
+    private dms.dmsHome2 dmsHome2;
+    private WebDriver driver;
+    private ContactUs contactUs;
+    private dms.dmsHome dmsHome;
+    private WebDriverWait wait;
+
+    /*run browser, add contact Us page in MAP2, initialize dmsHome and contactUs pages, open dws link*/
+    @BeforeClass
+    @Parameters({"browserName"})
+    public void setup(String browserName) throws Exception {
+        //  LOG.info("Navigating to test url");
+        driver = WebDriverFactory.getInstance(browserName);
+        driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 20);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        driver.manage().deleteAllCookies();
+        dmsHome = PageFactory.initElements(driver, dms.dmsHome.class);
+        dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(2000);
+        MAP2 map2 = dmsHome2.clickOnMap2Menu();
+        waitForJSandJQueryToLoad();
+        wait.until(isLoadingInvisible());
+        Thread.sleep(1000);
+        map2.clickContactTab();
+        waitForJSandJQueryToLoad();
+        wait.until(isLoadingInvisible());
+        wait.until(isAddPageVisible());
+        Thread.sleep(1000);
+        ContactEditor editor = map2.clickAddPage();
+        wait.until(isLoadingInvisible());
+        Thread.sleep(1000);
+        editor.addWidget();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(500);
+        editor.activatePage();
+        waitForJSandJQueryToLoad();
+        wait.until(isLoadingInvisible());
+        wait.until(isPageActivatedTooltipVisible());
+        Thread.sleep(1000);
+        Website website = map2.clickOnWebsiteMenu();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        LeadsEmail leadsEmail = website.clickOnLeadsTab();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leadsEmail.addEmail();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        WebmailLogin webmailLogin = leadsEmail.clickOnWebmailMenu();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        webmailLogin.loginToWebmail();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dws.url"));
+        waitForJSandJQueryToLoad();
+        contactUs = PageFactory.initElements(driver, ContactUs.class);
+    }
+
+    /*delete Contact Us page in MAP2, close browser*/
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws InterruptedException {
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        waitForJSandJQueryToLoad();
+        MAP2 map2 = dmsHome2.clickOnMap2Menu();
+        waitForJSandJQueryToLoad();
+        wait.until(isLoadingInvisible());
+        map2.clickContactTab();
+        waitForJSandJQueryToLoad();
+        wait.until(isLoadingInvisible());
+        wait.until(getConditionForTitle());
+        Thread.sleep(2000);
+        map2.deletePage();
+        waitForJSandJQueryToLoad();
+        wait.until(isPageDeletedTooltipVisible());
+        Thread.sleep(1000);
+        Website website = map2.clickOnWebsiteMenu();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        LeadsEmail leadsEmail = website.clickOnLeadsTab();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leadsEmail.removeEmail();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        if (driver != null) {
+            //   LOG.info("Killing web driver");
+            WebDriverFactory.killDriverInstance();
+        }
+    }
+
+    protected ExpectedCondition<WebElement> isAddPageVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right")));
+    }
+
+    protected ExpectedCondition<Boolean> getConditionForTitle() {
+        return ExpectedConditions.textToBe(By.xpath("//div[@class='pull-left']/span"), "Contact_us");
+    }
+
+    protected ExpectedCondition<WebElement> isPageActivatedTooltipVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@id='jGrowl']//div[@class='message'][contains(text(), 'Page activated')]")));
+    }
+
+    protected ExpectedCondition<WebElement> isPageDeletedTooltipVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@id='jGrowl']//div[@class='message'][contains(text(), 'Page deleted')]")));
+    }
+
+    protected ExpectedCondition<Boolean> isLoadingInvisible() {
+        return ExpectedConditions.invisibilityOfElementLocated(By.className("mask"));
+    }
+
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+    /*method for execute Java Script: page should be loaded*/
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
     @Test(priority = 1)
     public void setZipN3() throws InterruptedException {
         wait = new WebDriverWait(driver, 20);
-        // dmsHome2 = dmsHome.loginToDms();
-        // waitForJSandJQueryToLoad();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
@@ -69,16 +215,11 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -87,6 +228,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 3)
@@ -105,16 +253,11 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-      /*  emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -123,6 +266,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 4)
@@ -162,7 +312,6 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
@@ -180,6 +329,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 6)
@@ -198,16 +354,11 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -216,6 +367,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 7)
@@ -255,16 +413,11 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-      /*  emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -273,6 +426,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 9)
@@ -291,16 +451,11 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -309,6 +464,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 10)
@@ -348,16 +510,11 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-     /*   emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -366,6 +523,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 12)
@@ -384,16 +548,11 @@ public class ZipInEmail extends TestBase5 {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -402,6 +561,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 13)
@@ -440,16 +606,11 @@ public class ZipInEmail extends TestBase5 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -458,6 +619,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(dataProvider = "Zip7", priority = 15)
@@ -475,16 +643,11 @@ public class ZipInEmail extends TestBase5 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -493,6 +656,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 16)
@@ -537,10 +707,6 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        /*emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -549,6 +715,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(dataProvider = "Zip7", priority = 18)
@@ -566,16 +739,11 @@ public class ZipInEmail extends TestBase5 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-        //dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -584,6 +752,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 19)
@@ -622,16 +797,11 @@ public class ZipInEmail extends TestBase5 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -640,6 +810,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(dataProvider = "Zip7", priority = 21)
@@ -657,16 +834,11 @@ public class ZipInEmail extends TestBase5 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-      //  dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-      /*  emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -675,6 +847,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(priority = 22)
@@ -713,16 +892,11 @@ public class ZipInEmail extends TestBase5 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -731,6 +905,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @Test(dataProvider = "Zip7", priority = 24)
@@ -748,16 +929,11 @@ public class ZipInEmail extends TestBase5 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-       // dms.dmsHome2 dmsHome21 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -766,6 +942,13 @@ public class ZipInEmail extends TestBase5 {
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome22 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome22.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     @DataProvider(name = "zipN3")

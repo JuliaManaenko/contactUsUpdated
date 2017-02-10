@@ -37,10 +37,6 @@ public class IntPhoneNumInEmail extends TestBase5 {
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
@@ -72,10 +68,6 @@ public class IntPhoneNumInEmail extends TestBase5 {
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        /*emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);

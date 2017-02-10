@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import settings.Website;
 import testcase.TestBase;
 import utility.PropertyLoader;
 import webdriver.WebDriverFactory;
@@ -52,6 +53,14 @@ public class WowAnimation {
 
     @AfterClass
     public void tearDown() {
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dmsHome2 = dmsHome.loginToDms();
+        waitForJSandJQueryToLoad();
+        Website website = dmsHome2.clickOnWebsiteMenu();
+        waitForJSandJQueryToLoad();
+        website.disableCaptcha();
+        waitForJSandJQueryToLoad();
         if (driver != null) {
             //  LOG.info("Killing web driver");
             WebDriverFactory.killDriverInstance();

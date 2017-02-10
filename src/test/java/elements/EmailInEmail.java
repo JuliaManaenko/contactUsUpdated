@@ -34,10 +34,6 @@ public class EmailInEmail extends TestBase5 {
         EmailsList emailsList = dmsHome21.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-      /*  emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);

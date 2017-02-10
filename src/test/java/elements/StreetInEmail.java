@@ -33,16 +33,11 @@ public class StreetInEmail extends TestBase5 {
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
-        //  dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);

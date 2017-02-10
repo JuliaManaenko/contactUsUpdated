@@ -4,11 +4,11 @@
     <parameter name="browserName" value="chrome"/>
     <test name="Test">
         <classes>
-            <class name="access.TurnOffAccessDealers"/>
-            <class name="access.TurnOnAccessDealers"/>
-            <class name="access.TurnOffAccessSites"/>
-            <class name="access.TurnOnAccessSites"/>
-            <class name="elements.IsElementsDisplayed"/>
+             <class name="access.TurnOffAccessDealers"/>
+             <class name="access.TurnOnAccessDealers"/>
+             <class name="access.TurnOffAccessSites"/>
+             <class name="access.TurnOnAccessSites"/>
+             <class name="elements.IsElementsDisplayed"/>
              <class name="requiredFields.RequiredFieldsHighlighted"/>
              <class name="requiredFields.RequiredFieldsSelected"/>
              <class name="elements.PhoneNumTest"/>

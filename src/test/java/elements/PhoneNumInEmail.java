@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class PhoneNumInEmail extends TestBase5 {
 
     @AfterMethod
-    public void setinputMaskDefault() throws InterruptedException {
+    public void setInputMaskDefault() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
@@ -82,20 +82,15 @@ public class PhoneNumInEmail extends TestBase5 {
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         Assert.assertEquals(emailDetails.getPhone(), phone);
         waitForJSandJQueryToLoad();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
-        Thread.sleep(2000);
-       // driver.manage().deleteAllCookies();
+        Thread.sleep(1000);
     }
 
     @Test
@@ -131,10 +126,6 @@ public class PhoneNumInEmail extends TestBase5 {
         EmailsList emailsList =  dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);

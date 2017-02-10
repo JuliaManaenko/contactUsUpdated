@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class LastNameInEmail extends TestBase5 {
     @Test(dataProvider = "lName")
-    public void lCorrectCharinLead(String lName) throws InterruptedException {
+    public void lCorrectCharinEmail(String lName) throws InterruptedException {
         Thread.sleep(2000);
         driver.get(PropertyLoader.loadProperty("dws.url"));
         waitForJSandJQueryToLoad();
@@ -39,10 +39,6 @@ public class LastNameInEmail extends TestBase5 {
         EmailsList emailsList = dmsHome2.clickOnWebmailMenu2();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-       /* emailsList.clickDateColumn();
-        Thread.sleep(1000);
-        emailsList.clickDateColumn();
-        Thread.sleep(1000);*/
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);

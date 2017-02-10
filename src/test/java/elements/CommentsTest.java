@@ -142,7 +142,6 @@ public class CommentsTest extends TestBase2 {
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-
         Thread.sleep(1000);
         dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
         Leads leads = dmsHome2.clickOnLeadsMenu();

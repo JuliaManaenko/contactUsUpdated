@@ -1,6 +1,7 @@
 package testcase;
 
 import contactUsPage.ContactUs;
+import customers.Leads;
 import dms.dmsHome;
 import map2.ContactEditor;
 import map2.MAP2;
@@ -13,12 +14,15 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import settings.LeadsEmail;
 import settings.Website;
 import utility.PropertyLoader;
 import webdriver.WebDriverFactory;
+import webmail.EmailDetails;
+import webmail.EmailsList;
 import webmail.WebmailLogin;
 
 import java.util.concurrent.TimeUnit;
@@ -86,6 +90,21 @@ public class TestBase5 {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         waitForJSandJQueryToLoad();
         contactUs = PageFactory.initElements(driver, ContactUs.class);
+    }
+
+    @AfterMethod
+    public void deleteEmailAndLead() throws InterruptedException {
+      /*  EmailDetails emailDetails = PageFactory.initElements(driver, EmailDetails.class);
+        EmailsList emailsList1 = emailDetails.removeEmail();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);*/
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome21.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
     }
 
     /*delete Contact Us page in MAP2, close browser*/
