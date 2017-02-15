@@ -12,7 +12,7 @@
 
         <!--Allure properties -->
         <aspectj.version>1.8.5</aspectj.version>
-        <allure.version>1.5.0.RC2</allure.version>
+        <allure.version>1.5.1</allure.version>
         <allure.plugin.version>2.5</allure.plugin.version>
 
         <allure.xml.dir>xml-test-report</allure.xml.dir>
@@ -104,10 +104,7 @@
                 <version>2.8.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/generalSuite.xml</suiteXmlFile>
-                        <!--<suiteXmlFile>src/test/resources/chromeSuite.xml</suiteXmlFile>-->
-
-                        <!--  <suiteXmlFile>src/test/resources/${suiteName}</suiteXmlFile>-->
+                        <suiteXmlFile>src/test/resources/suite.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <reporter.debug>false</reporter.debug>
@@ -115,14 +112,14 @@
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                     </argLine>
-                    <properties>
+                   <!-- <properties>
                         <property>
                             <name>listener</name>
                             <value>
                                 com.lits.webdriver.listeners.OnTestFailureListener
                             </value>
                         </property>
-                    </properties>
+                    </properties>-->
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
@@ -151,7 +148,7 @@
                 <configuration>
                     <resultsDirectory>${allure.xml.dir}</resultsDirectory>
                     <reportDirectory>${project.build.directory}/graph-test-report</reportDirectory>
-                </configuration>
+                         </configuration>
             </plugin>
         </plugins>
     </reporting>

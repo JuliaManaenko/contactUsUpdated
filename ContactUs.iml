@@ -12,6 +12,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/Install/jar/allure-maven-plugin-2.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: org.apache.maven.plugins:maven-resources-plugin:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-inject-plexus:1.4.2" level="project" />
@@ -91,13 +100,13 @@
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.1.8" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.1.8" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
-    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-testng-adaptor:1.5.0.RC2" level="project" />
-    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-aspects:1.5.0.RC2" level="project" />
-    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-adaptor-api:1.5.0.RC2" level="project" />
-    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-annotations:1.5.0.RC2" level="project" />
-    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-model:1.5.0.RC2" level="project" />
+    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-testng-adaptor:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-aspects:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-adaptor-api:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-java-annotations:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: ru.yandex.qatools.allure:allure-model:1.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.9.3" level="project" />
-    <orderEntry type="library" name="Maven: ru.qatools.commons:properties:2.0.RC3" level="project" />
+    <orderEntry type="library" name="Maven: ru.qatools.commons:properties:2.0.RC5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tika:tika-core:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.3" level="project" />
   </component>

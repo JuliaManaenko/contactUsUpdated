@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Suite" verbose="5" data-provider-thread-count="1" configfailurepolicy="continue">
     <parameter name="browserName" value="chrome"/>
-    <test name="Test">
+   <!-- <test name="ContactUsTest">
         <classes>
              <class name="access.TurnOffAccessDealers"/>
              <class name="access.TurnOnAccessDealers"/>
@@ -40,8 +40,19 @@
              <class name="captcha.ReCaptcha2Test"/>
              <class name="captcha.MotionTest"/>
              <class name="captcha.ReCaptcha"/>
-
         </classes>
+    </test> -->
 
-    </test> <!-- Test -->
+    <test name="TradeInForm">
+        <classes>
+           <!-- <class name="TradeInForm.IsTradeInElementsDisplayed"/>
+            <class name="TradeInForm.TradeInRequiredFieldsHighlighted"/>
+            <class name="TradeInForm.TradeInRequiredFieldsSelected"/>
+            <class name="TradeInForm.TradeInWowAnimation"/>
+            <class name="TradeInForm.TradeInColorVariation"/>
+            <class name="TradeInForm.TradeInPostFormNotification"/>-->
+            <class name="TradeInForm.TradeInWidgetTitle"/>
+        </classes>
+    </test>
+
 </suite> <!-- Suite -->

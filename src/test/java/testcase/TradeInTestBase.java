@@ -2,40 +2,37 @@ package testcase;
 
 import contactUsPage.ContactUs;
 import dms.dmsHome;
-import dms.dmsHome2;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
 import org.testng.annotations.*;
-import settings.LeadsEmail;
 import settings.UserEditor;
 import settings.Users;
 import settings.Website;
 import utility.LogFactory;
 import utility.PropertyLoader;
 import webdriver.WebDriverFactory;
-import org.slf4j.Logger;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Julia on 30.12.2016.
+ * Created by Julia on 15.02.2017.
  */
-public class TestBase {
+public class TradeInTestBase {
     private static final Logger LOG = LogFactory.getLogger(TestBase.class);
 
     protected WebDriver driver;
-    protected ContactUs contactUs;
-    protected dmsHome dmsHome;
-    protected dmsHome2 dmsHome2;
+    protected ContactUs dwsPage;
+    protected dms.dmsHome dmsHome;
+    protected dms.dmsHome2 dmsHome2;
 
     /*Presteps: turn on MAP2, set jQuery - 1.11.2, disable captcha(temporary, until tests with captcha will be done)*/
     @BeforeSuite
     @Parameters({"browserName"})
     public void turnOnMap2(String browserName) throws InterruptedException {
-        LOG.info("Navigating to test url");
         driver = WebDriverFactory.getInstance(browserName);
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         driver.get(PropertyLoader.loadProperty("dms.url"));
@@ -89,7 +86,7 @@ public class TestBase {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
-        contactUs = PageFactory.initElements(driver, ContactUs.class);
+        dwsPage = PageFactory.initElements(driver, ContactUs.class);
 
     }
 
@@ -127,25 +124,25 @@ public class TestBase {
     public boolean waitForJSandJQueryToLoad() {
         WebDriverWait wait = new WebDriverWait(driver, 30);
     /*method for execute Java Script: page should be loaded*/
-     ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-        }
-    };
-    // wait for jQuery to load
-     ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-            try {
-                return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
             }
-            catch (Exception e) {
-                // no jQuery present
-                return true;
+        };
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
             }
-        }
-    };
+        };
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 }

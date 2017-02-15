@@ -28,6 +28,12 @@ public class MAP2 extends Page {
     @FindBy(how = How.CSS, using = "div[data-page='contact_us']")
     private WebElement contactUsTab;
 
+    @FindBy(how = How.CSS, using = "div[data-page='trade_in']")
+    private WebElement tradeInTab;
+
+    @FindBy(how = How.CSS, using = "div[data-page='vehicle']")
+    private WebElement vehicleDetailsTab;
+
     @FindBy(how = How.CSS, using = "div.map-link.pull-right")
     private WebElement addPageBtn;
 
@@ -51,9 +57,13 @@ public class MAP2 extends Page {
 
 
 
-    /*click on Contact Us tab in pages tree*/
+    /*click on a particular tab in pages tree*/
     public void clickContactTab() {
         contactUsTab.click();
+    }
+    public void clickTradeInTab() { tradeInTab.click(); }
+    public void clickVDTab() {
+        vehicleDetailsTab.click();
     }
 
     /*click on Add Page button, that opens Contact Us editor*/
@@ -69,10 +79,19 @@ public class MAP2 extends Page {
 
     }
 
-    /*check if Contact Us tab exists in pages tree*/
+    /*check if a particular tab exists in pages tree*/
     public boolean isContactTabExists() {
         try {
             contactUsTab.isDisplayed();
+            return true;// return true, if element exists
+        } catch (NoSuchElementException ex) {
+            return false;//return false, if element doesn't exist
+        }
+    }
+
+    public boolean isTradeInTabExists() {
+        try {
+            tradeInTab.isDisplayed();
             return true;// return true, if element exists
         } catch (NoSuchElementException ex) {
             return false;//return false, if element doesn't exist

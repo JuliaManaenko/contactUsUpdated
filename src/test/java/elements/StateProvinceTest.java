@@ -120,9 +120,14 @@ public class StateProvinceTest extends TestBase2 {
         driver.switchTo().window(tabs2.get(1));
         waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getState(), "");
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 13)
@@ -153,6 +158,11 @@ public class StateProvinceTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 14)
@@ -184,6 +194,11 @@ public class StateProvinceTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 15)
@@ -215,6 +230,11 @@ public class StateProvinceTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 15)
@@ -246,5 +266,10 @@ public class StateProvinceTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 }

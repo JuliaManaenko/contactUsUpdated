@@ -67,6 +67,14 @@ public class PhoneNumTest extends TestBase3 {
         driver.switchTo().window(tabs2.get(1));
         waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getPhoneNum(), phone); //'phone' variable is from data provider
+        Thread.sleep(1000);
+        driver.close();
+        driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     /*input css class should be 'error' if put phones that are not matches for phone input mask*/
@@ -232,6 +240,14 @@ public class PhoneNumTest extends TestBase3 {
         driver.switchTo().window(tabs2.get(1));
         waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getPhoneNum(), PropertyLoader.loadProperty("phoneAll"));
+        Thread.sleep(1000);
+        driver.close();
+        driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
 

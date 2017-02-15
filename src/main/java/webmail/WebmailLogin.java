@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import page.Page;
-import utility.PropertyLoader;
+import utility.PropertyLoader2;
 
 /**
  * Created by Julia on 03.02.2017.
@@ -34,11 +34,11 @@ public class WebmailLogin extends Page {
     public EmailsList loginToWebmail(){
         driver.switchTo().frame(iframe);
         username.clear();
-        username.sendKeys(PropertyLoader.loadProperty("webmail.user"));
+        username.sendKeys(PropertyLoader2.loadProperty("webmail.user"));
         password.clear();
-        password.sendKeys(PropertyLoader.loadProperty("webmail.pw"));
+        password.sendKeys(PropertyLoader2.loadProperty("webmail.pw"));
         server.clear();
-        server.sendKeys(PropertyLoader.loadProperty("webmail.server"));
+        server.sendKeys(PropertyLoader2.loadProperty("webmail.server"));
         loginButton.click();
         driver.switchTo().defaultContent();
         return PageFactory.initElements(driver, EmailsList.class);

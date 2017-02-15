@@ -28,6 +28,9 @@ public class ContactUsWidgetSettings extends Page {
     @FindBy(how= How.XPATH, using ="//div[@data-option='submit_message']//input")
     private WebElement submitInput;
 
+    @FindBy(how= How.XPATH, using ="//div[@data-option='title']//input")
+    private WebElement widgetTitleInput;
+
     @FindBy(how= How.XPATH, using ="//div[@class='pull-left mapx-input-group widget-editor-searchbox']//input[@class='mapx-form-control']")
     private WebElement searchInput;
 
@@ -60,26 +63,25 @@ public class ContactUsWidgetSettings extends Page {
         options.selectByValue("nowow");
     }
 
-    public void setAnimationBounceIn(){
+    public void setAnimation(String animation){
         WebElement select = wowAnimSelect;
         Select options = new Select(select);
-        options.selectByValue("wow bounceIn");
-    }
-
-    public void setAnimationBounceDown(){
-        WebElement select = wowAnimSelect;
-        Select options = new Select(select);
-        options.selectByValue("wow bounceInDown");
-    }
-
-    public void setAnimationBounceLeft(){
-        WebElement select = wowAnimSelect;
-        Select options = new Select(select);
-        options.selectByValue("wow bounceInLeft");
+        options.selectByValue(animation);
     }
 
     public HTMLEditor openHtmlEditor(){
         submitInput.click();
         return PageFactory.initElements(driver, HTMLEditor.class);
+    }
+
+    public void setColorVariation(String colorVariation){
+        WebElement select = colorSelect;
+        Select options = new Select(select);
+        options.selectByValue(colorVariation);
+    }
+
+    public void fillWidgetTitle(String title){
+        widgetTitleInput.clear();
+        widgetTitleInput.sendKeys(title);
     }
 }

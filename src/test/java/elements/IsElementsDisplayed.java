@@ -14,7 +14,7 @@ public class IsElementsDisplayed extends TestBase2 {
     @Test(groups = "dws")
     public void widgetTitleDisplayed() {
 
-        Assert.assertTrue(contactUs.isCitylnputDisplayed());
+        Assert.assertTrue(contactUs.isWidgetExists());
     }
 
     @Test(groups = "dws")

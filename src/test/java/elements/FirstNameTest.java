@@ -101,6 +101,11 @@ public class FirstNameTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
 

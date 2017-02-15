@@ -22,6 +22,15 @@ public class Users extends Page {
     @FindBy(how = How.XPATH, using = "//li[@class='rootUserBranch jstree-open jstree-last']/a")
     private WebElement rootUser;
 
+    @FindBy(how = How.XPATH, using = "(//li[contains(@class, 'userBranch')])[last()]")
+    private WebElement lastUser;
+
+    @FindBy(how = How.ID, using = "user_tree_add")
+    private WebElement addUserBtn;
+
+    @FindBy(how = How.ID, using = "user_tree_delete")
+    private WebElement deleteUserBtn;
+
     @FindBy(how = How.CSS, using = "a[href='/dms/settings']")
     private WebElement settingsMenuItem;
 
@@ -44,5 +53,26 @@ public class Users extends Page {
         websiteMenuItem.click();*/
         driver.get("http://www.tacker.ixloo.com/dms/settings/website#general");
         return PageFactory.initElements(driver, Website.class);
+    }
+
+    /*click Add user button*/
+    public UserEditor clickAddUser(){
+        addUserBtn.click();
+        return PageFactory.initElements(driver, UserEditor.class);
+    }
+
+
+    /*delete the last user in the tree*/
+    public void deleteLastUser(){
+        lastUser.click();
+        deleteUserBtn.click();
+    }
+
+    /*open the last user in the tree*/
+    public UserEditor openLastUserEditor(){
+        Actions action = new Actions(driver);
+        Action moveToElem = action.doubleClick(lastUser).build();
+        moveToElem.perform();
+        return PageFactory.initElements(driver, UserEditor.class);
     }
 }

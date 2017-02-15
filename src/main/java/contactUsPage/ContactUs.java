@@ -25,6 +25,21 @@ public class ContactUs extends Page {
     @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Contact Information')]")
     private WebElement contactInfoTitle;
 
+    @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Vehicle Information')]")
+    private WebElement vehicleInfoTitle;
+
+    @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Upload Photo')]")
+    private WebElement uploadPhotoTitle;
+
+    @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Questions or Comments')]")
+    private WebElement questionTitle;
+
+    @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Comments')]")
+    private WebElement commentsTitle;
+
+    @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Security')]")
+    private WebElement securityTitle;
+
     @FindBy(how = How.NAME, using = "first_name")
     private WebElement firstNameInput;
 
@@ -52,8 +67,32 @@ public class ContactUs extends Page {
     @FindBy(how = How.NAME, using = "zip")
     private WebElement zipInput;
 
-    @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Questions or Comments')]")
-    private WebElement questionTitle;
+    @FindBy(how = How.NAME, using = "vin")
+    private WebElement vinInput;
+
+    @FindBy(how = How.NAME, using = "year")
+    private WebElement yearSelect;
+
+    @FindBy(how = How.NAME, using = "motorized_type")
+    private WebElement motorizedTypeSelect;
+
+    @FindBy(how = How.NAME, using = "make")
+    private WebElement makeSelect;
+
+    @FindBy(how = How.NAME, using = "model")
+    private WebElement modelSelect;
+
+    @FindBy(how = How.NAME, using = "trim")
+    private WebElement trimSelect;
+
+    @FindBy(how = How.NAME, using = "price")
+    private WebElement askingPriceInput;
+
+    @FindBy(how = How.NAME, using = "mileage")
+    private WebElement odometerInput;
+
+    @FindBy(how = How.NAME, using = "comments")
+    private WebElement commentTextArea;
 
     @FindBy(how = How.XPATH, using = "//span[@class='help-block']")
     private WebElement helpText;
@@ -61,14 +100,11 @@ public class ContactUs extends Page {
     @FindBy(how = How.XPATH, using = "//span[@class='label label-primary comments_counter']")
     private WebElement counter;
 
-    @FindBy(how = How.NAME, using = "comments")
-    private WebElement commentTextArea;
-
-    @FindBy(how = How.XPATH, using = "//legend[contains(text(), 'Security')]")
-    private WebElement securityTitle;
-
     @FindBy(how = How.XPATH, using = "//p[@class='text-muted text-center']")
     private WebElement astericsText;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='text-center']//p")
+    private WebElement uploadPhotoText;
 
     @FindBy(how = How.XPATH, using = "//span[@class='glyphicon glyphicon-asterisk form-control-feedback text-danger']")
     private WebElement astericsInput;
@@ -82,13 +118,22 @@ public class ContactUs extends Page {
     @FindBy(how = How.XPATH, using = "//div[@class='btn btn-primary btn-submit']")
     private WebElement submitButton;
 
+    @FindBy(how = How.XPATH, using = "//button[contains(@class,'trade-submit')]")
+    private WebElement tradeInSubmitButton;
+
     @FindBy(how = How.CLASS_NAME, using = "modul-r-contact_us")
     private WebElement widget;
 
     @FindBy(how = How.XPATH, using = "//div[contains(@class, 'modul-r-contact_us')]/div")
     private WebElement widget2;
 
-    @FindBy(how = How.XPATH, using = "(//div[contains(@class, 'modul-r-contact_us')]//div[@class='text-center'])[1]")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class, 'modul-r-tradein')]/div")
+    private WebElement tradeInWidget;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class, 'modul-r-tradein')]")
+    private WebElement tradeInWidget2;
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='panel-body']//div[@class='text-center'])[1]")
     private WebElement postForm;
 
     @FindBy(how = How.XPATH, using = "//div[@class='row captcha_container capchaB']")
@@ -118,6 +163,12 @@ public class ContactUs extends Page {
     @FindBy(how = How.XPATH, using = "//div[@class='motion-captcha col-lg-12']//canvas")
     private WebElement motionCaptchaCanvas;
 
+    @FindBy(how = How.ID, using = "img_upload")
+    private WebElement uploadBtn;
+
+    @FindBy(how = How.ID, using = "remove-selected-upload")
+    private WebElement removeBtn;
+
 
     public ContactUs(WebDriver webDriver) {
         super(webDriver);
@@ -137,6 +188,24 @@ public class ContactUs extends Page {
     public boolean isContactInfoTitleDisplayed() {
         try {
             contactInfoTitle.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isVehicleInfoTitleDisplayed() {
+        try {
+            vehicleInfoTitle.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isCommentsTitleDisplayed() {
+        try {
+            commentsTitle.isDisplayed();
             return true;
         } catch (NoSuchElementException ex) {
             return false;
@@ -318,6 +387,15 @@ public class ContactUs extends Page {
         }
     }
 
+    public boolean isTradeInSubmitButtonDisplayed() {
+        try {
+            tradeInSubmitButton.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
     public boolean isPostFormDisplayed() {
         try {
             postForm.isDisplayed();
@@ -372,10 +450,113 @@ public class ContactUs extends Page {
         }
     }
 
+    public boolean isVinInputDisplayed() {
+        try {
+            vinInput.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isYearSelectDisplayed() {
+        try {
+            yearSelect.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isMotorizedTypeaDisplayed() {
+        try {
+            motorizedTypeSelect.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isMakeSelectDisplayed() {
+        try {
+            makeSelect.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isModelSelectDisplayed() {
+        try {
+            modelSelect.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isTrimSelectDisplayed() {
+        try {
+            trimSelect.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isAskingPriceDisplayed() {
+        try {
+            askingPriceInput.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isOdometerInputDisplayed() {
+        try {
+            odometerInput.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isUploadPhotoTitleDisplayed() {
+        try {
+            uploadPhotoTitle.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isUploadButtonDisplayed() {
+        try {
+            uploadBtn.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isRemoveButtonDisplayed() {
+        try {
+            removeBtn.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
     /*method click on submit button*/
 
     public void clickOnSubmit() {
         submitButton.click();
+    }
+
+    public void clickOnTradeInSubmit() {
+        tradeInSubmitButton.click();
     }
 
    /*methods for getting border color of input elements*/
@@ -469,8 +650,14 @@ public class ContactUs extends Page {
         return widget.getAttribute("class").contains(wowClass);
     }
 
+    public boolean getTradeInWidgetClassWow(String wowClass) { return tradeInWidget2.getAttribute("class").contains(wowClass); }
+
     public String getWidgetClassColor() {
         return widget2.getAttribute("class");
+    }
+
+    public String getTradeinWidgetClassColor() {
+        return tradeInWidget.getAttribute("class");
     }
 
     public String getRecaptcha2CheckboxClass() {
@@ -597,9 +784,17 @@ public class ContactUs extends Page {
         return commentTextArea.getAttribute("value");
     }
 
-    /*Get text from Post Form Notification*/
+    /*Get text from elements*/
     public String postFormGetText() {
         return postForm.getText();
+    }
+
+    public String getWidgetTitleText(){
+        return widgetTitle.getText();
+    }
+
+    public String getUploadPhotoText(){
+        return uploadPhotoText.getText();
     }
 
     public void clickRecaptcha2() {

@@ -60,9 +60,14 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.switchTo().window(tabs2.get(1));
         waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getIntPhoneNum(), "");
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 3)
@@ -115,6 +120,11 @@ public class IntPhoneNumTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 5)
@@ -163,6 +173,11 @@ public class IntPhoneNumTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 7)
@@ -211,6 +226,11 @@ public class IntPhoneNumTest extends TestBase2 {
         Thread.sleep(1000);
         driver.close();
         driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 
     @Test(priority = 9)
@@ -261,5 +281,13 @@ public class IntPhoneNumTest extends TestBase2 {
         driver.switchTo().window(tabs2.get(1));
         waitForJSandJQueryToLoad();
         Assert.assertEquals(leadDetails.getIntPhoneNum(), PropertyLoader.loadProperty("intPhone20"));
+        Thread.sleep(1000);
+        driver.close();
+        driver.switchTo().window(tabs2.get(0));
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
     }
 }

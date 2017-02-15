@@ -31,6 +31,9 @@ public class ContactEditor extends Page {
     @FindBy(how= How.XPATH, using ="//div[@class='ico-widget widget-contact_us']")
     private WebElement contactIconTree;
 
+    @FindBy(how= How.XPATH, using ="//div[@class='ico-widget widget-form_trade_in']")
+    private WebElement tradeInIconTree;
+
     @FindBy(how= How.XPATH, using ="//div[@class='mapx-button-ico activate']")
     private WebElement activateBtn;
 
@@ -42,6 +45,12 @@ public class ContactEditor extends Page {
 
     @FindBy(how= How.XPATH, using ="//div[@class='layout-container container']//div[@data-widget='contact_us']")
     private WebElement contactUsWidget;
+
+    @FindBy(how= How.XPATH, using ="//div[@class='layout-container container']//div[@data-widget='form_trade_in']")
+    private WebElement tradeInWidget;
+
+    @FindBy(how= How.XPATH, using ="//div[@class='layout-container container']//div[@class='ax-widget panel panel-default']")
+    private WebElement widget;
 
     @FindBy(how= How.XPATH, using ="//div[@class='ax-btn btn-edit']")
     private WebElement widgetEditBtn;
@@ -55,10 +64,15 @@ public class ContactEditor extends Page {
         nameInput.sendKeys("contactauto");
             }
 
-    /*add Contact Us widget, using Java Script*/
+    /*add a particular widget, using Java Script*/
     public void addWidget(){
         libraryTab.click();
         ((JavascriptExecutor)driver).executeScript("map.pg.addWidget(\"contact_us\", {destination: \"body_0_0\"});");
+    }
+
+    public void addTradeInWidget(){
+        libraryTab.click();
+        ((JavascriptExecutor)driver).executeScript("map.pg.addWidget(\"form_trade_in\", {destination: \"body_0_0\"});");
     }
 
     /*click on Activate page button*/
@@ -72,11 +86,22 @@ public class ContactEditor extends Page {
         return PageFactory.initElements(driver, MAP2.class);
     }
 
-    /*check if Contact Us widget exists in the widgets library*/
+    /*check if a particular widget exists in the widgets library*/
     public boolean isContactWidgetExists(){
         libraryTab.click();
         try{
             contactIconTree.isDisplayed();
+            return true; // return true, if element exists
+        }
+        catch (NoSuchElementException ex){
+            return false; //return false, if element doesn't exist
+        }
+    }
+
+    public boolean isTradeInWidgetExists(){
+        libraryTab.click();
+        try{
+            tradeInIconTree.isDisplayed();
             return true; // return true, if element exists
         }
         catch (NoSuchElementException ex){
@@ -93,13 +118,18 @@ public class ContactEditor extends Page {
     /*open widget settings*/
     public ContactUsWidgetSettings openWidgetSettings(){
         Actions action = new Actions(driver);
-        Action moveToElem = action.moveToElement(contactUsWidget).build();
+        //Action moveToElem = action.moveToElement(contactUsWidget).build();
+        Action moveToElem = action.moveToElement(widget).build();
         moveToElem.perform();
         widgetEditBtn.click();
         return PageFactory.initElements(driver, ContactUsWidgetSettings.class);
     }
 
-
-
-
+    public ContactUsWidgetSettings openTradeInWidgetSettings(){
+        Actions action = new Actions(driver);
+        Action moveToElem = action.moveToElement(tradeInWidget).build();
+        moveToElem.perform();
+        widgetEditBtn.click();
+        return PageFactory.initElements(driver, ContactUsWidgetSettings.class);
+    }
 }

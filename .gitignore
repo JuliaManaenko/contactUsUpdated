@@ -3,3 +3,5 @@
 target/
 test-output/
 /src/main/resources/environment.properties
+/src/main/resources/cred.properties
+!/src/main/resources/environment.properties
