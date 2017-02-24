@@ -46,6 +46,7 @@ public class TradeInColorVariation {
         dmsHome2 = dmsHome.loginToDms();
     }
 
+
     @Test(dataProvider = "colors", dataProviderClass = DataProviderSet1.class)
     public void checkColorClass(String colorValue, String colorClass) throws InterruptedException {
         wait = new WebDriverWait(driver, 20);

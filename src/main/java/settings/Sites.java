@@ -34,6 +34,12 @@ public class Sites extends Page {
     @FindBy(how = How.XPATH, using = "//div[@aria-labelledby='ui-dialog-title-site_editor']")
     private WebElement siteEditorWindow;
 
+    @FindBy(how = How.CSS, using = "a[href='/dms/settings']")
+    private WebElement settingsMenuItem;
+
+    @FindBy(how = How.CSS, using = "a[href='/dms/settings/website']")
+    private WebElement websiteMenuItem;
+
     /*open Site Editor popup on the root site*/
     public SiteEditor openSiteEditor() {
         Actions action = new Actions(driver);
@@ -50,5 +56,14 @@ public class Sites extends Page {
         map2MenuItem.click();*/
         driver.get("http://www.tacker.ixloo.com/dms/tools/make_a_page_2");
         return PageFactory.initElements(driver, MAP2.class);
+    }
+
+    /*go to dms Website General page*/
+    public Website clickOnWebsiteMenu() {
+        Actions action = new Actions(driver);
+        Action moveToElem = action.moveToElement(settingsMenuItem).build();
+        moveToElem.perform();
+        websiteMenuItem.click();
+        return PageFactory.initElements(driver, Website.class);
     }
 }

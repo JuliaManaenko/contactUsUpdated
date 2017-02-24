@@ -76,9 +76,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(dataProvider = "zipN3", priority = 4)
@@ -86,9 +86,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipN3", priority = 5)
@@ -96,9 +96,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipN3", priority = 6)
@@ -106,9 +106,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(priority = 7)
@@ -116,9 +116,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN7"));
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.zipGetValue(), PropertyLoader.loadProperty("zipN6"));
+        Assert.assertEquals(dwsPage.zipGetValue(), PropertyLoader.loadProperty("zipN6"));
     }
 
     @Test(priority = 8)
@@ -148,9 +148,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(dataProvider = "zipN4", priority = 10)
@@ -158,9 +158,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipN4", priority = 11)
@@ -168,9 +168,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipN4", priority = 12)
@@ -178,9 +178,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(priority = 13)
@@ -209,9 +209,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(dataProvider = "zipN5", priority = 15)
@@ -219,9 +219,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipN5", priority = 16)
@@ -229,9 +229,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipN5", priority = 17)
@@ -239,9 +239,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(priority = 18)
@@ -270,9 +270,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN6"));
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(priority = 20)
@@ -280,9 +280,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(PropertyLoader.loadProperty("zipN6"));
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipN6", priority = 21)
@@ -290,9 +290,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipN6", priority = 22)
@@ -300,9 +300,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(priority = 23)
@@ -330,9 +330,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(dataProvider = "zipL3", priority = 25)
@@ -340,9 +340,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipL3", priority = 26)
@@ -350,9 +350,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipL3", priority = 27)
@@ -360,9 +360,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(dataProvider = "Zip7", priority = 28)
@@ -370,9 +370,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip7);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.zipGetValue(), zip6);
+        Assert.assertEquals(dwsPage.zipGetValue(), zip6);
     }
 
     @Test(priority = 29)
@@ -401,9 +401,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(dataProvider = "zipL4", priority = 31)
@@ -411,9 +411,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipL4", priority = 32)
@@ -421,9 +421,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipL4", priority = 33)
@@ -431,9 +431,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(priority = 34)
@@ -461,9 +461,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(dataProvider = "zipL5", priority = 36)
@@ -471,9 +471,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipL5", priority = 37)
@@ -481,9 +481,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipL5", priority = 38)
@@ -491,9 +491,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(priority = 39)
@@ -523,9 +523,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassValid"));
     }
 
     @Test(dataProvider = "zipL6", priority = 41)
@@ -533,9 +533,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_gray"));
     }
 
     @Test(dataProvider = "incZipL6", priority = 42)
@@ -543,9 +543,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
+        Assert.assertEquals(dwsPage.getZipInputClass(), PropertyLoader.loadProperty("inputPhoneClassError"));
     }
 
     @Test(dataProvider = "incZipL6", priority = 43)
@@ -553,9 +553,9 @@ public class ZipTest extends TestBase {
         driver.get(PropertyLoader.loadProperty("dws.url"));
         driver.findElement(By.name("zip")).clear();
         driver.findElement(By.name("zip")).sendKeys(zip);
-        contactUs.clickOnSubmit();
+        dwsPage.clickOnSubmit();
         Thread.sleep(1000);
-        Assert.assertEquals(contactUs.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
+        Assert.assertEquals(dwsPage.getZipInputBorderColor(), PropertyLoader.loadProperty("border_color_red"));
     }
 
     @Test(priority = 44)

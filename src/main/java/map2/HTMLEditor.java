@@ -32,7 +32,6 @@ public class HTMLEditor extends Page {
     public void addText(){
         driver.switchTo().frame(iFrame);
         textarea.sendKeys(PropertyLoader.loadProperty("text50"));
-        //((JavascriptExecutor)driver).executeScript("$('div#cke_389_contents').text('ppp');");
         driver.switchTo().defaultContent();
     }
 

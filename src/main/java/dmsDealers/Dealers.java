@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import page.Page;
+import settings.Website;
 
 /**
  * Created by Julia on 03.01.2017.
@@ -42,6 +43,12 @@ public class Dealers extends Page{
     @FindBy(how = How.CSS, using = "a[href='/dms/tools/make_a_page_2']")
     private WebElement map2MenuItem;
 
+    @FindBy(how = How.CSS, using = "a[href='/dms/settings']")
+    private WebElement settingsMenuItem;
+
+    @FindBy(how = How.CSS, using = "a[href='/dms/settings/website']")
+    private WebElement websiteMenuItem;
+
     @FindBy(how = How.ID, using = "idBackCont")
     private WebElement screenLoading;
 
@@ -50,14 +57,17 @@ public class Dealers extends Page{
         Actions action = new Actions(driver);
         Action dblclick = action.doubleClick(domainInTree).build();
         dblclick.perform();
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         sitePackEditBtn.click();
+        waitForJSandJQueryToLoad();
         return PageFactory.initElements(driver, SitePackage.class);
     }
 
     /*click on Site Package Edit button*/
     public SitePackage clickSitePackBtn() throws InterruptedException {
         sitePackEditBtn.click();
+        waitForJSandJQueryToLoad();
         return PageFactory.initElements(driver, SitePackage.class);
     }
 
@@ -75,6 +85,15 @@ public class Dealers extends Page{
         map2MenuItem.click();*/
         driver.get("http://www.tacker.ixloo.com/dms/tools/make_a_page_2");
         return PageFactory.initElements(driver, MAP2.class);
+    }
+
+    /*go to dms Website General page*/
+    public Website clickOnWebsiteMenu() {
+        Actions action = new Actions(driver);
+        Action moveToElem = action.moveToElement(settingsMenuItem).build();
+        moveToElem.perform();
+        websiteMenuItem.click();
+        return PageFactory.initElements(driver, Website.class);
     }
 
     public ExpectedCondition<Boolean> isEditorInvisible() {

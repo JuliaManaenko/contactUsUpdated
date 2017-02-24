@@ -14,12 +14,12 @@ public class TradeInRequiredFieldsHighlighted extends TradeInTestBase2 {
     @BeforeMethod
     public void clickSubmit() throws InterruptedException {
         tradeIn.clickOnTradeInSubmit();
-        Thread.sleep(1000);
+        //waitForJSandJQueryToLoad();
     }
 
 
     @Test
-    public void firstNameClass() { Assert.assertEquals(tradeIn.getFirstNameInputClass(), "form-control error"); }
+    public void firstNameInputClass() { Assert.assertEquals(tradeIn.getFirstNameInputClass(), "form-control error"); }
 
     @Test
     public void lastNameClass() {
@@ -35,7 +35,9 @@ public class TradeInRequiredFieldsHighlighted extends TradeInTestBase2 {
     public void phoneNumNameClass() { Assert.assertEquals(tradeIn.getPhoneNumInputClass(), "form-control text-uppercase error"); }
 
     @Test
-    public void firstNameHighlight() { Assert.assertEquals(tradeIn.getFirstNameInputBorderColor(), PropertyLoader.loadProperty("border_color_red2")); }
+    public void firstNameInputHighlight() {
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.getFirstNameInputBorderColor(), PropertyLoader.loadProperty("border_color_red")); }
 
     @Test
     public void lastNameHighlight() { Assert.assertEquals(tradeIn.getLastNameInputBorderColor(), PropertyLoader.loadProperty("border_color_red")); }
@@ -45,5 +47,17 @@ public class TradeInRequiredFieldsHighlighted extends TradeInTestBase2 {
 
     @Test
     public void emailHighlight() { Assert.assertEquals(tradeIn.getEmailInputBorderColor(), PropertyLoader.loadProperty("border_color_red")); }
+
+    @Test
+    public void firstNameLabelHighlight() { Assert.assertEquals(tradeIn.getFirstNameLabelFontColor(), PropertyLoader.loadProperty("font_color_red")); }
+
+    @Test
+    public void lastNameLabelHighlight() { Assert.assertEquals(tradeIn.getLastNameLabelFontColor(), PropertyLoader.loadProperty("font_color_red")); }
+
+    @Test
+    public void phoneNumLabelHighlight() { Assert.assertEquals(tradeIn.getPhoneNumLabelFontColor(), PropertyLoader.loadProperty("font_color_red")); }
+
+    @Test
+    public void emailLabelHighlight() { Assert.assertEquals(tradeIn.getEmailLabelFontColor(), PropertyLoader.loadProperty("font_color_red")); }
 
 }

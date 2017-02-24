@@ -52,6 +52,9 @@ public class ContactEditor extends Page {
     @FindBy(how= How.XPATH, using ="//div[@class='layout-container container']//div[@class='ax-widget panel panel-default']")
     private WebElement widget;
 
+    @FindBy(how= How.XPATH, using ="//div[@data-widget='form_trade_in'][contains(@class, 'ax-widget')]")
+    private WebElement tradeInWidgetInEditor;
+
     @FindBy(how= How.XPATH, using ="//div[@class='ax-btn btn-edit']")
     private WebElement widgetEditBtn;
 
@@ -91,6 +94,17 @@ public class ContactEditor extends Page {
         libraryTab.click();
         try{
             contactIconTree.isDisplayed();
+            return true; // return true, if element exists
+        }
+        catch (NoSuchElementException ex){
+            return false; //return false, if element doesn't exist
+        }
+    }
+
+    /*check if a particular widget exists in the widgets library*/
+    public boolean isTradeInWidgetExistsInEditor(){
+        try{
+            tradeInWidgetInEditor.isDisplayed();
             return true; // return true, if element exists
         }
         catch (NoSuchElementException ex){

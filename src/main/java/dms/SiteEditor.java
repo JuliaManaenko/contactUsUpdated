@@ -36,6 +36,12 @@ public class SiteEditor extends Page {
     @FindBy(how = How.ID, using = "dws_contact_us")
     private WebElement contactWidgetCheckbox;
 
+    @FindBy(how = How.ID, using = "page_trade_in")
+    private WebElement tradeInPageCheckbox;
+
+    @FindBy(how = How.ID, using = "dws_form_trade_in")
+    private WebElement tradeInWidgetCheckbox;
+
     @FindBy(how = How.XPATH, using = "(//div[@class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix']/a)[1]")
     private WebElement crossPage;
 
@@ -91,6 +97,58 @@ public class SiteEditor extends Page {
         /*click on Contact Us checkbox only if it is unchecked*/
         if (contactWidgetCheckbox.getAttribute("checked") == null) {
             contactWidgetCheckbox.click();
+        }
+        crossWidget.click();
+        okBtn.click();
+        return PageFactory.initElements(driver, Sites.class);
+    }
+
+    /*turn off Trade In page in access*/
+    public Sites turnOffTradeInPageSite() {
+        LOG.info("Click on pages button");
+        pagesBtn.click();
+        LOG.info("Turn off contact us checkbox, if it is selected");
+        /*click on Contact Us checkbox only if it is checked*/
+        if (tradeInPageCheckbox.isSelected()) {
+            tradeInPageCheckbox.click();
+        }
+        LOG.info("Click on cross");
+        crossPage.click();
+        LOG.info("Click OK button");
+        okBtn.click();
+        return PageFactory.initElements(driver, Sites.class);
+    }
+
+    /*turn off TradeIn widget in access*/
+    public Sites turnOffTradeInWidgetSite() {
+        widgetsBtn.click();
+        /*click on Contact Us checkbox only if it is checked*/
+        if (tradeInWidgetCheckbox.isSelected()) {
+            tradeInWidgetCheckbox.click();
+        }
+        crossWidget.click();
+        okBtn.click();
+        return PageFactory.initElements(driver, Sites.class);
+    }
+
+    /*turn on TradeIn page in access*/
+    public Sites turnOnTradeInPageSite() {
+        pagesBtn.click();
+        /*click on Contact Us checkbox only if it is unchecked*/
+        if (tradeInPageCheckbox.getAttribute("checked") == null) {
+            tradeInPageCheckbox.click();
+        }
+        crossPage.click();
+        okBtn.click();
+        return PageFactory.initElements(driver, Sites.class);
+    }
+
+    /*turn on TradeIn widget in access*/
+    public Sites turnOnTradeInWidgetSite() {
+        widgetsBtn.click();
+        /*click on Contact Us checkbox only if it is unchecked*/
+        if (tradeInWidgetCheckbox.getAttribute("checked") == null) {
+            tradeInWidgetCheckbox.click();
         }
         crossWidget.click();
         okBtn.click();

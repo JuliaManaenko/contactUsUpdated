@@ -169,6 +169,45 @@ public class ContactUs extends Page {
     @FindBy(how = How.ID, using = "remove-selected-upload")
     private WebElement removeBtn;
 
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Vin:')]")
+    private WebElement vinLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Year:')]")
+    private WebElement yearLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Motorized Type:')]")
+    private WebElement motorizedTypeLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Make:')]")
+    private WebElement makeLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Model:')]")
+    private WebElement modelLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Trim:')]")
+    private WebElement trimLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Asking Price:')]")
+    private WebElement askingPriceLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Odometer:')]")
+    private WebElement odometerLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'First Name:')]")
+    private WebElement firstNameLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Last Name:')]")
+    private WebElement lastNameLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Phone Number:')]")
+    private WebElement phoneNumLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Email Address:')]")
+    private WebElement emailLabel;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Int. Phone Number:')]")
+    private WebElement intPhoneLabel;
+
 
     public ContactUs(WebDriver webDriver) {
         super(webDriver);
@@ -549,6 +588,121 @@ public class ContactUs extends Page {
         }
     }
 
+    public boolean isVinLabelDisplayed() {
+        try {
+            vinLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isYearLabelDisplayed() {
+        try {
+            yearLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isMotorTypeLabelDisplayed() {
+        try {
+            motorizedTypeLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isMakeLabelDisplayed() {
+        try {
+            makeLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isModelLabelDisplayed() {
+        try {
+            modelLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isTrimLabelDisplayed() {
+        try {
+            trimLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isAskingPriceLabelDisplayed() {
+        try {
+            askingPriceLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+    public boolean isOdometerLabelDisplayed() {
+        try {
+            odometerLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+    public boolean isFirstNameLabelDisplayed() {
+        try {
+            firstNameLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isLastNameLabelDisplayed() {
+        try {
+            lastNameLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isPhoneNumLabelDisplayed() {
+        try {
+            phoneNumLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isEmailLabelDisplayed() {
+        try {
+            emailLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isIntPhoneLabelDisplayed() {
+        try {
+            intPhoneLabel.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
     /*method click on submit button*/
 
     public void clickOnSubmit() {
@@ -691,11 +845,23 @@ public class ContactUs extends Page {
         return driver.switchTo().activeElement().equals(zipInput);
     }
 
+    /*methods for getting font-color of labels*/
+    public String getFirstNameLabelFontColor(){ return firstNameLabel.getCssValue("color");  }
+    public String getLastNameLabelFontColor(){ return lastNameLabel.getCssValue("color");  }
+    public String getPhoneNumLabelFontColor(){ return phoneNumLabel.getCssValue("color");  }
+    public String getEmailLabelFontColor(){ return emailLabel.getCssValue("color");  }
+
+
     /*methods for filling inputs with some values*/
 
     public void fillFirstName() {
         firstNameInput.clear();
         firstNameInput.sendKeys("John");
+    }
+
+    public void fillFirstNameVar(String name) {
+        firstNameInput.clear();
+        firstNameInput.sendKeys(name);
     }
 
     public void fillLastName() {
@@ -762,6 +928,15 @@ public class ContactUs extends Page {
         }
     }
 
+    public boolean isTradeInWidgetExists() {
+        try {
+            tradeInWidget2.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
     /*Methods for getting text from input*/
 
     public String intPhoneGetValue() {
@@ -789,9 +964,7 @@ public class ContactUs extends Page {
         return postForm.getText();
     }
 
-    public String getWidgetTitleText(){
-        return widgetTitle.getText();
-    }
+    public String getWidgetTitleText(){ return widgetTitle.getText(); }
 
     public String getUploadPhotoText(){
         return uploadPhotoText.getText();

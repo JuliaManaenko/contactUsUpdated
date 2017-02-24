@@ -40,6 +40,9 @@ public class MAP2 extends Page {
     @FindBy(how = How.XPATH, using = "(//span[@class='ui-button ui-state-default'])[last()]")
     private WebElement deleteLastPageBtn;
 
+    @FindBy(how = How.XPATH, using = "(//span[@class='mapx-button-ico edit'])[last()]/..")
+    private WebElement editLastPageBtn;
+
     @FindBy(how = How.XPATH, using = "(//a[contains(text(), 'Admin')])[1]")
     private WebElement adminMenuItem;
 
@@ -77,6 +80,12 @@ public class MAP2 extends Page {
             deleteLastPageBtn.click();
             driver.switchTo().alert().accept(); //click OK in alert
 
+    }
+
+    /*click on Edit last page icon*/
+    public ContactEditor editLastPage() {
+        editLastPageBtn.click();
+        return PageFactory.initElements(driver, ContactEditor.class);
     }
 
     /*check if a particular tab exists in pages tree*/

@@ -35,6 +35,12 @@ public class SitePackage extends Page {
     @FindBy(how = How.ID, using = "page_contact_us")
     private WebElement contactPageCheckbox;
 
+    @FindBy(how = How.ID, using = "dws_form_trade_in")
+    private WebElement tradeInWidgetCheckbox;
+
+    @FindBy(how = How.ID, using = "page_trade_in")
+    private WebElement tradeInPageCheckbox;
+
     @FindBy(how = How.XPATH, using = "(//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']/span[contains(text(),'Ok')])[2]")
     private WebElement okBtn;
 
@@ -51,8 +57,6 @@ public class SitePackage extends Page {
     public Dealers turnOnPageDealers() {
         LOG.info("Checkbox attribute is " + contactPageCheckbox.getAttribute("checked"));
         if (contactPageCheckbox.getAttribute("checked") == null) {
-
-
             contactPageCheckbox.click();
         }
         okBtn.click();
@@ -72,6 +76,43 @@ public class SitePackage extends Page {
     public Dealers turnOffPageDealers() {
         if (contactPageCheckbox.isSelected()) {
             contactPageCheckbox.click();
+        }
+        okBtn.click();
+        return PageFactory.initElements(driver, Dealers.class);
+    }
+
+    /*turn on Contact Us widget*/
+    public Dealers turnOnTradeInWidgetDealers() {
+        if (tradeInWidgetCheckbox.getAttribute("checked") == null) {
+            tradeInWidgetCheckbox.click();
+        }
+        okBtn.click();
+        return PageFactory.initElements(driver, Dealers.class);
+    }
+
+    /*turn on Contact Us page*/
+    public Dealers turnOnTradeInPageDealers() {
+        LOG.info("Checkbox attribute is " + contactPageCheckbox.getAttribute("checked"));
+        if (tradeInPageCheckbox.getAttribute("checked") == null) {
+            tradeInPageCheckbox.click();
+        }
+        okBtn.click();
+        return PageFactory.initElements(driver, Dealers.class);
+    }
+
+    /*turn off Contact Us widget*/
+    public Dealers turnOffTradeInWidgetDealers() {
+        if (tradeInWidgetCheckbox.isSelected()) {
+            tradeInWidgetCheckbox.click();
+        }
+        okBtn.click();
+        return PageFactory.initElements(driver, Dealers.class);
+    }
+
+    /*turn off Contact Us page*/
+    public Dealers turnOffTradeInPageDealers() {
+        if (tradeInPageCheckbox.isSelected()) {
+            tradeInPageCheckbox.click();
         }
         okBtn.click();
         return PageFactory.initElements(driver, Dealers.class);

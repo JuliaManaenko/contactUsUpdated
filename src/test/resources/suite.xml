@@ -45,13 +45,18 @@
 
     <test name="TradeInForm">
         <classes>
-           <!-- <class name="TradeInForm.IsTradeInElementsDisplayed"/>
+           <!-- <class name="TradeInForm.TradeInTurnOffAccessDealers"/>
+            <class name="TradeInForm.TradeInTurnOnAccessDealers"/>
+            <class name="TradeInForm.TradeInTurnOffAccessSites"/>
+            <class name="TradeInForm.TradeInTurnOnAccessSites"/>
+            <class name="TradeInForm.IsTradeInElementsDisplayed"/>
             <class name="TradeInForm.TradeInRequiredFieldsHighlighted"/>
             <class name="TradeInForm.TradeInRequiredFieldsSelected"/>
             <class name="TradeInForm.TradeInWowAnimation"/>
             <class name="TradeInForm.TradeInColorVariation"/>
-            <class name="TradeInForm.TradeInPostFormNotification"/>-->
-            <class name="TradeInForm.TradeInWidgetTitle"/>
+            <class name="TradeInForm.TradeInPostFormNotification"/>
+            <class name="TradeInForm.TradeInWidgetTitle"/>-->
+            <class name="TradeInForm.TradeInFirstName"/>
         </classes>
     </test>
 

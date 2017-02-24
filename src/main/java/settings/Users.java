@@ -22,7 +22,7 @@ public class Users extends Page {
     @FindBy(how = How.XPATH, using = "//li[@class='rootUserBranch jstree-open jstree-last']/a")
     private WebElement rootUser;
 
-    @FindBy(how = How.XPATH, using = "(//li[contains(@class, 'userBranch')])[last()]")
+    @FindBy(how = How.XPATH, using = "(//li[contains(@class, 'userBranch')]/a)[last()]")
     private WebElement lastUser;
 
     @FindBy(how = How.ID, using = "user_tree_add")

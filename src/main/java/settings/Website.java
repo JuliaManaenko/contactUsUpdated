@@ -57,6 +57,15 @@ public class Website extends Page {
     @FindBy(how = How.XPATH, using = "//tr[@id='jquery_version']//span[@class='settings_view dotted_note']")
     private WebElement jQueryValue;
 
+    @FindBy(how = How.XPATH, using = "//tr[@id='redirect_404']//a[@class='button-style b_edit notranslate']")
+    private WebElement the404EditBtn;
+
+    @FindBy(how = How.XPATH, using = "//tr[@id='redirect_404']//a[@class='button-style b_save']")
+    private WebElement the404SaveBtn;
+
+    @FindBy(how = How.XPATH, using = "//tr[@id='redirect_404']//select")
+    private WebElement the404Select;
+
     /*open Leads Email tab*/
     public LeadsEmail clickOnLeadsTab() {
         leadsEmailTab.click();
@@ -127,5 +136,12 @@ public class Website extends Page {
             jQueryInput.sendKeys("1.11.2");
             jQuerySaveBtn.click();
         }
+    }
+
+    public void set404Redir(String value404){
+        the404EditBtn.click();
+        WebElement select = the404Select;
+        Select options = new Select(select);
+        options.selectByVisibleText(value404);
     }
 }

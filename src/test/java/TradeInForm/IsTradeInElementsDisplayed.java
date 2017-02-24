@@ -134,4 +134,65 @@ public class IsTradeInElementsDisplayed extends TradeInTestBase2 {
     public void tradeInSubmitButtonDisplayed(){
         Assert.assertTrue(tradeIn.isTradeInSubmitButtonDisplayed());
     }
+
+    @Test
+    public void tradeInVinLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isVinLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInYearLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isYearLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInMotorizedTypeLabelDisplayed(){ Assert.assertTrue(tradeIn.isMotorTypeLabelDisplayed()); }
+
+    @Test
+    public void tradeInMakeLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isMakeLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInModelLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isModelLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInTrimLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isTrimLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInAskingPriceLabelDisplayed(){ Assert.assertTrue(tradeIn.isAskingPriceLabelDisplayed()); }
+
+    @Test
+    public void tradeInOdometerLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isOdometerLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInFirstNameLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isFirstNameLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInLastNameLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isLastNameLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInPhoneNumLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isPhoneNumLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInEmailLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isEmailLabelDisplayed());
+    }
+
+    @Test
+    public void tradeInIntPhoneLabelDisplayed(){
+        Assert.assertTrue(tradeIn.isIntPhoneLabelDisplayed());
+    }
 }

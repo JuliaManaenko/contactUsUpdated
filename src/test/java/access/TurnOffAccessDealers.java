@@ -93,7 +93,7 @@ public class TurnOffAccessDealers extends TestBase {
         driver.get("http://www.tacker.ixloo.com/contactus2");
         waitForJSandJQueryToLoad();
         //wait.until(jsLoad);
-        Assert.assertFalse(contactUs.isWidgetExists());
+        Assert.assertFalse(dwsPage.isWidgetExists());
     }
 
    /* ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {

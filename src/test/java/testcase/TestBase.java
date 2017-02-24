@@ -3,10 +3,13 @@ package testcase;
 import contactUsPage.ContactUs;
 import dms.dmsHome;
 import dms.dmsHome2;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import settings.LeadsEmail;
@@ -27,7 +30,7 @@ public class TestBase {
     private static final Logger LOG = LogFactory.getLogger(TestBase.class);
 
     protected WebDriver driver;
-    protected ContactUs contactUs;
+    protected ContactUs dwsPage;
     protected dmsHome dmsHome;
     protected dmsHome2 dmsHome2;
 
@@ -89,7 +92,7 @@ public class TestBase {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
-        contactUs = PageFactory.initElements(driver, ContactUs.class);
+        dwsPage = PageFactory.initElements(driver, ContactUs.class);
 
     }
 
@@ -125,7 +128,7 @@ public class TestBase {
     }
 
     public boolean waitForJSandJQueryToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 35);
     /*method for execute Java Script: page should be loaded*/
      ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
         @Override
@@ -147,5 +150,13 @@ public class TestBase {
         }
     };
         return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
+
+    protected ExpectedCondition<Boolean> getConditionForTitle() {
+        return ExpectedConditions.textToBe(By.xpath("//div[@class='pull-left']/span"), "Trade_in");
+    }
+
+    protected ExpectedCondition<WebElement> isPageActivatedTooltipVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@id='jGrowl']//div[@class='message'][contains(text(), 'Page activated')]")));
     }
 }

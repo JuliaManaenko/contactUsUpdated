@@ -1,63 +1,50 @@
 package TradeInForm;
 
-import dmsDealers.Dealers;
-import dmsDealers.SitePackage;
+import dms.SiteEditor;
 import map2.ContactEditor;
 import map2.MAP2;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import settings.Sites;
 import settings.Website;
 import testcase.TestBase;
 import utility.PropertyLoader;
 
 /**
- * Created by Julia on 15.02.2017.
+ * Created by Julia on 16.02.2017.
  */
-public class TradeInTurnOffAccessDealers extends TestBase {
-
+public class TradeInTurnOffAccessSites extends TestBase {
     private ContactEditor tradeInEditor;
     private MAP2 map2;
     private WebDriverWait wait;
 
     /*Trade In tab should not be present in MAP2*/
     @Test
-    public void tradeInPageMAP2DoesntExist() throws InterruptedException {
+    public void tradeInMapPageDoesntExist() throws InterruptedException {
+        /*login under supervisor*/
         driver.manage().deleteAllCookies();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 20);
-        /*navigate to dms-Dealers*/
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
+        /*navigate to dms-Sites*/
+        Sites sites = dmsHome2.clickOnSitesMenu();
+        waitForJSandJQueryToLoad();
+        /*turn off Trade In page from access*/
+        SiteEditor editor = sites.openSiteEditor();
+        waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        Dealers dealers = dmsHome2.clickOnDealersMenu();
+        Sites sites2 = editor.turnOffTradeInPageSite();
         waitForJSandJQueryToLoad();
-        Thread.sleep(1100);
-        /*turn off Contact Us page from access*/
-        SitePackage editor = dealers.turnOnAccess();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@aria-labelledby='ui-dialog-title-site_editor']")));
+        /*navigate to MAP2*/
+        map2 = sites2.goToMAP2();
         waitForJSandJQueryToLoad();
-        wait.until(editor.isEditorVisible());
-        Dealers dealers2 = editor.turnOffTradeInPageDealers();
-        waitForJSandJQueryToLoad();
-        /*wait until editor will be closed*/
-        wait.until(dealers2.isEditorInvisible());
-        dealers2.clickSave();
-        waitForJSandJQueryToLoad();
-        driver.manage().deleteAllCookies();
-        driver.get(PropertyLoader.loadProperty("dms.url"));
-        waitForJSandJQueryToLoad();
-        dms.dmsHome dmsHome1 = PageFactory.initElements(driver, dms.dmsHome.class);
-        dmsHome2 = dmsHome1.loginToDmsManager();
-        waitForJSandJQueryToLoad();
-        map2 = dmsHome2.clickOnMap2Menu();
-        waitForJSandJQueryToLoad();
+
         Assert.assertFalse(map2.isTradeInTabExists());
     }
 
@@ -70,22 +57,18 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         wait = new WebDriverWait(driver, 20);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
-        Thread.sleep(1000);
-        /*navigate to dms-Dealers*/
-        Dealers dealers = dmsHome2.clickOnDealersMenu();
+        /*navigate to dms-Sites*/
+        Sites sites = dmsHome2.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
-        Thread.sleep(1100);
         /*turn on Trade In page from access*/
-        SitePackage editor = dealers.turnOnAccess();
+        SiteEditor editor = sites.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(editor.isEditorVisible());
-        Dealers dealers2 = editor.turnOnTradeInPageDealers();
+        Thread.sleep(1000);
+        Sites sites2 = editor.turnOnTradeInPageSite();
         waitForJSandJQueryToLoad();
-        wait.until(dealers2.isEditorInvisible());//wait until editor will be closed
-        dealers2.clickSave();
-        waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@aria-labelledby='ui-dialog-title-site_editor']")));
         /*navigate to MAP2*/
-        MAP2 map2 = dealers2.goToMAP2();
+        map2 = sites2.goToMAP2();
         waitForJSandJQueryToLoad();
         /*add Trade In page*/
         map2.clickTradeInTab();
@@ -99,20 +82,18 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         wait.until(isPageActivatedTooltipVisible());
         MAP2 map21 = tradeInEditor.backToMap();
         waitForJSandJQueryToLoad();
-        /*navigate to dms-Dealers*/
-        Dealers dealers3 = map21.clickOnDealersMenu();
+        /*navigate to dms-Sites*/
+        Sites sites1 = map21.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
         /*turn off Trade In page from access*/
-        SitePackage editor2 = dealers3.turnOnAccess();
+        SiteEditor editor1 = sites1.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(editor2.isEditorVisible());
-        Dealers dealers4 = editor.turnOffTradeInPageDealers();
+        Thread.sleep(1000);
+        Sites sites3 = editor1.turnOffTradeInPageSite();
         waitForJSandJQueryToLoad();
-        wait.until(dealers4.isEditorInvisible());//wait until editor will be closed
-        dealers4.clickSave();
-        waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@aria-labelledby='ui-dialog-title-site_editor']")));
         /*navigate to dms - Settings - Website General*/
-        Website website = dealers4.clickOnWebsiteMenu();
+        Website website = sites3.clickOnWebsiteMenu();
         waitForJSandJQueryToLoad();
         /*Set 'The '404 not found' Redirection' setting to 'Inventory page (default)'*/
         website.set404Redir(PropertyLoader.loadProperty("the404InventoryRedirect"));
@@ -128,18 +109,16 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
-        Dealers dealers1 = dmsHome2.clickOnDealersMenu();
+        Sites sites4 = dmsHome2.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
-        SitePackage editor3 = dealers1.turnOnAccess();
+        SiteEditor editor2 = sites4.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(editor3.isEditorVisible());
-        Dealers dealers5 = editor.turnOnTradeInPageDealers();
+        Thread.sleep(1000);
+        Sites sites5 = editor2.turnOnTradeInPageSite();
         waitForJSandJQueryToLoad();
-        wait.until(dealers5.isEditorInvisible());//wait until editor will be closed
-        dealers5.clickSave();
-        waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@aria-labelledby='ui-dialog-title-site_editor']")));
         /*delete the last created Trade In page in MAP2*/
-        MAP2 map22 = dealers5.goToMAP2();
+        MAP2 map22 = sites5.goToMAP2();
         waitForJSandJQueryToLoad();
         map22.clickTradeInTab();
         waitForJSandJQueryToLoad();
@@ -148,86 +127,87 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         waitForJSandJQueryToLoad();
     }
 
-    /*Contact Us widget should not be present in MAP2 in library*/
+    /*Trade In widget should not be present in MAP2*/
     @Test
-    public void tradeInWidgetDoesntExistInLib() throws InterruptedException {
+    public void TradeInWidgetDoesntExistInLib() throws InterruptedException {
         driver.manage().deleteAllCookies();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 20);
-        waitForJSandJQueryToLoad();
-        dms.dmsHome dmsHome1 = PageFactory.initElements(driver, dms.dmsHome.class);
-        dmsHome2 = dmsHome1.loginToDms();
-        waitForJSandJQueryToLoad();
-        /*navigate to dms-Dealers*/
-        Dealers dealers = dmsHome2.clickOnDealersMenu();
+        /*login under supervisor*/
+        dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        /*turn on Contact Us page from access*/
-        SitePackage editor = dealers.turnOnAccess();
+        /*navigate to dms-Sites*/
+        Sites sites = dmsHome2.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
-        wait.until(editor.isEditorVisible());
-        Dealers dealers2 = editor.turnOnTradeInPageDealers();
+        Thread.sleep(1000);
+        /*turn on Trade In page from access*/
+        SiteEditor editor = sites.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(dealers2.isEditorInvisible());
-        /*turn off Contact Us widget from access*/
-        SitePackage editor2 = dealers.clickSitePackBtn();
+        Thread.sleep(1000);
+        Sites sites2 = editor.turnOnPageSite();
         waitForJSandJQueryToLoad();
-        wait.until(editor2.isEditorVisible());
-        Dealers dealers3 = editor.turnOffTradeInWidgetDealers();
+        Thread.sleep(1000);
+        /*turn off Trade In widget from access*/
+        SiteEditor editor2 = sites2.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(dealers3.isEditorInvisible());
-        dealers2.clickSave();
+        Thread.sleep(1000);
+        Sites sites3 = editor.turnOffWidgetSite();
         waitForJSandJQueryToLoad();
+        /*login under manager*/
         driver.manage().deleteAllCookies();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-        dms.dmsHome dmsHome11 = PageFactory.initElements(driver, dms.dmsHome.class);
-        dmsHome2 = dmsHome11.loginToDmsManager();
+        dms.dmsHome dmsHome1 = PageFactory.initElements(driver, dms.dmsHome.class);
+        dmsHome2 = dmsHome1.loginToDmsManager();
         waitForJSandJQueryToLoad();
+        /*navigate to MAP2*/
         map2 = dmsHome2.clickOnMap2Menu();
         waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        /*open new Trade In page in MAP2*/
         map2.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
-        wait.until(getConditionForTitle());
         Thread.sleep(1000);
         tradeInEditor = map2.clickAddPage();
         waitForJSandJQueryToLoad();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
+
         Assert.assertFalse(tradeInEditor.isTradeInWidgetExists());
     }
 
+    /*Trade In widget should not be present in MAP2 Editor*/
     @Test
-    public void tradeInWidgetDoesntExistInEditor() throws InterruptedException {
+    public void TradeInWidgetDoesntExistInEditor() throws InterruptedException {
         driver.manage().deleteAllCookies();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 20);
-        waitForJSandJQueryToLoad();
-        dms.dmsHome dmsHome1 = PageFactory.initElements(driver, dms.dmsHome.class);
-        dmsHome2 = dmsHome1.loginToDms();
-        waitForJSandJQueryToLoad();
-        /*navigate to dms-Dealers*/
-        Dealers dealers = dmsHome2.clickOnDealersMenu();
+        /*login under supervisor*/
+        dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        /*turn on Contact Us page from access*/
-        SitePackage editor = dealers.turnOnAccess();
+        /*navigate to dms-Sites*/
+        Sites sites = dmsHome2.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
-        wait.until(editor.isEditorVisible());
-        Dealers dealers2 = editor.turnOnTradeInPageDealers();
+        Thread.sleep(1000);
+        /*turn on Trade In page from access*/
+        SiteEditor editor = sites.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(dealers2.isEditorInvisible());
-        /*turn on Contact Us widget from access*/
-        SitePackage editor2 = dealers.clickSitePackBtn();
+        Thread.sleep(1000);
+        Sites sites2 = editor.turnOnTradeInPageSite();
         waitForJSandJQueryToLoad();
-        wait.until(editor2.isEditorVisible());
-        Dealers dealers3 = editor.turnOnTradeInWidgetDealers();
+        Thread.sleep(1000);
+        /*turn on Trade In widget from access*/
+        SiteEditor editor2 = sites2.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(dealers3.isEditorInvisible());
-        dealers2.clickSave();
+        Thread.sleep(1000);
+        Sites sites3 = editor.turnOnTradeInWidgetSite();
         waitForJSandJQueryToLoad();
-        map2 = dealers2.goToMAP2();
+        /*navigate to MAP2*/
+        map2 = sites3.goToMAP2();
         waitForJSandJQueryToLoad();
+        /*add Trade In page and Trade In widget*/
         map2.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
@@ -240,73 +220,76 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         waitForJSandJQueryToLoad();
         tradeInEditor.activatePage();
         waitForJSandJQueryToLoad();
-        Dealers dealers1 = map2.clickOnDealersMenu();
+        wait.until(isPageActivatedTooltipVisible());
+        map2 = tradeInEditor.backToMap();
         waitForJSandJQueryToLoad();
-        SitePackage editor3 = dealers1.turnOnAccess();
+        /*navigate to dms-Sites*/
+        Sites sites1 = map2.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
-        wait.until(editor3.isEditorVisible());
-        Dealers dealers4 = editor3.turnOffTradeInWidgetDealers();
+        /*turn off Trade In widget from access*/
+        SiteEditor editor3 = sites1.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(dealers4.isEditorInvisible());
-        dealers2.clickSave();
+        Thread.sleep(1000);
+        Sites sites4 = editor3.turnOffTradeInWidgetSite();
         waitForJSandJQueryToLoad();
+        /*login under manager*/
         driver.manage().deleteAllCookies();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
-        dms.dmsHome dmsHome11 = PageFactory.initElements(driver, dms.dmsHome.class);
-        dmsHome2 = dmsHome11.loginToDmsManager();
+        dms.dmsHome dmsHome1 = PageFactory.initElements(driver, dms.dmsHome.class);
+        dmsHome2 = dmsHome1.loginToDmsManager();
         waitForJSandJQueryToLoad();
+        /*navigate to MAP2*/
         map2 = dmsHome2.clickOnMap2Menu();
         waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        /*open the last created Trade In page*/
         map2.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
         Thread.sleep(1000);
         tradeInEditor = map2.editLastPage();
         waitForJSandJQueryToLoad();
-        Thread.sleep(2000);
-        Assert.assertFalse(tradeInEditor.isTradeInWidgetExistsInEditor());
         Thread.sleep(1000);
-        MAP2 map22 =  tradeInEditor.backToMap();
-        wait.until(getConditionForTitle());
-        waitForJSandJQueryToLoad();
-        map22.deletePage();
-        waitForJSandJQueryToLoad();
+
+        Assert.assertFalse(tradeInEditor.isTradeInWidgetExistsInEditor());
     }
 
     /*Trade In widget should not be present on dws page*/
     @Test
-    public void tradeInDdwsWidgetDoesntExist() throws InterruptedException {
+    public void tradeInDwsWidgetDoesntExist() throws InterruptedException {
         driver.manage().deleteAllCookies();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 20);
-        waitForJSandJQueryToLoad();
-        dmsHome2 = dmsHome.loginToDms();
-        waitForJSandJQueryToLoad();
-        /*navigate to dms-Dealers*/
-        Dealers dealers = dmsHome2.clickOnDealersMenu();
+        /*login under supervisor*/
+        dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
-        /*turn on Contact Us page from access*/
-        SitePackage editor = dealers.turnOnAccess();
+        /*navigate to dms-Sites*/
+        Sites sites = dmsHome2.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
-        wait.until(editor.isEditorVisible());
-        Dealers dealers2 = editor.turnOnTradeInPageDealers();
-        wait.until(dealers2.isEditorInvisible());
-        /*turn off Contact Us widget from access*/
-        SitePackage editor2 = dealers.clickSitePackBtn();
+        Thread.sleep(1000);
+        /*turn on Trade In page from access*/
+        SiteEditor editor = sites.openSiteEditor();
         waitForJSandJQueryToLoad();
-        wait.until(editor2.isEditorVisible());
-        Dealers dealers3 = editor.turnOnTradeInWidgetDealers();
+        Thread.sleep(1000);
+        Sites sites2 = editor.turnOnTradeInPageSite();
         waitForJSandJQueryToLoad();
-        wait.until(dealers3.isEditorInvisible());
-        dealers2.clickSave();
+        Thread.sleep(1000);
+        /*turn on Trade In widget from access*/
+        SiteEditor editor2 = sites2.openSiteEditor();
         waitForJSandJQueryToLoad();
-        map2 = dealers2.goToMAP2();
+        Thread.sleep(1000);
+        Sites sites3 = editor.turnOnTradeInWidgetSite();
         waitForJSandJQueryToLoad();
+        /*navigate to MAP2*/
+        map2 = sites3.goToMAP2();
+        waitForJSandJQueryToLoad();
+        /*add Trade In page and Trade In widget*/
         map2.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
+        wait.until(getConditionForTitle());
         Thread.sleep(1000);
         tradeInEditor = map2.clickAddPage();
         waitForJSandJQueryToLoad();
@@ -315,17 +298,25 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         waitForJSandJQueryToLoad();
         tradeInEditor.activatePage();
         waitForJSandJQueryToLoad();
-        Dealers dealers1 = map2.clickOnDealersMenu();
+        wait.until(isPageActivatedTooltipVisible());
+        map2 = tradeInEditor.backToMap();
         waitForJSandJQueryToLoad();
-        SitePackage editor3 = dealers1.turnOnAccess();
-        wait.until(editor3.isEditorVisible());
-        Dealers dealers4 = editor3.turnOffTradeInWidgetDealers();
-        wait.until(dealers4.isEditorInvisible());
-        dealers2.clickSave();
+        /*navigate to dms-Sites*/
+        Sites sites1 = map2.clickOnSitesMenu();
         waitForJSandJQueryToLoad();
+        /*turn off Trade In widget from access*/
+        SiteEditor editor3 = sites1.openSiteEditor();
+        waitForJSandJQueryToLoad();
+        Thread.sleep(1000);
+        Sites sites4 = editor3.turnOffTradeInWidgetSite();
+        waitForJSandJQueryToLoad();
+        /*open Trade In page in dws*/
         driver.get(PropertyLoader.loadProperty("dws.url2") + "tradein.html");
         waitForJSandJQueryToLoad();
+
         Assert.assertFalse(dwsPage.isTradeInWidgetExists());
+
+        /*delete the last created page in MAP2*/
         Thread.sleep(1000);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
@@ -335,33 +326,8 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         map22.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(getConditionForTitle());
+        Thread.sleep(1000);
         map22.deletePage();
         waitForJSandJQueryToLoad();
-    }
-
-    public static ExpectedCondition<Boolean> absenceOfElementLocated(
-            final By locator) {
-        return new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                try {
-                    driver.findElement(locator);
-                    return false;
-                } catch (NoSuchElementException e) {
-                    return true;
-                } catch (StaleElementReferenceException e) {
-                    return true;
-                }
-            }
-
-            @Override
-            public String toString() {
-                return "element to not being present: " + locator;
-            }
-        };
-    }
-
-    protected ExpectedCondition<Boolean> getConditionForTitle() {
-        return ExpectedConditions.textToBe(By.xpath("//div[@class='pull-left']/span"), "Trade_in");
     }
 }

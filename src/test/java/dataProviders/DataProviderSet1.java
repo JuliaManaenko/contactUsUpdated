@@ -81,4 +81,11 @@ public class DataProviderSet1 {
                 {PropertyLoader.loadProperty("text50")},
                 {PropertyLoader.loadProperty("textAll")}};
     }
+
+    @DataProvider(name = "fName")
+    public static Object[][] getPhone() {
+        return new Object[][]{{PropertyLoader.loadProperty("text1")},
+                {PropertyLoader.loadProperty("text20")},
+                {PropertyLoader.loadProperty("textAll")}};
+    }
 }

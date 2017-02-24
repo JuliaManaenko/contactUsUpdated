@@ -1,6 +1,7 @@
 package testcase;
 
 import contactUsPage.ContactUs;
+import dms.SiteEditor;
 import dms.dmsHome;
 import map2.ContactEditor;
 import map2.MAP2;
@@ -16,6 +17,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import settings.Localization;
+import settings.Sites;
 import settings.Website;
 import utility.PropertyLoader;
 import webdriver.WebDriverFactory;
@@ -43,7 +45,20 @@ public class TradeInTestBase2 {
         dmsHome = PageFactory.initElements(driver, dms.dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
-        MAP2 map2 = dmsHome2.clickOnMap2Menu();
+        Sites sites = dmsHome2.clickOnSitesMenu();
+        waitForJSandJQueryToLoad();
+        SiteEditor editor = sites.openSiteEditor();
+        waitForJSandJQueryToLoad();
+        Sites sites2 = editor.turnOnTradeInPageSite();
+        waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@aria-labelledby='ui-dialog-title-site_editor']")));
+        /*turn on Contact Us widget from access*/
+        SiteEditor editor2 = sites2.openSiteEditor();
+        waitForJSandJQueryToLoad();
+        Sites sites3 = editor2.turnOnTradeInWidgetSite();
+        waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@aria-labelledby='ui-dialog-title-site_editor']")));
+        MAP2 map2 = sites.goToMAP2();
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         Thread.sleep(2000);
@@ -51,12 +66,12 @@ public class TradeInTestBase2 {
         wait.until(isLoadingInvisible());
         wait.until(isAddPageVisible());
         Thread.sleep(2000);
-        ContactEditor editor = map2.clickAddPage();
+        ContactEditor mapEditor = map2.clickAddPage();
         wait.until(isLoadingInvisible());
         Thread.sleep(2000);
-        editor.addTradeInWidget();
+        mapEditor.addTradeInWidget();
         Thread.sleep(500);
-        editor.activatePage();
+        mapEditor.activatePage();
         wait.until(isLoadingInvisible());
         wait.until(isPageActivatedTooltipVisible());
         Thread.sleep(2000);
