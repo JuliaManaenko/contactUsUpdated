@@ -7,6 +7,7 @@ import map2.MAP2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,10 +23,11 @@ import java.util.concurrent.TimeUnit;
  * Created by Julia on 18.01.2017.
  */
 public class EmailInputTest {
-    protected WebDriver driver;
-    WebDriverWait wait;
-    protected ContactUs contactUs;
-    protected dms.dmsHome dmsHome;
+
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private ContactUs contactUs;
+    private dms.dmsHome dmsHome;
 
     @BeforeClass
     @Parameters({"browserName"})
@@ -37,12 +39,12 @@ public class EmailInputTest {
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
+        wait.until(isHomeBreadcrumbsVisible());
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
         waitForJSandJQueryToLoad();
-        Thread.sleep(2000);
+        wait.until(isMAP2PagesListVisible());
         map2.clickContactTab();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.map-link.pull-right"))));
-        Thread.sleep(2000);
         ContactEditor editor = map2.clickAddPage();
         Thread.sleep(2000);
         editor.addWidget();
@@ -50,7 +52,6 @@ public class EmailInputTest {
         waitForJSandJQueryToLoad();
         Thread.sleep(2000);
         if (driver != null) {
-            //   LOG.info("Killing web driver");
             WebDriverFactory.killDriverInstance();
         }
     }
@@ -65,25 +66,22 @@ public class EmailInputTest {
     }
 
     @AfterClass
-    //  @Parameters({ "browserName" })
     public void tearDown() throws InterruptedException {
-        //    driver = WebDriverFactory.getInstance(browserName);
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 20);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome dmsHome1 = PageFactory.initElements(driver, dms.dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome1.loginToDms();
-        // waitForJSandJQueryToLoad();
+         waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
-        //  waitForJSandJQueryToLoad();
+        waitForJSandJQueryToLoad();
         Thread.sleep(3000);
         map2.clickContactTab();
         Thread.sleep(3000);
         map2.deletePage();
         Thread.sleep(1000);
         if (driver != null) {
-            //   LOG.info("Killing web driver");
             WebDriverFactory.killDriverInstance();
         }
     }
@@ -206,6 +204,14 @@ public class EmailInputTest {
                 {PropertyLoader.loadProperty("nEmail17")},
                 {PropertyLoader.loadProperty("nEmail18")},
                 {PropertyLoader.loadProperty("nEmail19")},};
+    }
+
+    protected ExpectedCondition<WebElement> isHomeBreadcrumbsVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@id='slid_breadcrumb']//a[contains(text(), 'Home')]")));
+    }
+
+    protected ExpectedCondition<WebElement> isMAP2PagesListVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(".sidebar.page-types")));
     }
 
     public boolean waitForJSandJQueryToLoad() {

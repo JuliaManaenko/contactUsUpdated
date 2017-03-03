@@ -1,13 +1,21 @@
 /*Contact Us dws page*/
 package contactUsPage;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
 import page.Page;
 import utility.LogFactory;
 import utility.PropertyLoader;
-import org.slf4j.Logger;
+
+import java.util.List;
 
 
 /**
@@ -135,6 +143,9 @@ public class ContactUs extends Page {
 
     @FindBy(how = How.XPATH, using = "(//div[@class='panel-body']//div[@class='text-center'])[1]")
     private WebElement postForm;
+
+    @FindBy(how = How.CLASS_NAME, using = "btn-message-ok")
+    private WebElement postFormOkBtn;
 
     @FindBy(how = How.XPATH, using = "//div[@class='row captcha_container capchaB']")
     private WebElement captcha;
@@ -395,10 +406,6 @@ public class ContactUs extends Page {
         }
     }
 
-    public Dimension astericsInputSize() {
-        return astericsInput.getSize();
-    }
-
     public boolean isAstericsCaptchaDisplayed() {
         try {
             astericsCaptcha.isDisplayed();
@@ -650,6 +657,7 @@ public class ContactUs extends Page {
             return false;
         }
     }
+
     public boolean isOdometerLabelDisplayed() {
         try {
             odometerLabel.isDisplayed();
@@ -658,6 +666,7 @@ public class ContactUs extends Page {
             return false;
         }
     }
+
     public boolean isFirstNameLabelDisplayed() {
         try {
             firstNameLabel.isDisplayed();
@@ -755,6 +764,18 @@ public class ContactUs extends Page {
         return commentTextArea.getCssValue("border-color");
     }
 
+    public String getVINInputBorderColor() {
+        return vinInput.getCssValue("border-color");
+    }
+
+    public String getYearSelectBorderColor() {
+        return yearSelect.getCssValue("border-color");
+    }
+
+    public String getAskingPriceInputBorderColor() {
+        return askingPriceInput.getCssValue("border-color");
+    }
+
     /*methods for getting class name of input elements*/
 
     public String getFirstNameInputClass() {
@@ -797,14 +818,13 @@ public class ContactUs extends Page {
         return commentTextArea.getAttribute("class");
     }
 
-    public String getWidgetClass() { return widget.getAttribute("class");  }
+    public String getWidgetClass() {return widget.getAttribute("class"); }
 
-    public boolean getWidgetClassWow(String wowClass)
-    {
+    public boolean getWidgetClassWow(String wowClass) {
         return widget.getAttribute("class").contains(wowClass);
     }
 
-    public boolean getTradeInWidgetClassWow(String wowClass) { return tradeInWidget2.getAttribute("class").contains(wowClass); }
+    public boolean getTradeInWidgetClassWow(String wowClass) { return tradeInWidget2.getAttribute("class").contains(wowClass);}
 
     public String getWidgetClassColor() {
         return widget2.getAttribute("class");
@@ -818,9 +838,18 @@ public class ContactUs extends Page {
         return reCaptcha2Checkbox.getAttribute("class");
     }
 
-    public boolean getMotionCaptchaClass(String motionClass)
-    {
-        return motionCaptchaCanvas.getAttribute("class").contains(motionClass);
+    public boolean getMotionCaptchaClass(String motionClass) { return motionCaptchaCanvas.getAttribute("class").contains(motionClass);}
+
+    public String getVINInputClass() {
+        return vinInput.getAttribute("class");
+    }
+
+    public String getYearSelectClass() {
+        return yearSelect.getAttribute("class");
+    }
+
+    public String getAskingPriceInputClass() {
+        return askingPriceInput.getAttribute("class");
     }
 
     /*methods for check if cursor is in input*/
@@ -845,11 +874,40 @@ public class ContactUs extends Page {
         return driver.switchTo().activeElement().equals(zipInput);
     }
 
+    public boolean isVINSelected() { return driver.switchTo().activeElement().equals(vinInput); }
+
+    public boolean isYearSelected() {
+        return driver.switchTo().activeElement().equals(yearSelect);
+    }
+
+    public boolean isAskingPriceSelected() {
+        return driver.switchTo().activeElement().equals(askingPriceInput);
+    }
+
     /*methods for getting font-color of labels*/
-    public String getFirstNameLabelFontColor(){ return firstNameLabel.getCssValue("color");  }
-    public String getLastNameLabelFontColor(){ return lastNameLabel.getCssValue("color");  }
-    public String getPhoneNumLabelFontColor(){ return phoneNumLabel.getCssValue("color");  }
-    public String getEmailLabelFontColor(){ return emailLabel.getCssValue("color");  }
+    public String getFirstNameLabelFontColor() {
+        return firstNameLabel.getCssValue("color");
+    }
+
+    public String getLastNameLabelFontColor() {
+        return lastNameLabel.getCssValue("color");
+    }
+
+    public String getPhoneNumLabelFontColor() {
+        return phoneNumLabel.getCssValue("color");
+    }
+
+    public String getEmailLabelFontColor() {
+        return emailLabel.getCssValue("color");
+    }
+
+    public String getVINLabelFontColor() {
+        return vinLabel.getCssValue("color");
+    }
+
+    public String getAskingPriceLabelFontColor() {
+        return askingPriceLabel.getCssValue("color");
+    }
 
 
     /*methods for filling inputs with some values*/
@@ -869,6 +927,11 @@ public class ContactUs extends Page {
         lastNameInput.sendKeys("Smith");
     }
 
+    public void fillLastNameVar(String name) {
+        lastNameInput.clear();
+        lastNameInput.sendKeys(name);
+    }
+
     public void fillPhoneNum() {
         phoneNumInput.clear();
         phoneNumInput.sendKeys("9587123698");
@@ -879,6 +942,11 @@ public class ContactUs extends Page {
         phoneNumInput.sendKeys(PropertyLoader.loadProperty("phoneL1"));
     }
 
+    public void fillPhoneNumVar(String phone) {
+        phoneNumInput.clear();
+        phoneNumInput.sendKeys(phone);
+    }
+
     public void fillEmail() {
         emailInput.clear();
         emailInput.sendKeys("test_2@dxloo.com");
@@ -887,6 +955,11 @@ public class ContactUs extends Page {
     public void fillEmail2() {
         emailInput.clear();
         emailInput.sendKeys(PropertyLoader.loadProperty("Email1"));
+    }
+
+    public void fillEmailVar(String email) {
+        emailInput.clear();
+        emailInput.sendKeys(email);
     }
 
     public void fillZip() {
@@ -916,6 +989,33 @@ public class ContactUs extends Page {
         commentTextArea.sendKeys("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore commentTextArea.sendKeys(\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor isa");
     }
 
+    public void fillCommentsVar(String comment) {
+        commentTextArea.clear();
+        commentTextArea.sendKeys(comment);
+    }
+
+    public void fillIntPhoneVar(String intPhone) {
+        intPhoneInput.clear();
+        intPhoneInput.sendKeys(intPhone);
+    }
+
+    public void fillVINVar(String vin) {
+        vinInput.clear();
+        vinInput.sendKeys(vin);
+    }
+
+    public void fillAskPriceVar(String price) {
+        askingPriceInput.clear();
+        askingPriceInput.sendKeys(price);
+    }
+
+    /*Select values in selects*/
+
+    public void selectYear(String year){
+        WebElement select = yearSelect;
+        Select options = new Select(select);
+        options.selectByVisibleText(year);
+    }
 
     /*Method for check if widget exists or doesn't exist*/
 
@@ -959,14 +1059,20 @@ public class ContactUs extends Page {
         return commentTextArea.getAttribute("value");
     }
 
+    public String vinGetValue() {
+        return vinInput.getAttribute("value");
+    }
+
     /*Get text from elements*/
     public String postFormGetText() {
         return postForm.getText();
     }
 
-    public String getWidgetTitleText(){ return widgetTitle.getText(); }
+    public String getWidgetTitleText() {
+        return widgetTitle.getText();
+    }
 
-    public String getUploadPhotoText(){
+    public String getUploadPhotoText() {
         return uploadPhotoText.getText();
     }
 
@@ -977,6 +1083,48 @@ public class ContactUs extends Page {
     public String getMotionCaptchaText() {
         return motionCaptchaText.getText();
     }
+
+    public String getYearLabelText() {
+        return yearLabel.getText();
+    }
+
+    public String getYearSelectValue() {
+        WebElement select = yearSelect;
+        Select options = new Select(select);
+        WebElement selectedOption = options.getFirstSelectedOption();
+        return selectedOption.getText();
+    }
+
+    //TODO:
+    public List<WebElement> getYearSelectOptions() {
+        WebElement select = yearSelect;
+        Select options = new Select(select);
+        List<WebElement> allOptions = options.getOptions();
+        return allOptions;
+    }
+
+    /*TODO: Methods for checking if element is hover*/
+
+    public String getTradeInSubmitClass() {
+        Actions action = new Actions(driver);
+        Action moveToElem = action.moveToElement(tradeInSubmitButton).build();
+        moveToElem.perform();
+        return tradeInSubmitButton.getAttribute("class");
+    }
+
+    public String getTradeInSubmitColor() {
+        Actions action = new Actions(driver);
+        Action moveToElem = action.moveToElement(tradeInSubmitButton).build();
+        moveToElem.perform();
+        return tradeInSubmitButton.getAttribute("background-color");
+    }
+
+    /*TODO: Methods for checking if element is clickable*/
+
+    /*Methods for click in input*/
+
+    public void clickAskingPriceInput(){askingPriceInput.click();}
+
 }
 
 

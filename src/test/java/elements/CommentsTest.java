@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class CommentsTest extends TestBase2 {
 
-    protected dms.dmsHome2 dmsHome2;
+    private dms.dmsHome2 dmsHome2;
 
     @Test(priority = 1)
     public void emptyCommentsClass() throws InterruptedException {

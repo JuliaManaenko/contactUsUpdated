@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class IntPhoneNumTest extends TestBase2 {
 
-    LeadDetails leadDetails;
+    private LeadDetails leadDetails;
 
     @Test(priority = 1)
     public void emptyValueClass() throws InterruptedException {

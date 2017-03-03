@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
  * Created by Julia on 17.01.2017.
  */
 public class TestBase3 {
-    private static final Logger LOG = LogFactory.getLogger(TestBase.class);
 
+    private static final Logger LOG = LogFactory.getLogger(TestBase.class);
     protected WebDriver driver;
     protected ContactUs contactUs;
     protected dms.dmsHome dmsHome;
@@ -124,6 +124,4 @@ public class TestBase3 {
         };
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
-
-
 }

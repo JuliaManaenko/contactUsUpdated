@@ -55,8 +55,27 @@
             <class name="TradeInForm.TradeInWowAnimation"/>
             <class name="TradeInForm.TradeInColorVariation"/>
             <class name="TradeInForm.TradeInPostFormNotification"/>
-            <class name="TradeInForm.TradeInWidgetTitle"/>-->
+            <class name="TradeInForm.TradeInWidgetTitle"/>
             <class name="TradeInForm.TradeInFirstName"/>
+            <class name="TradeInForm.TradeInFirstNameInEmail"/>
+            <class name="TradeInForm.TradeInLastName"/>
+            <class name="TradeInForm.TradeInLastNameInEmail"/>
+            <class name="TradeInForm.TradeInPhoneNumber"/>
+            <class name="TradeInForm.TradeInPhoneNumInEmail"/>
+            <class name="TradeInForm.TradeInEmailInput"/>
+            <class name="TradeInForm.TradeInEmailInLead"/>
+            <class name="TradeInForm.TradeInEmailInEmail"/>
+            <class name="TradeInForm.TradeInIntPhoneNum"/>
+            <class name="TradeInForm.TradeInIntPhoneNumInEmail"/>
+            <class name="TradeInForm.TradeInComments"/>
+            <class name="TradeInForm.TradeInCommentsInEmail"/>
+            <class name="TradeInForm.TradeInVINInput"/>
+            <class name="TradeInForm.TradeInVINinEmail"/>
+            <class name="TradeInForm.TradeInYearSelect"/>
+            <class name="TradeInForm.TradeInYearInEmail"/>-->
+            <class name="TradeInForm.TradeInAskingPrice"/>
+            <class name="TradeInForm.TradeInAskingPriceInEmail"/>
+
         </classes>
     </test>
 

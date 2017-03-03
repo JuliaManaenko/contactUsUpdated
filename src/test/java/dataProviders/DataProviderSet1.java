@@ -83,9 +83,244 @@ public class DataProviderSet1 {
     }
 
     @DataProvider(name = "fName")
-    public static Object[][] getPhone() {
+    public static Object[][] getName() {
         return new Object[][]{{PropertyLoader.loadProperty("text1")},
                 {PropertyLoader.loadProperty("text20")},
                 {PropertyLoader.loadProperty("textAll")}};
+    }
+
+    /*1st element - phone input mask (diff variants), 2nd element - phone number in form and lead details*/
+    @DataProvider(name = "phones")
+    public static Object[][] getPhone() {
+        return new Object[][]{{PropertyLoader.loadProperty("inputMaskL1"), PropertyLoader.loadProperty("phoneL1")},
+                {PropertyLoader.loadProperty("inputMaskL2"), PropertyLoader.loadProperty("phoneL2")},
+                {PropertyLoader.loadProperty("inputMaskN1"), PropertyLoader.loadProperty("phoneN1")},
+                {PropertyLoader.loadProperty("inputMaskN2"), PropertyLoader.loadProperty("phoneN2")},
+                {PropertyLoader.loadProperty("inputMaskS1"), PropertyLoader.loadProperty("phoneS1")},
+                {PropertyLoader.loadProperty("inputMaskS2"), PropertyLoader.loadProperty("phoneS2")},
+                {PropertyLoader.loadProperty("inputMaskNLS1"), PropertyLoader.loadProperty("phoneNLS1")},
+                {PropertyLoader.loadProperty("inputMaskNLS2"), PropertyLoader.loadProperty("phoneNLS2")},
+                {PropertyLoader.loadProperty("inputMaskLSN1"), PropertyLoader.loadProperty("phoneLSN1")},
+                {PropertyLoader.loadProperty("inputMaskLSN2"), PropertyLoader.loadProperty("phoneLSN2")},
+                {PropertyLoader.loadProperty("inputMaskMix1"), PropertyLoader.loadProperty("phoneMix1")},
+                {PropertyLoader.loadProperty("inputMaskMix2"), PropertyLoader.loadProperty("phoneMix2")}};
+    }
+
+    @DataProvider(name = "incorrectPhones")
+    public static Object[][] getIncorrectPhone() {
+        return new Object[][]{{PropertyLoader.loadProperty("inputMaskL1"), PropertyLoader.loadProperty("phoneMix1")},
+                {PropertyLoader.loadProperty("inputMaskL2"), PropertyLoader.loadProperty("phoneLSN2")},
+                {PropertyLoader.loadProperty("inputMaskN1"), PropertyLoader.loadProperty("phoneL2")},
+                {PropertyLoader.loadProperty("inputMaskN2"), PropertyLoader.loadProperty("phoneS2")},
+                {PropertyLoader.loadProperty("inputMaskNLS1"), PropertyLoader.loadProperty("phoneS1")},
+                {PropertyLoader.loadProperty("inputMaskNLS2"), PropertyLoader.loadProperty("phoneLSN1")},
+                {PropertyLoader.loadProperty("inputMaskLSN1"), PropertyLoader.loadProperty("phoneNLS2")},
+                {PropertyLoader.loadProperty("inputMaskLSN2"), PropertyLoader.loadProperty("phoneL2")},
+                {PropertyLoader.loadProperty("inputMaskMix1"), PropertyLoader.loadProperty("phoneL1")},
+                {PropertyLoader.loadProperty("inputMaskMix2"), PropertyLoader.loadProperty("phoneN1")}};
+    }
+
+    @DataProvider(name = "incorrectEmail")
+    public static Object[][] getIncorrectEmail() {
+        return new Object[][]{{PropertyLoader.loadProperty("nEmail1")},
+                {PropertyLoader.loadProperty("nEmail2")},
+                {PropertyLoader.loadProperty("nEmail3")},
+                {PropertyLoader.loadProperty("nEmail4")},
+                {PropertyLoader.loadProperty("nEmail5")},
+                {PropertyLoader.loadProperty("nEmail6")},
+                {PropertyLoader.loadProperty("nEmail7")},
+                {PropertyLoader.loadProperty("nEmail8")},
+                {PropertyLoader.loadProperty("nEmail9")},
+                {PropertyLoader.loadProperty("nEmail10")},
+                {PropertyLoader.loadProperty("nEmail11")},
+                {PropertyLoader.loadProperty("nEmail12")},
+                {PropertyLoader.loadProperty("nEmail13")},
+                {PropertyLoader.loadProperty("nEmail14")},
+                {PropertyLoader.loadProperty("nEmail15")},
+                {PropertyLoader.loadProperty("nEmail16")},
+                {PropertyLoader.loadProperty("nEmail17")},
+                {PropertyLoader.loadProperty("nEmail18")},
+                {PropertyLoader.loadProperty("nEmail19")},
+                {PropertyLoader.loadProperty("nEmail20")},
+                {PropertyLoader.loadProperty("nEmail21")},
+                {PropertyLoader.loadProperty("nEmail22")},
+                {PropertyLoader.loadProperty("nEmail23")},
+                {PropertyLoader.loadProperty("nEmail24")},};
+    }
+
+    @DataProvider(name = "intPhones")
+    public static Object[][] getIntPhone() {
+        return new Object[][]{{PropertyLoader.loadProperty("intPhone0"), PropertyLoader.loadProperty("intPhone0")},
+                {PropertyLoader.loadProperty("intPhone1"), PropertyLoader.loadProperty("intPhone1")},
+                {PropertyLoader.loadProperty("intPhone10"), PropertyLoader.loadProperty("intPhone10")},
+                {PropertyLoader.loadProperty("intPhone20"), PropertyLoader.loadProperty("intPhone20")},
+                {PropertyLoader.loadProperty("intPhone21"), PropertyLoader.loadProperty("intPhone20")}};
+    }
+
+    @DataProvider(name = "comments")
+    private static Object[][] putComments() {
+        return new Object[][]{{PropertyLoader.loadProperty("comment1"), PropertyLoader.loadProperty("comment1")},
+                {PropertyLoader.loadProperty("comment1000"), PropertyLoader.loadProperty("comment1000")},
+                {PropertyLoader.loadProperty("comment2000"), PropertyLoader.loadProperty("comment2000")},
+                {PropertyLoader.loadProperty("comment2001"), PropertyLoader.loadProperty("comment2000")},
+                {PropertyLoader.loadProperty("commentTag"), PropertyLoader.loadProperty("comment1")}};
+    }
+
+    @DataProvider(name = "commentsCount")
+    private static Object[][] putCommentsCount() {
+        return new Object[][]{{PropertyLoader.loadProperty("comment1"), PropertyLoader.loadProperty("count1999")},
+                {PropertyLoader.loadProperty("comment1000"), PropertyLoader.loadProperty("count1000")},
+                {PropertyLoader.loadProperty("comment2000"), PropertyLoader.loadProperty("count0")},
+                {PropertyLoader.loadProperty("comment2001"), PropertyLoader.loadProperty("count0")},
+                {PropertyLoader.loadProperty("commentTag"), PropertyLoader.loadProperty("count1999")}};
+    }
+
+    @DataProvider(name = "correctVin")
+    public static Object[][] putVin() {
+        return new Object[][]{{PropertyLoader.loadProperty("vin0"), PropertyLoader.loadProperty("vin0")},
+                {PropertyLoader.loadProperty("vin17"), PropertyLoader.loadProperty("vin17")},
+                {PropertyLoader.loadProperty("vin18"), PropertyLoader.loadProperty("vin17")},
+                {PropertyLoader.loadProperty("vinNum"), PropertyLoader.loadProperty("vinNum")},
+                {PropertyLoader.loadProperty("vinLet"), PropertyLoader.loadProperty("vinLet")},
+                {PropertyLoader.loadProperty("vinMix"), PropertyLoader.loadProperty("vinMix")}};
+    }
+
+    @DataProvider(name = "incorrectVin")
+    public static Object[][] putIncorrectVin() {
+        return new Object[][]{{PropertyLoader.loadProperty("vin1")},
+                {PropertyLoader.loadProperty("vin2")},
+                {PropertyLoader.loadProperty("vin3")},
+                {PropertyLoader.loadProperty("vin4")},
+                {PropertyLoader.loadProperty("vin5")},
+                {PropertyLoader.loadProperty("vin6")},
+                {PropertyLoader.loadProperty("vin7")},
+                {PropertyLoader.loadProperty("vin8")},
+                {PropertyLoader.loadProperty("vin9")},
+                {PropertyLoader.loadProperty("vin10")},
+                {PropertyLoader.loadProperty("vin11")},
+                {PropertyLoader.loadProperty("vin12")},
+                {PropertyLoader.loadProperty("vin13")},
+                {PropertyLoader.loadProperty("vin14")},
+                {PropertyLoader.loadProperty("vin15")},
+                {PropertyLoader.loadProperty("vin16")},
+                {PropertyLoader.loadProperty("vinRus")},
+                {PropertyLoader.loadProperty("nVin1")},
+                {PropertyLoader.loadProperty("nVin2")},
+                {PropertyLoader.loadProperty("nVin3")},
+                {PropertyLoader.loadProperty("nVin4")},
+                {PropertyLoader.loadProperty("nVin5")},
+                {PropertyLoader.loadProperty("nVin6")},
+                {PropertyLoader.loadProperty("nVin7")},
+                {PropertyLoader.loadProperty("nVin8")},
+                {PropertyLoader.loadProperty("nVin9")},
+                {PropertyLoader.loadProperty("nVin10")},
+                {PropertyLoader.loadProperty("nVin11")},
+                {PropertyLoader.loadProperty("nVin12")},
+                {PropertyLoader.loadProperty("nVin13")},
+                {PropertyLoader.loadProperty("nVin14")},
+                {PropertyLoader.loadProperty("nVin15")},
+                {PropertyLoader.loadProperty("nVin16")},
+                {PropertyLoader.loadProperty("nVin17")},
+                {PropertyLoader.loadProperty("nVin18")},
+                {PropertyLoader.loadProperty("nVin19")},
+                {PropertyLoader.loadProperty("nVin20")},
+                {PropertyLoader.loadProperty("nVin21")},
+                {PropertyLoader.loadProperty("nVin22")},
+                {PropertyLoader.loadProperty("nVin23")},
+                {PropertyLoader.loadProperty("nVin24")},
+                {PropertyLoader.loadProperty("nVin25")},
+                {PropertyLoader.loadProperty("nVin26")},
+                {PropertyLoader.loadProperty("nVin27")},
+                {PropertyLoader.loadProperty("nVin28")},
+                {PropertyLoader.loadProperty("nVin29")},
+                {PropertyLoader.loadProperty("nVin30")}};
+    }
+
+    @DataProvider(name = "years")
+    public static Object[][] getYear() {
+        return new Object[][]{{"Select Year"},{"2018"},{"2017"},{"2016"},{"2015"},{"2014"},{"2013"},{"2012"},{"2011"},{"2010"},{"2009"},
+               // {"2008"},{"2007"},{"2006"},{"2005"},{"2004"},{"2003"},{"2002"},{"2001"},{"2000"},{"1999"},{"1998"},{"1997"},
+               // {"1996"},{"1995"},{"1994"},{"1993"},{"1992"},{"1991"},{"1990"},{"1989"},{"1988"},{"1987"},{"1986"},{"1985"},
+        };
+    }
+
+    //TODO: finish with all years
+    @DataProvider(name = "yearsLead")
+    public static Object[][] getYearLead() {
+        return new Object[][]{{"Select Year", ""},{"2018", "2018"},{"2017", "2017"},{"2016", "2016"},{"2015", "2015"},
+                                 {"2014", "2014"},{"2013", "2013"},{"2012", "2012"},{"2011", "2011"},{"2010", "2010"},
+                                 {"2009", "2009"},{"2008", "2008"},{"2007", "2007"},{"2006", "2006"},{"2005", "2005"},
+                                 {"2004", "2004"},{"2003", "2003"},{"2002", "2002"},{"2001", "2001"},{"2000", "2000"},
+                                 {"1999", "1999"},{"1998", "1998"},{"1997", "1997"},{"1996", "1996"},{"1995", "1995"},
+                                 {"1994", "1994"},{"1993", "1993"},{"1992", "1992"},{"1991", "1991"},{"1990", "1990"},
+                                 {"1989", "1989"},{"1988", "1988"},{"1987", "1987"},{"1986", "1986"},{"1985", "1985"},
+        };
+    }
+
+    @DataProvider(name = "incorrectPrice")
+    public static Object[][] getIncorrectPrice() {
+        return new Object[][]{{PropertyLoader.loadProperty("char1")},
+                {PropertyLoader.loadProperty("char2")},
+                {PropertyLoader.loadProperty("char3")},
+                {PropertyLoader.loadProperty("char4")},
+                {PropertyLoader.loadProperty("char5")},
+                {PropertyLoader.loadProperty("char6")},
+                {PropertyLoader.loadProperty("char7")},
+                {PropertyLoader.loadProperty("char8")},
+                {PropertyLoader.loadProperty("char9")},
+                {PropertyLoader.loadProperty("char10")},
+                {PropertyLoader.loadProperty("char11")},
+                {PropertyLoader.loadProperty("char12")},
+                {PropertyLoader.loadProperty("char13")},
+                {PropertyLoader.loadProperty("char14")},
+                {PropertyLoader.loadProperty("char15")},
+                {PropertyLoader.loadProperty("char16")},
+                {PropertyLoader.loadProperty("char17")},
+                {PropertyLoader.loadProperty("char18")},
+                {PropertyLoader.loadProperty("char19")},
+                {PropertyLoader.loadProperty("char20")},
+                {PropertyLoader.loadProperty("char21")},
+                {PropertyLoader.loadProperty("char22")},
+                {PropertyLoader.loadProperty("char23")},
+                {PropertyLoader.loadProperty("char24")},
+                {PropertyLoader.loadProperty("char25")},
+                {PropertyLoader.loadProperty("char26")},
+                {PropertyLoader.loadProperty("char27")},
+                {PropertyLoader.loadProperty("char28")},
+                {PropertyLoader.loadProperty("char29")},
+                {PropertyLoader.loadProperty("char30")},
+                {PropertyLoader.loadProperty("let1")},
+                {PropertyLoader.loadProperty("let2")},
+                {PropertyLoader.loadProperty("let3")},
+                {PropertyLoader.loadProperty("let4")},
+                {PropertyLoader.loadProperty("let5")},
+                {PropertyLoader.loadProperty("let6")},
+                {PropertyLoader.loadProperty("let7")},
+                {PropertyLoader.loadProperty("let8")},
+                {PropertyLoader.loadProperty("let9")},
+                {PropertyLoader.loadProperty("let10")},
+                {PropertyLoader.loadProperty("let11")},
+                {PropertyLoader.loadProperty("let12")},
+                {PropertyLoader.loadProperty("let13")},
+                {PropertyLoader.loadProperty("let14")},
+                {PropertyLoader.loadProperty("let15")},
+                {PropertyLoader.loadProperty("let16")},
+                {PropertyLoader.loadProperty("let17")},
+                {PropertyLoader.loadProperty("let18")},
+                {PropertyLoader.loadProperty("let19")},
+                {PropertyLoader.loadProperty("let20")},
+                {PropertyLoader.loadProperty("let21")},
+                {PropertyLoader.loadProperty("let22")},
+                {PropertyLoader.loadProperty("let23")},
+                {PropertyLoader.loadProperty("let24")},
+                {PropertyLoader.loadProperty("let25")},
+                {PropertyLoader.loadProperty("let26")}};
+    }
+
+    @DataProvider(name = "correctPrice")
+    public static Object[][] getCorrectPrice() {
+        return new Object[][]{{PropertyLoader.loadProperty("number0"), PropertyLoader.loadProperty("number00")},
+                {PropertyLoader.loadProperty("number1"), PropertyLoader.loadProperty("number1")},
+                {PropertyLoader.loadProperty("number10"), PropertyLoader.loadProperty("number10L")}};
     }
 }

@@ -35,7 +35,7 @@ public class LeadDetails extends Page {
     @FindBy(how = How.ID, using = "phone")
     private WebElement phoneNum;
 
-    @FindBy(how = How.XPATH, using = "((//table[@class='templateMail']//table)[11]//td)[4]/span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(), 'International Phone Number:')]//../following-sibling::td//span")
     private WebElement intPhoneNum;
 
     @FindBy(how = How.XPATH, using = "//span[@id='email']/a/b")
@@ -56,8 +56,23 @@ public class LeadDetails extends Page {
     @FindBy(how = How.XPATH, using = "(//table[@class='templateMail']//table)[27]//span")
     private WebElement comments;
 
+    @FindBy(how = How.XPATH, using = "(//table[@class='templateMail']//table)[43]//span")
+    private WebElement tradeInComments;
+
+    @FindBy(how = How.XPATH, using = "//b[contains(text(), 'Comments')]")
+    private WebElement tradeInCommentsTitle;
+
     @FindBy(how = How.XPATH, using = "(//table[@class='templateMail']//table)[35]//span")
     private WebElement source;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Vin:')]//../following-sibling::td//span")
+    private WebElement vin;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Year:')]//../following-sibling::td//span")
+    private WebElement year;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Asking Price:')]//../following-sibling::td//span")
+    private WebElement askingPrice;
 
     /*methods for getting values of fields*/
 
@@ -113,9 +128,30 @@ public class LeadDetails extends Page {
         return comments.getText();
     }
 
+    public String getTradeInComments()
+    {
+        return tradeInComments.getText();
+    }
+
+    public String getVin() {return vin.getText();}
+
+    public String getYear() { return year.getText(); }
+
+    public String getAskingPrice() { return askingPrice.getText(); }
+
     public boolean isIntPhoneFieldExist(){
         try {
             intPhoneNum.isDisplayed();
+            return true;
+        }
+        catch (NoSuchElementException ex){
+            return false;
+        }
+    }
+
+    public boolean isTradeInCommentsExist(){
+        try {
+            tradeInCommentsTitle.isDisplayed();
             return true;
         }
         catch (NoSuchElementException ex){

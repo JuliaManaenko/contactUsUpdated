@@ -1,8 +1,7 @@
-package testcase;
+package TradeInForm;
 
 import contactUsPage.ContactUs;
-import dms.SiteEditor;
-import dms.dmsHome;
+import customers.Leads;
 import map2.ContactEditor;
 import map2.MAP2;
 import org.openqa.selenium.By;
@@ -14,20 +13,22 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-import settings.Localization;
-import settings.Sites;
+import settings.LeadsEmail;
 import settings.Website;
 import utility.PropertyLoader;
 import webdriver.WebDriverFactory;
+import webmail.WebmailLogin;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Julia on 14.02.2017.
+ * Created by Julia on 27.02.2017.
  */
-public class TradeInTestBase2 {
+public class TradeInTestBaseEmail {
+
     protected WebDriver driver;
     protected ContactUs tradeIn;
     protected dms.dmsHome dmsHome;
@@ -41,76 +42,75 @@ public class TradeInTestBase2 {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 20);
         driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        driver.manage().deleteAllCookies();
         dmsHome = PageFactory.initElements(driver, dms.dmsHome.class);
         dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
-        wait.until(isHomeBreadcrumbsVisible());
-        Sites sites = dmsHome2.clickOnSitesMenu();
-        waitForJSandJQueryToLoad();
-        SiteEditor editor = sites.openSiteEditor();
-        waitForJSandJQueryToLoad();
-        Sites sites2 = editor.turnOnTradeInPageSite();
-        waitForJSandJQueryToLoad();
-        wait.until(isSiteEditorInvisible());
-        /*turn on Contact Us widget from access*/
-        SiteEditor editor2 = sites2.openSiteEditor();
-        waitForJSandJQueryToLoad();
-        Sites sites3 = editor2.turnOnTradeInWidgetSite();
-        waitForJSandJQueryToLoad();
-        wait.until(isSiteEditorInvisible());
-        MAP2 map2 = sites3.goToMAP2();
+        MAP2 map2 = dmsHome2.clickOnMap2Menu();
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         map2.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(isAddPageVisible());
-        ContactEditor mapEditor = map2.clickAddPage();
-        waitForJSandJQueryToLoad();
+        ContactEditor editor = map2.clickAddPage();
         wait.until(isLoadingInvisible());
-        mapEditor.addTradeInWidget();
+        editor.addTradeInWidget();
         waitForJSandJQueryToLoad();
-        mapEditor.activatePage();
+        editor.activatePage();
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(isPageActivatedTooltipVisible());
         Website website = map2.clickOnWebsiteMenu();
         waitForJSandJQueryToLoad();
-        wait.until(isWebsiteSidePanelVisible());
-        Localization localization = website.clickOnLocalizationTab();
-        wait.until(isLocalizationBreadcrumbsVisible());
-        localization.turnOffForceValid();
+        LeadsEmail leadsEmail = website.clickOnLeadsTab();
+        waitForJSandJQueryToLoad();
+        leadsEmail.addTradeInEmail();
+        waitForJSandJQueryToLoad();
+        WebmailLogin webmailLogin = leadsEmail.clickOnWebmailMenu();
+        waitForJSandJQueryToLoad();
+        webmailLogin.loginToWebmail();
         waitForJSandJQueryToLoad();
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
         tradeIn = PageFactory.initElements(driver, ContactUs.class);
     }
 
-    /*delete Contact Us page in MAP2, close browser*/
+    @AfterMethod
+    public void deleteEmailAndLead() throws InterruptedException {
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome21 = PageFactory.initElements(driver, dms.dmsHome2.class);
+        Leads leads = dmsHome21.clickOnLeadsMenu();
+        waitForJSandJQueryToLoad();
+        leads.removeFirstLead();
+        waitForJSandJQueryToLoad();
+    }
+
+    /*delete TradeIn page in MAP2, close browser*/
     @AfterClass(alwaysRun = true)
     public void tearDown() throws InterruptedException {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dms.dmsHome2 dmsHome2 = PageFactory.initElements(driver, dms.dmsHome2.class);
         waitForJSandJQueryToLoad();
-        try {
-            MAP2 map2 = dmsHome2.clickOnMap2Menu();
-            waitForJSandJQueryToLoad();
-            wait.until(isLoadingInvisible());
-            map2.clickTradeInTab();
-            waitForJSandJQueryToLoad();
-            wait.until(isLoadingInvisible());
-            wait.until(getConditionForTitle());
-            map2.deletePage();
-            waitForJSandJQueryToLoad();
-            wait.until(isPageDeletedTooltipVisible());
-        }
-        catch (Exception ex){
-            if (driver != null) {
-                //   LOG.info("Killing web driver");
-                WebDriverFactory.killDriverInstance();
-            }
-        }
+        MAP2 map2 = dmsHome2.clickOnMap2Menu();
+        waitForJSandJQueryToLoad();
+        wait.until(isLoadingInvisible());
+        map2.clickTradeInTab();
+        waitForJSandJQueryToLoad();
+        wait.until(isLoadingInvisible());
+        wait.until(getConditionForTitle());
+        map2.deletePage();
+        waitForJSandJQueryToLoad();
+        wait.until(isPageDeletedTooltipVisible());
+        Website website = map2.clickOnWebsiteMenu();
+        waitForJSandJQueryToLoad();
+        LeadsEmail leadsEmail = website.clickOnLeadsTab();
+        waitForJSandJQueryToLoad();
+        leadsEmail.removeTradeInEmail();
+        waitForJSandJQueryToLoad();
         if (driver != null) {
-            //   LOG.info("Killing web driver");
             WebDriverFactory.killDriverInstance();
         }
     }
@@ -139,16 +139,8 @@ public class TradeInTestBase2 {
         return ExpectedConditions.visibilityOf(driver.findElement(By.className("btn-message-ok")));
     }
 
-    protected ExpectedCondition<WebElement> isLeadsListVisible() {
-        return ExpectedConditions.visibilityOf(driver.findElement(By.id("leads-list-width")));
-    }
-
     protected ExpectedCondition<WebElement> isHomeBreadcrumbsVisible() {
         return ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@id='slid_breadcrumb']//a[contains(text(), 'Home')]")));
-    }
-
-    protected ExpectedCondition<Boolean> isSiteEditorInvisible() {
-        return ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@aria-labelledby='ui-dialog-title-site_editor']"));
     }
 
     protected ExpectedCondition<WebElement> isWebsiteSidePanelVisible() {
@@ -158,6 +150,15 @@ public class TradeInTestBase2 {
     protected ExpectedCondition<WebElement> isLocalizationBreadcrumbsVisible() {
         return ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class='header_dealership'][contains(text(), 'Localization')]")));
     }
+
+    protected ExpectedCondition<WebElement> isLeadsListVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.id("leads-list-width")));
+    }
+
+    protected ExpectedCondition<WebElement> isWebmailFrameVisible() {
+        return ExpectedConditions.visibilityOf(driver.findElement(By.id("fr")));
+    }
+
 
     public boolean waitForJSandJQueryToLoad() {
 
@@ -186,3 +187,4 @@ public class TradeInTestBase2 {
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 }
+

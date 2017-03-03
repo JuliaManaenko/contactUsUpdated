@@ -28,7 +28,7 @@ public class EmailDetails extends Page {
     @FindBy(how = How.ID, using = "phone")
     private WebElement phoneNum;
 
-    @FindBy(how = How.XPATH, using = "((//table[@class='templateMail']//table)[11]//td)[4]/span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(), 'International Phone Number:')]//../following-sibling::td//span")
     private WebElement intPhoneNum;
 
     @FindBy(how = How.XPATH, using = "//span[@id='email']/a/b")
@@ -49,11 +49,23 @@ public class EmailDetails extends Page {
     @FindBy(how = How.XPATH, using = "(//table[@class='templateMail']//table)[27]//span")
     private WebElement comments;
 
+    @FindBy(how = How.XPATH, using = "(//table[@class='templateMail']//table)[43]//span")
+    private WebElement tradeInComments;
+
     @FindBy(how = How.ID, using = "rcmbtn106")
     private WebElement backBtn;
 
     @FindBy(how = How.ID, using = "rcmbtn111")
     private WebElement deleteBtn;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Vin:')]//../following-sibling::td//span")
+    private WebElement vin;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Year:')]//../following-sibling::td//span")
+    private WebElement year;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Asking Price:')]//../following-sibling::td//span")
+    private WebElement askingPrice;
 
     public EmailsList backToList(){
         backBtn.click();
@@ -61,6 +73,12 @@ public class EmailDetails extends Page {
     }
 
     public EmailsList removeEmail(){
+        deleteBtn.click();
+        return PageFactory.initElements(driver,EmailsList.class);
+    }
+
+    public EmailsList removeEmail2(){
+        driver.switchTo().frame(iframe);
         deleteBtn.click();
         return PageFactory.initElements(driver,EmailsList.class);
     }
@@ -115,9 +133,39 @@ public class EmailDetails extends Page {
         return comments.getText();
     }
 
+    public String getTradeInComments(){
+        driver.switchTo().frame(iframe);
+        return tradeInComments.getText();
+    }
+
+    public String getVin(){
+        driver.switchTo().frame(iframe);
+        return vin.getText();
+    }
+
+    public String getYear(){
+        driver.switchTo().frame(iframe);
+        return year.getText();
+    }
+
+    public String getAskingPrice(){
+        driver.switchTo().frame(iframe);
+        return askingPrice.getText();
+    }
+
     public boolean isCommentsFieldExist(){
         try {
             comments.isDisplayed();
+            return true;
+        }
+        catch (NoSuchElementException ex){
+            return false;
+        }
+    }
+
+    public boolean isTradeInCommentsFieldExist(){
+        try {
+            tradeInComments.isDisplayed();
             return true;
         }
         catch (NoSuchElementException ex){

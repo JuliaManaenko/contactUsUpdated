@@ -177,6 +177,14 @@ public class Localization extends Page {
         phoneInputMaskSaveBtn.click();
     }
 
+    /*fill Phone Input Mask with variables*/
+    public void fillInputMaskVar(String mask) {
+        phoneInputMaskEditBtn.click();
+        phoneInputMask.clear();
+        phoneInputMask.sendKeys(mask);
+        phoneInputMaskSaveBtn.click();
+    }
+
     /*Select MIN number of characters in ZIP Codes - 3*/
     public void setMinZip3() {
         minNumZipEditBtn.click();
