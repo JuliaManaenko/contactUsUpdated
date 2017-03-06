@@ -3,20 +3,24 @@ package TradeInForm;
 import customers.LeadDetails;
 import customers.Leads;
 import dataProviders.DataProviderSet1;
+import org.slf4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import testcase.TradeInTestBase2;
+import utility.LogFactory;
 import utility.PropertyLoader;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Julia on 02.03.2017.
  */
 public class TradeInYearSelect extends TradeInTestBase2 {
+    private static final Logger LOG = LogFactory.getLogger(TradeInYearSelect.class);
     private dms.dmsHome2 dmsHome2;
 
-   /* @Test
+    @Test
     public void labelIsYear() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
@@ -30,21 +34,22 @@ public class TradeInYearSelect extends TradeInTestBase2 {
         Assert.assertEquals(tradeIn.getYearSelectValue(), "Select Year");
     }
 
-   //TODO: check all years in a loop
-    @Test(dataProvider = "years", dataProviderClass = DataProviderSet1.class, enabled = false)
-    public void getAllYearValues(String year) {
+    @Test
+    public void getAllYearValues() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
-       // List <String> yearList = Arrays.asList("Select Year", "2018", "2017", "2016", "2015");
-        for (int i=0; i<tradeIn.getYearSelectOptions().size(); i++) {
-         //   for(int j=0; j<yearList.size(); j++) {
-                Assert.assertEquals(tradeIn.getYearSelectOptions().get(i).getText(), year);
-            //}
+        List<String> yearList = new ArrayList<>();//create array list for years
+        yearList.add("Select Year"); //add 'Select Year' as first element of array list
+        for (int i = 2018; i >= 1901; i--) { //add numbers from 2018 to 1901 in array list and convert them to String
+            yearList.add(Integer.toString(i));
+        }
+        for (int i = 0; i < tradeIn.getYearSelectOptions().size(); i++) { //compare recived years and years from array list
+            Assert.assertEquals(tradeIn.getYearSelectOptions().get(i).getText(), yearList.get(i));
         }
     }
 
     @Test
-    public void submitWithoutSelectingYearInputClass(){
+    public void submitWithoutSelectingYearClass() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
         tradeIn.clickOnTradeInSubmit();
@@ -68,7 +73,7 @@ Assert.assertEquals(tradeIn.getYearSelectClass(), PropertyLoader.loadProperty("i
         tradeIn.clickOnTradeInSubmit();
         waitForJSandJQueryToLoad();
         Assert.assertFalse(tradeIn.isYearSelected());
-    }*/
+    }
 
     @Test(dataProvider = "yearsLead", dataProviderClass = DataProviderSet1.class)
     public void yearInLead(String yearForm, String yearLead) {

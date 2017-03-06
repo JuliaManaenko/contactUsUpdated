@@ -67,6 +67,21 @@ public class EmailDetails extends Page {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Asking Price:')]//../following-sibling::td//span")
     private WebElement askingPrice;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Mileage:')]//../following-sibling::td//span")
+    private WebElement odometer;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Motorized Type:')]//../following-sibling::td//span")
+    private WebElement motorizedType;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Make:'')]//../following-sibling::td//span")
+    private WebElement make;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Model:'')]//../following-sibling::td//span")
+    private WebElement model;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Trim:'')]//../following-sibling::td//span")
+    private WebElement trim;
+
     public EmailsList backToList(){
         backBtn.click();
         return PageFactory.initElements(driver,EmailsList.class);
@@ -151,6 +166,31 @@ public class EmailDetails extends Page {
     public String getAskingPrice(){
         driver.switchTo().frame(iframe);
         return askingPrice.getText();
+    }
+
+    public String getOdometer() {
+        driver.switchTo().frame(iframe);
+        return odometer.getText();
+    }
+
+    public String getMotorizedType() {
+        driver.switchTo().frame(iframe);
+        return motorizedType.getText();
+    }
+
+    public String getMake() {
+        driver.switchTo().frame(iframe);
+        return make.getText();
+    }
+
+    public String getModel() {
+        driver.switchTo().frame(iframe);
+        return model.getText();
+    }
+
+    public String getTrim() {
+        driver.switchTo().frame(iframe);
+        return trim.getText();
     }
 
     public boolean isCommentsFieldExist(){

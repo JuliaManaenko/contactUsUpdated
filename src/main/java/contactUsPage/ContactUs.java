@@ -1,7 +1,6 @@
 /*Contact Us dws page*/
 package contactUsPage;
 
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +14,7 @@ import page.Page;
 import utility.LogFactory;
 import utility.PropertyLoader;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -218,6 +218,9 @@ public class ContactUs extends Page {
 
     @FindBy(how = How.XPATH, using = "//label[contains(text(), 'Int. Phone Number:')]")
     private WebElement intPhoneLabel;
+
+    @FindBy(how = How.XPATH, using = "//button[contains(@class,'trade-submit')]//span[@class='fa fa-check']")
+    private WebElement tradeInSubmitBtnCheckMark;
 
 
     public ContactUs(WebDriver webDriver) {
@@ -776,7 +779,33 @@ public class ContactUs extends Page {
         return askingPriceInput.getCssValue("border-color");
     }
 
-    /*methods for getting class name of input elements*/
+    public String getOdometerInputBorderColor() {
+        return odometerInput.getCssValue("border-color");
+    }
+
+    public String getMotorizedTypeSelectBorderColor() {
+        return motorizedTypeSelect.getCssValue("border-color");
+    }
+
+    public String getMakeSelectBorderColor() {
+        return makeSelect.getCssValue("border-color");
+    }
+
+    public String getModelSelectBorderColor() {
+        return modelSelect.getCssValue("border-color");
+    }
+
+    public String getTrimSelectBorderColor() {
+        return trimSelect.getCssValue("border-color");
+    }
+
+    /*methods for getting background color of elements*/
+
+    public String getTradeInSubmitBtnBgColor() {
+        return tradeInSubmitButton.getCssValue("background-color");
+    }
+
+    /*methods for getting class name of elements*/
 
     public String getFirstNameInputClass() {
         return firstNameInput.getAttribute("class");
@@ -852,6 +881,30 @@ public class ContactUs extends Page {
         return askingPriceInput.getAttribute("class");
     }
 
+    public String getOdometerClass() {
+        return odometerInput.getAttribute("class");
+    }
+
+    public String getTradeInSubmitBtnClass() {
+        return tradeInSubmitButton.getAttribute("class");
+    }
+
+    public String getMotorizedTypeSelectClass() {
+        return motorizedTypeSelect.getAttribute("class");
+    }
+
+    public String getMakeSelectClass() {
+        return makeSelect.getAttribute("class");
+    }
+
+    public String getModelSelectClass() {
+        return modelSelect.getAttribute("class");
+    }
+
+    public String getTrimSelectClass() {
+        return trimSelect.getAttribute("class");
+    }
+
     /*methods for check if cursor is in input*/
 
     public boolean isFirstNameSelected() {
@@ -884,6 +937,26 @@ public class ContactUs extends Page {
         return driver.switchTo().activeElement().equals(askingPriceInput);
     }
 
+    public boolean isOdometerSelected() {
+        return driver.switchTo().activeElement().equals(odometerInput);
+    }
+
+    public boolean isMotorizedTypeSelected() {
+        return driver.switchTo().activeElement().equals(motorizedTypeSelect);
+    }
+
+    public boolean isMakeSelected() {
+        return driver.switchTo().activeElement().equals(makeSelect);
+    }
+
+    public boolean isModelSelected() {
+        return driver.switchTo().activeElement().equals(modelSelect);
+    }
+
+    public boolean isTrimSelected() {
+        return driver.switchTo().activeElement().equals(trimSelect);
+    }
+
     /*methods for getting font-color of labels*/
     public String getFirstNameLabelFontColor() {
         return firstNameLabel.getCssValue("color");
@@ -907,6 +980,30 @@ public class ContactUs extends Page {
 
     public String getAskingPriceLabelFontColor() {
         return askingPriceLabel.getCssValue("color");
+    }
+
+    public String getOdometerLabelFontColor() {
+        return odometerLabel.getCssValue("color");
+    }
+
+    public String getTradeInSubmitBtnFontColor() {
+        return tradeInSubmitButton.getCssValue("color");
+    }
+
+    public String getMotorizedTypeLabelFontColor() {
+        return motorizedTypeLabel.getCssValue("color");
+    }
+
+    public String getMakeLabelFontColor() {
+        return makeLabel.getCssValue("color");
+    }
+
+    public String getModelLabelFontColor() {
+        return modelLabel.getCssValue("color");
+    }
+
+    public String getTrimLabelFontColor() {
+        return trimLabel.getCssValue("color");
     }
 
 
@@ -1009,12 +1106,41 @@ public class ContactUs extends Page {
         askingPriceInput.sendKeys(price);
     }
 
+    public void fillOdometerVar(String odometer) {
+        odometerInput.clear();
+        odometerInput.sendKeys(odometer);
+    }
+
     /*Select values in selects*/
 
     public void selectYear(String year){
         WebElement select = yearSelect;
         Select options = new Select(select);
         options.selectByVisibleText(year);
+    }
+
+    public void selectMotorizedType(String motorizedType) {
+        WebElement select = motorizedTypeSelect;
+        Select options = new Select(select);
+        options.selectByVisibleText(motorizedType);
+    }
+
+    public void selectMake(String make) {
+        WebElement select = makeSelect;
+        Select options = new Select(select);
+        options.selectByVisibleText(make);
+    }
+
+    public void selectModel(String model) {
+        WebElement select = modelSelect;
+        Select options = new Select(select);
+        options.selectByVisibleText(model);
+    }
+
+    public void selectTrim(String trim) {
+        WebElement select = trimSelect;
+        Select options = new Select(select);
+        options.selectByVisibleText(trim);
     }
 
     /*Method for check if widget exists or doesn't exist*/
@@ -1063,6 +1189,10 @@ public class ContactUs extends Page {
         return vinInput.getAttribute("value");
     }
 
+    public String odometerGetValue() {
+        return odometerInput.getAttribute("value");
+    }
+
     /*Get text from elements*/
     public String postFormGetText() {
         return postForm.getText();
@@ -1088,6 +1218,38 @@ public class ContactUs extends Page {
         return yearLabel.getText();
     }
 
+    public String getAskingPriceLabelText() {
+        return askingPriceLabel.getText();
+    }
+
+    public String getOdometerLabelText() {
+        return odometerLabel.getText();
+    }
+
+    public String getMotorizedTypeLabelText() {
+        return motorizedTypeLabel.getText();
+    }
+
+    public String getMakeLabelText() {
+        return makeLabel.getText();
+    }
+
+    public String getModelrLabelText() {
+        return modelLabel.getText();
+    }
+
+    public String getTrimLabelText() {
+        return trimLabel.getText();
+    }
+
+    /*Metods for getting text of other elements*/
+
+    public String getTradeInSubmitBtnText() {
+        return tradeInSubmitButton.getText();
+    }
+
+    /*Methods for getting selected option of select*/
+
     public String getYearSelectValue() {
         WebElement select = yearSelect;
         Select options = new Select(select);
@@ -1095,7 +1257,36 @@ public class ContactUs extends Page {
         return selectedOption.getText();
     }
 
-    //TODO:
+    public String getMotorizedTypeSelectValue() {
+        WebElement select = motorizedTypeSelect;
+        Select options = new Select(select);
+        WebElement selectedOption = options.getFirstSelectedOption();
+        return selectedOption.getText();
+    }
+
+    public String getMakeSelectValue() {
+        WebElement select = makeSelect;
+        Select options = new Select(select);
+        WebElement selectedOption = options.getFirstSelectedOption();
+        return selectedOption.getText();
+    }
+
+    public String getModelSelectValue() {
+        WebElement select = modelSelect;
+        Select options = new Select(select);
+        WebElement selectedOption = options.getFirstSelectedOption();
+        return selectedOption.getText();
+    }
+
+    public String getTrimSelectValue() {
+        WebElement select = trimSelect;
+        Select options = new Select(select);
+        WebElement selectedOption = options.getFirstSelectedOption();
+        return selectedOption.getText();
+    }
+
+    /*methods for getting all options from select*/
+
     public List<WebElement> getYearSelectOptions() {
         WebElement select = yearSelect;
         Select options = new Select(select);
@@ -1103,27 +1294,74 @@ public class ContactUs extends Page {
         return allOptions;
     }
 
-    /*TODO: Methods for checking if element is hover*/
+    public List<WebElement> getMotorizedTypeSelectOptions() {
+        WebElement select = motorizedTypeSelect;
+        Select options = new Select(select);
+        List<WebElement> allOptions = options.getOptions();
+        return allOptions;
+    }
 
-    public String getTradeInSubmitClass() {
+    public List<String> getMotorizedTypeSelectOptionsManually() {
+        List<String> motorizedTypeList = Arrays.asList("Select Motorized Type", "AGRICULTURAL EQUIPMENT", "AIRCRAFT", "ATVs", "BOAT", "CARS & TRUCKS & VANS", "COMMERCIAL TRUCKS", "CONSTRUCTION EQUIPMENT", "DISMANTLED MACHINE", "GO KARTS & SCOOTERS", "LIGHT TRUCK", "MILITARY VEHICLES", "MOTORCYCLE", "OTHER", "PWC/ATV", "RVs & CAMPERS", "SAVING PLANS (CARS)", "SNOWMOBILES", "TRAILERS");
+        return motorizedTypeList;
+    }
+
+    /*methods for moving mouse on element*/
+
+    public void moveMouseToTradeInSubmitBtn() {
         Actions action = new Actions(driver);
         Action moveToElem = action.moveToElement(tradeInSubmitButton).build();
         moveToElem.perform();
-        return tradeInSubmitButton.getAttribute("class");
     }
-
-    public String getTradeInSubmitColor() {
-        Actions action = new Actions(driver);
-        Action moveToElem = action.moveToElement(tradeInSubmitButton).build();
-        moveToElem.perform();
-        return tradeInSubmitButton.getAttribute("background-color");
-    }
-
-    /*TODO: Methods for checking if element is clickable*/
 
     /*Methods for click in input*/
 
     public void clickAskingPriceInput(){askingPriceInput.click();}
+
+    public void clickOdometerInput() {
+        odometerInput.click();
+    }
+
+    public boolean isTradeInSubmitHasCheckMark() {
+        try {
+            tradeInSubmitBtnCheckMark.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    /*if element is enable*/
+
+    public boolean isTradeInSubmitBtnEnabled() {
+        return tradeInSubmitButton.isEnabled();
+    }
+
+    public boolean isMotorizedTypeSelectEnabled() {
+        return motorizedTypeSelect.isEnabled();
+    }
+
+    public boolean isYearSelectEnabled() {
+        return yearSelect.isEnabled();
+    }
+
+    public boolean isMakeSelectEnabled() {
+        return makeSelect.isEnabled();
+    }
+
+    public boolean isModelSelectEnabled() {
+        return modelSelect.isEnabled();
+    }
+
+    public boolean isTrimSelectEnabled() {
+        return trimSelect.isEnabled();
+    }
+
+    /*get cursor kind in element*/
+
+    public String getTradeInSubmitBtnCursorKind() {
+        return tradeInSubmitButton.getCssValue("cursor");
+    }
 
 }
 

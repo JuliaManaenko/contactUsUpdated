@@ -10,13 +10,13 @@ import webmail.EmailsList;
 /**
  * Created by Julia on 03.03.2017.
  */
-public class TradeInAskingPriceInEmail extends TradeInTestBaseEmail {
+public class TradeInOdometerInEmail extends TradeInTestBaseEmail {
 
-    @Test(dataProvider = "correctPrice", dataProviderClass = DataProviderSet1.class)
-    public void correctValuesAskingPriceinEmail(String priceForm, String priceEmail){
+    @Test(dataProvider = "correctOdometer", dataProviderClass = DataProviderSet1.class)
+    public void correctValuesOdometerinEmail(String odometer, String odometerEmail) {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
-        tradeIn.fillAskPriceVar(priceForm);
+        tradeIn.fillOdometerVar(odometer);
         tradeIn.fillFirstName();
         tradeIn.fillLastName();
         tradeIn.fillPhoneNum();
@@ -35,7 +35,7 @@ public class TradeInAskingPriceInEmail extends TradeInTestBaseEmail {
         wait.until(isWebmailFrameVisible());
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
-        Assert.assertEquals(emailDetails.getAskingPrice(), priceEmail);
+        Assert.assertEquals(emailDetails.getOdometer(), odometerEmail);
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
     }

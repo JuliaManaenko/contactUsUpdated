@@ -74,6 +74,21 @@ public class LeadDetails extends Page {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Asking Price:')]//../following-sibling::td//span")
     private WebElement askingPrice;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Mileage:')]//../following-sibling::td//span")
+    private WebElement odometer;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Motorized Type:')]//../following-sibling::td//span")
+    private WebElement motorizedType;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Make:'')]//../following-sibling::td//span")
+    private WebElement make;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Model:'')]//../following-sibling::td//span")
+    private WebElement model;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Trim:'')]//../following-sibling::td//span")
+    private WebElement trim;
+
     /*methods for getting values of fields*/
 
     public String getFirstName(){
@@ -138,6 +153,26 @@ public class LeadDetails extends Page {
     public String getYear() { return year.getText(); }
 
     public String getAskingPrice() { return askingPrice.getText(); }
+
+    public String getOdometer() {
+        return odometer.getText();
+    }
+
+    public String getMotorizedType() {
+        return motorizedType.getText();
+    }
+
+    public String getMake() {
+        return make.getText();
+    }
+
+    public String getModel() {
+        return model.getText();
+    }
+
+    public String getTrim() {
+        return trim.getText();
+    }
 
     public boolean isIntPhoneFieldExist(){
         try {

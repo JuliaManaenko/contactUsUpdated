@@ -72,9 +72,16 @@
             <class name="TradeInForm.TradeInVINInput"/>
             <class name="TradeInForm.TradeInVINinEmail"/>
             <class name="TradeInForm.TradeInYearSelect"/>
-            <class name="TradeInForm.TradeInYearInEmail"/>-->
+            <class name="TradeInForm.TradeInYearInEmail"/>
             <class name="TradeInForm.TradeInAskingPrice"/>
             <class name="TradeInForm.TradeInAskingPriceInEmail"/>
+            <class name="TradeInForm.TradeInOdometer"/>
+            <class name="TradeInForm.TradeInOdometerInEmail"/>
+            <class name="TradeInForm.TradeInSubmitBtn"/>
+            <class name="TradeInForm.TradeInMotorizedType"/>
+            <class name="TradeInForm.TradeInMotorizedTypeInEmail"/>-->
+            <class name="TradeInForm.TradeInMake"/>
+
 
         </classes>
     </test>

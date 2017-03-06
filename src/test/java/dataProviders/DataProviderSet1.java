@@ -254,7 +254,23 @@ public class DataProviderSet1 {
                                  {"1999", "1999"},{"1998", "1998"},{"1997", "1997"},{"1996", "1996"},{"1995", "1995"},
                                  {"1994", "1994"},{"1993", "1993"},{"1992", "1992"},{"1991", "1991"},{"1990", "1990"},
                                  {"1989", "1989"},{"1988", "1988"},{"1987", "1987"},{"1986", "1986"},{"1985", "1985"},
-        };
+                {"1984", "1984"}, {"1983", "1983"}, {"1982", "1982"}, {"1981", "1981"}, {"1980", "1980"},
+                {"1979", "1979"}, {"1978", "1978"}, {"1977", "1977"}, {"1976", "1976"}, {"1975", "1975"},
+                {"1974", "1974"}, {"1973", "1973"}, {"1972", "1972"}, {"1971", "1971"}, {"1970", "1970"},
+                {"1969", "1969"}, {"1968", "1968"}, {"1967", "1967"}, {"1966", "1966"}, {"1965", "1965"},
+                {"1964", "1964"}, {"1963", "1963"}, {"1962", "1962"}, {"1961", "1961"}, {"1960", "1960"},
+                {"1959", "1959"}, {"1958", "1958"}, {"1957", "1957"}, {"1956", "1956"}, {"1955", "1955"},
+                {"1954", "1954"}, {"1953", "1953"}, {"1952", "1952"}, {"1951", "1951"}, {"1950", "1950"},
+                {"1949", "1949"}, {"1948", "1948"}, {"1947", "1947"}, {"1946", "1946"}, {"1945", "1945"},
+                {"1944", "1944"}, {"1943", "1943"}, {"1942", "1942"}, {"1941", "1941"}, {"1940", "1940"},
+                {"1939", "1939"}, {"1938", "1938"}, {"1937", "1937"}, {"1936", "1936"}, {"1935", "1935"},
+                {"1934", "1934"}, {"1933", "1933"}, {"1932", "1932"}, {"1931", "1931"}, {"1930", "1930"},
+                {"1929", "1929"}, {"1928", "1928"}, {"1927", "1927"}, {"1926", "1926"}, {"1925", "1925"},
+                {"1924", "1924"}, {"1923", "1923"}, {"1922", "1922"}, {"1921", "1921"}, {"1920", "1920"},
+                {"1919", "1919"}, {"1918", "1918"}, {"1917", "1917"}, {"1916", "1916"}, {"1915", "1915"},
+                {"1914", "1914"}, {"1913", "1913"}, {"1912", "1912"}, {"1911", "1911"}, {"1910", "1910"},
+                {"1909", "1909"}, {"1908", "1908"}, {"1907", "1907"}, {"1906", "1906"}, {"1905", "1905"},
+                {"1904", "1904"}, {"1903", "1903"}, {"1902", "1902"}, {"1901", "1901"}};
     }
 
     @DataProvider(name = "incorrectPrice")
@@ -322,5 +338,37 @@ public class DataProviderSet1 {
         return new Object[][]{{PropertyLoader.loadProperty("number0"), PropertyLoader.loadProperty("number00")},
                 {PropertyLoader.loadProperty("number1"), PropertyLoader.loadProperty("number1")},
                 {PropertyLoader.loadProperty("number10"), PropertyLoader.loadProperty("number10L")}};
+    }
+
+    @DataProvider(name = "correctOdometer")
+    public static Object[][] getCorrectOdometer() {
+        return new Object[][]{{PropertyLoader.loadProperty("number0"), PropertyLoader.loadProperty("number00")},
+                {PropertyLoader.loadProperty("number1"), PropertyLoader.loadProperty("number1")},
+                {PropertyLoader.loadProperty("number10"), PropertyLoader.loadProperty("number10L")},
+                {PropertyLoader.loadProperty("number11"), PropertyLoader.loadProperty("number10L")}};
+    }
+
+    @DataProvider(name = "motorizedType")
+    public static Object[][] getMotorizedType() {
+        return new Object[][]{{"Select Motorized Type", ""},
+                {PropertyLoader.loadProperty("AGRICULTURAL_EQUIPMENT"), PropertyLoader.loadProperty("AGRICULTURAL_EQUIPMENT")},
+                {PropertyLoader.loadProperty("AIRCRAFT"), PropertyLoader.loadProperty("AIRCRAFT")},
+                {PropertyLoader.loadProperty("ATVs"), PropertyLoader.loadProperty("ATVs")},
+                {PropertyLoader.loadProperty("BOAT"), PropertyLoader.loadProperty("BOAT")},
+                {PropertyLoader.loadProperty("CARS_TRUCKS_VANS"), PropertyLoader.loadProperty("CARS_TRUCKS_VANS")},
+                {PropertyLoader.loadProperty("COMMERCIAL_TRUCKS"), PropertyLoader.loadProperty("COMMERCIAL_TRUCKS")},
+                {PropertyLoader.loadProperty("CONSTRUCTION_EQUIPMENT"), PropertyLoader.loadProperty("CONSTRUCTION_EQUIPMENT")},
+                {PropertyLoader.loadProperty("DISMANTLED_MACHINE"), PropertyLoader.loadProperty("DISMANTLED_MACHINE")},
+                {PropertyLoader.loadProperty("GO_KARTS_COOTERS"), PropertyLoader.loadProperty("GO_KARTS_COOTERS")},
+                {PropertyLoader.loadProperty("LIGHT_TRUCK"), PropertyLoader.loadProperty("LIGHT_TRUCK")},
+                {PropertyLoader.loadProperty("MILITARY_VEHICLES"), PropertyLoader.loadProperty("MILITARY_VEHICLES")},
+                {PropertyLoader.loadProperty("MOTORCYCLE"), PropertyLoader.loadProperty("MOTORCYCLE")},
+                {PropertyLoader.loadProperty("OTHER"), PropertyLoader.loadProperty("OTHER")},
+                {PropertyLoader.loadProperty("PWC/ATV"), PropertyLoader.loadProperty("PWC/ATV")},
+                {PropertyLoader.loadProperty("RVs_CAMPERS"), PropertyLoader.loadProperty("RVs_CAMPERS")},
+                {PropertyLoader.loadProperty("SAVING_PLANS_(CARS)"), PropertyLoader.loadProperty("SAVING_PLANS_(CARS)")},
+                {PropertyLoader.loadProperty("SNOWMOBILES"), PropertyLoader.loadProperty("SNOWMOBILES")},
+                {PropertyLoader.loadProperty("TRAILERS"), PropertyLoader.loadProperty("TRAILERS")},
+        };
     }
 }

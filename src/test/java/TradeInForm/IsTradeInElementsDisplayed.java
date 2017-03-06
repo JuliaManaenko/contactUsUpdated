@@ -192,7 +192,7 @@ public class IsTradeInElementsDisplayed extends TradeInTestBase2 {
     }
 
     @Test
-    public void tradeInIntPhoneLabelDisplayed(){
+    public void tradeInIntPhoneLabelDisplayed() {
         Assert.assertTrue(tradeIn.isIntPhoneLabelDisplayed());
     }
 }

@@ -4,7 +4,6 @@ import customers.LeadDetails;
 import customers.Leads;
 import dataProviders.DataProviderSet1;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
@@ -15,9 +14,10 @@ import java.util.ArrayList;
  * Created by Julia on 02.03.2017.
  */
 public class TradeInAskingPrice extends TradeInTestBase2 {
+
     private dms.dmsHome2 dmsHome2;
 
-   /* @Test(dataProvider = "correctPrice", dataProviderClass = DataProviderSet1.class)
+    @Test(dataProvider = "correctPrice", dataProviderClass = DataProviderSet1.class)
     public void correctValuesAskingPriceClass(String price, String priceLead){
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
@@ -113,7 +113,7 @@ public class TradeInAskingPrice extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertTrue(tradeIn.isAskingPriceSelected());
-    }*/
+    }
 
     @Test
     public void clickOnAskingPriceHighlight() throws InterruptedException {
@@ -121,8 +121,6 @@ public class TradeInAskingPrice extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         tradeIn.clickAskingPriceInput();
         Thread.sleep(1000);
-        Assert.assertEquals(tradeIn.getAskingPriceInputBorderColor(), PropertyLoader.loadProperty("font_color_gray"));
-
-
+        Assert.assertEquals(tradeIn.getAskingPriceInputBorderColor(), PropertyLoader.loadProperty("border_color_gray2"));
     }
 }
