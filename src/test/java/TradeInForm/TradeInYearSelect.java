@@ -54,11 +54,11 @@ public class TradeInYearSelect extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         tradeIn.clickOnTradeInSubmit();
         waitForJSandJQueryToLoad();
-Assert.assertEquals(tradeIn.getYearSelectClass(), PropertyLoader.loadProperty("inputClassValid2"));
+        Assert.assertEquals(tradeIn.getYearSelectClass(), PropertyLoader.loadProperty("inputClassValid2"));
     }
 
     @Test
-    public void submitWithoutSelectingYearBorderColor(){
+    public void submitWithoutSelectingYearBorderColor() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
         tradeIn.clickOnTradeInSubmit();
@@ -67,7 +67,7 @@ Assert.assertEquals(tradeIn.getYearSelectClass(), PropertyLoader.loadProperty("i
     }
 
     @Test
-    public void submitWithoutSelectingYearNotFocused(){
+    public void submitWithoutSelectingYearNotFocused() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
         tradeIn.clickOnTradeInSubmit();

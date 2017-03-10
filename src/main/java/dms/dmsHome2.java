@@ -3,6 +3,8 @@ package dms;
 
 import customers.Leads;
 import dmsDealers.Dealers;
+import dmsInventory.Inventory;
+import dmsInventory.UploadWizard;
 import map2.MAP2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -60,6 +62,12 @@ public class dmsHome2 extends Page {
 
     @FindBy(how = How.CSS, using = "a[href='/dms/email']")
     private WebElement webmailMenuItem;
+
+    @FindBy(how = How.CSS, using = "a[href='/dms/inventory']")
+    private WebElement inventoryMenuItem;
+
+    @FindBy(how = How.CSS, using = "a[href='/dms/inventory/wizard']")
+    private WebElement uploadWizardMenuItem;
 
 
 /*go to dms Dealers page*/
@@ -133,5 +141,20 @@ public class dmsHome2 extends Page {
     public EmailsList clickOnWebmailMenu2() {
         webmailMenuItem.click();
         return PageFactory.initElements(driver, EmailsList.class);
+    }
+
+    /*go to Inventory page*/
+    public Inventory clickOnInventoryMenu() {
+        inventoryMenuItem.click();
+        return PageFactory.initElements(driver, Inventory.class);
+    }
+
+    /*go to dms Customers Leads page*/
+    public UploadWizard clickOnUploadWizardMenu() {
+        Actions action = new Actions(driver);
+        Action moveToElem = action.moveToElement(inventoryMenuItem).build();
+        moveToElem.perform();
+        uploadWizardMenuItem.click();
+        return PageFactory.initElements(driver, UploadWizard.class);
     }
 }

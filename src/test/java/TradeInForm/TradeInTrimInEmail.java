@@ -1,6 +1,5 @@
 package TradeInForm;
 
-import dataProviders.DataProviderSet1;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utility.PropertyLoader;
@@ -8,19 +7,27 @@ import webmail.EmailDetails;
 import webmail.EmailsList;
 
 /**
- * Created by Julia on 06.03.2017.
+ * Created by Julia on 09.03.2017.
  */
-public class TradeInMotorizedTypeInEmail extends TradeInTestBaseEmail {
+public class TradeInTrimInEmail extends TradeInTestBaseEmail {
 
-    @Test(dataProvider = "motorizedType", dataProviderClass = DataProviderSet1.class)
-    public void motorizedTypeInEmail(String motorizedTypeForm, String motorizedTypeEmail) {
+    @Test
+    public void makeInEmail() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
         tradeIn.fillFirstName();
         tradeIn.fillLastName();
         tradeIn.fillPhoneNum();
         tradeIn.fillEmail();
-        tradeIn.selectMotorizedType(motorizedTypeForm);
+        tradeIn.selectMotorizedType(PropertyLoader.loadProperty("CARS_TRUCKS_VANS"));
+        waitForJSandJQueryToLoad();
+        tradeIn.selectMakeByIndex(1);
+        waitForJSandJQueryToLoad();
+        tradeIn.selectModelByIndex(1);
+        waitForJSandJQueryToLoad();
+        String firstTrim = tradeIn.getTrimSelectOptions().get(1).getText();
+        tradeIn.selectTrimByIndex(1);
+        waitForJSandJQueryToLoad();
         tradeIn.clickOnTradeInSubmit();
         waitForJSandJQueryToLoad();
         wait.until(isPostFormVisible());
@@ -35,7 +42,7 @@ public class TradeInMotorizedTypeInEmail extends TradeInTestBaseEmail {
         wait.until(isWebmailFrameVisible());
         EmailDetails emailDetails = emailsList.openFirstEmail();
         waitForJSandJQueryToLoad();
-        Assert.assertEquals(emailDetails.getMotorizedType(), motorizedTypeEmail);
+        Assert.assertEquals(emailDetails.getTrim(), firstTrim);
         EmailsList emailsList1 = emailDetails.removeEmail();
         waitForJSandJQueryToLoad();
     }

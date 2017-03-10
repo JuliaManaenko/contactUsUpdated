@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import page.Page;
 import utility.LogFactory;
 
+import java.util.List;
+
 /**
  * Created by Julia on 11.01.2017.
  */
@@ -80,14 +82,20 @@ public class LeadDetails extends Page {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Motorized Type:')]//../following-sibling::td//span")
     private WebElement motorizedType;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Make:'')]//../following-sibling::td//span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Make:')]//../following-sibling::td//span")
     private WebElement make;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Model:'')]//../following-sibling::td//span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Model:')]//../following-sibling::td//span")
     private WebElement model;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Trim:'')]//../following-sibling::td//span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Trim:')]//../following-sibling::td//span")
     private WebElement trim;
+
+    @FindBy(how = How.XPATH, using = "(//b[contains(text(),'User Image')]/../../../../../../../../../../../following-sibling::tr)[2]//img")
+    private List<WebElement> userImage;
+
+    @FindBy(how = How.XPATH, using = "//b[contains(text(),'User Image')]/../../../../../../../../../../..")
+    private WebElement userImageTitle;
 
     /*methods for getting values of fields*/
 
@@ -190,6 +198,23 @@ public class LeadDetails extends Page {
             return true;
         }
         catch (NoSuchElementException ex){
+            return false;
+        }
+    }
+
+    public int getUserImageNumber() {
+        try {
+            return userImage.size();
+        } catch (NoSuchElementException ex) {
+            return 0;
+        }
+    }
+
+    public boolean isUserImageTitleExist() {
+        try {
+            userImageTitle.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
             return false;
         }
     }

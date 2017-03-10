@@ -371,4 +371,27 @@ public class DataProviderSet1 {
                 {PropertyLoader.loadProperty("TRAILERS"), PropertyLoader.loadProperty("TRAILERS")},
         };
     }
+
+    @DataProvider(name = "motorizedTypeWithoutSelect")
+    public static Object[][] getMotorizedType2() {
+        return new Object[][]{{PropertyLoader.loadProperty("AGRICULTURAL_EQUIPMENT"), PropertyLoader.loadProperty("AGRICULTURAL_EQUIPMENT")},
+                {PropertyLoader.loadProperty("AIRCRAFT"), PropertyLoader.loadProperty("AIRCRAFT")},
+                {PropertyLoader.loadProperty("ATVs"), PropertyLoader.loadProperty("ATVs")},
+                {PropertyLoader.loadProperty("BOAT"), PropertyLoader.loadProperty("BOAT")},
+                {PropertyLoader.loadProperty("CARS_TRUCKS_VANS"), PropertyLoader.loadProperty("CARS_TRUCKS_VANS")},
+                {PropertyLoader.loadProperty("COMMERCIAL_TRUCKS"), PropertyLoader.loadProperty("COMMERCIAL_TRUCKS")},
+                {PropertyLoader.loadProperty("CONSTRUCTION_EQUIPMENT"), PropertyLoader.loadProperty("CONSTRUCTION_EQUIPMENT")},
+                {PropertyLoader.loadProperty("DISMANTLED_MACHINE"), PropertyLoader.loadProperty("DISMANTLED_MACHINE")},
+                {PropertyLoader.loadProperty("GO_KARTS_COOTERS"), PropertyLoader.loadProperty("GO_KARTS_COOTERS")},
+                {PropertyLoader.loadProperty("LIGHT_TRUCK"), PropertyLoader.loadProperty("LIGHT_TRUCK")},
+                {PropertyLoader.loadProperty("MILITARY_VEHICLES"), PropertyLoader.loadProperty("MILITARY_VEHICLES")},
+                {PropertyLoader.loadProperty("MOTORCYCLE"), PropertyLoader.loadProperty("MOTORCYCLE")},
+                {PropertyLoader.loadProperty("OTHER"), PropertyLoader.loadProperty("OTHER")},
+                {PropertyLoader.loadProperty("PWC/ATV"), PropertyLoader.loadProperty("PWC/ATV")},
+                {PropertyLoader.loadProperty("RVs_CAMPERS"), PropertyLoader.loadProperty("RVs_CAMPERS")},
+                {PropertyLoader.loadProperty("SAVING_PLANS_(CARS)"), PropertyLoader.loadProperty("SAVING_PLANS_(CARS)")},
+                {PropertyLoader.loadProperty("SNOWMOBILES"), PropertyLoader.loadProperty("SNOWMOBILES")},
+                {PropertyLoader.loadProperty("TRAILERS"), PropertyLoader.loadProperty("TRAILERS")},
+        };
+    }
 }

@@ -195,4 +195,9 @@ public class IsTradeInElementsDisplayed extends TradeInTestBase2 {
     public void tradeInIntPhoneLabelDisplayed() {
         Assert.assertTrue(tradeIn.isIntPhoneLabelDisplayed());
     }
+
+    @Test
+    public void tradeInAstericsInputNumberIs4() {
+        Assert.assertEquals(tradeIn.getAstericsInputNumber(), 4);
+    }
 }

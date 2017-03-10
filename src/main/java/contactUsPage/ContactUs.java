@@ -117,6 +117,9 @@ public class ContactUs extends Page {
     @FindBy(how = How.XPATH, using = "//span[@class='glyphicon glyphicon-asterisk form-control-feedback text-danger']")
     private WebElement astericsInput;
 
+    @FindBy(how = How.XPATH, using = "//span[@class='glyphicon glyphicon-asterisk form-control-feedback text-danger']")
+    private List<WebElement> astericsInputList;
+
     @FindBy(how = How.XPATH, using = "//span[@class='glyphicon glyphicon-asterisk text-danger pull-right']")
     private WebElement astericsCaptcha;
 
@@ -140,6 +143,9 @@ public class ContactUs extends Page {
 
     @FindBy(how = How.XPATH, using = "//div[contains(@class, 'modul-r-tradein')]")
     private WebElement tradeInWidget2;
+
+    @FindBy(how = How.ID, using = "main_form")
+    private WebElement formInWidget;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='panel-body']//div[@class='text-center'])[1]")
     private WebElement postForm;
@@ -221,6 +227,21 @@ public class ContactUs extends Page {
 
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'trade-submit')]//span[@class='fa fa-check']")
     private WebElement tradeInSubmitBtnCheckMark;
+
+    @FindBy(how = How.ID, using = "editProgress")
+    private WebElement uploadSuccessText;
+
+    @FindBy(how = How.XPATH, using = "//img[@class='thumbnail img-responsive']")
+    private List<WebElement> uploadedImage;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='fa fa-upload']")
+    private WebElement tradeInUploadBtnIcon;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='fa fa-trash']")
+    private WebElement tradeInRemoveBtnIcon;
+
+    @FindBy(how = How.ID, using = "upload_image")
+    private WebElement uploadBtnDiv;
 
 
     public ContactUs(WebDriver webDriver) {
@@ -715,7 +736,34 @@ public class ContactUs extends Page {
         }
     }
 
-    /*method click on submit button*/
+    public boolean isTradeInUploadBtnIconDisplayed() {
+        try {
+            tradeInUploadBtnIcon.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isTradeInRemoveBtnIconDisplayed() {
+        try {
+            tradeInRemoveBtnIcon.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isTradeInFormInWidgetDisplayed() {
+        try {
+            formInWidget.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    /*method click on button*/
 
     public void clickOnSubmit() {
         submitButton.click();
@@ -723,6 +771,10 @@ public class ContactUs extends Page {
 
     public void clickOnTradeInSubmit() {
         tradeInSubmitButton.click();
+    }
+
+    public void clickOKinPostForm() {
+        postFormOkBtn.click();
     }
 
    /*methods for getting border color of input elements*/
@@ -1125,22 +1177,40 @@ public class ContactUs extends Page {
         options.selectByVisibleText(motorizedType);
     }
 
-    public void selectMake(String make) {
+    public void selectMakeByText(String make) {
         WebElement select = makeSelect;
         Select options = new Select(select);
         options.selectByVisibleText(make);
     }
 
-    public void selectModel(String model) {
+    public void selectMakeByIndex(int index) {
+        WebElement select = makeSelect;
+        Select options = new Select(select);
+        options.selectByIndex(index);
+    }
+
+    public void selectModelByText(String model) {
         WebElement select = modelSelect;
         Select options = new Select(select);
         options.selectByVisibleText(model);
     }
 
-    public void selectTrim(String trim) {
+    public void selectModelByIndex(int index) {
+        WebElement select = modelSelect;
+        Select options = new Select(select);
+        options.selectByIndex(index);
+    }
+
+    public void selectTrimByText(String trim) {
         WebElement select = trimSelect;
         Select options = new Select(select);
         options.selectByVisibleText(trim);
+    }
+
+    public void selectTrimByIndex(int index) {
+        WebElement select = trimSelect;
+        Select options = new Select(select);
+        options.selectByIndex(index);
     }
 
     /*Method for check if widget exists or doesn't exist*/
@@ -1192,6 +1262,27 @@ public class ContactUs extends Page {
     public String odometerGetValue() {
         return odometerInput.getAttribute("value");
     }
+
+    public String firstNameGetValue() {
+        return firstNameInput.getAttribute("value");
+    }
+
+    public String lastNameGetValue() {
+        return lastNameInput.getAttribute("value");
+    }
+
+    public String phoneNumGetValue() {
+        return phoneNumInput.getAttribute("value");
+    }
+
+    public String emailGetValue() {
+        return emailInput.getAttribute("value");
+    }
+
+    public String askingPriceGetValue() {
+        return askingPriceInput.getAttribute("value");
+    }
+
 
     /*Get text from elements*/
     public String postFormGetText() {
@@ -1297,13 +1388,34 @@ public class ContactUs extends Page {
     public List<WebElement> getMotorizedTypeSelectOptions() {
         WebElement select = motorizedTypeSelect;
         Select options = new Select(select);
-        List<WebElement> allOptions = options.getOptions();
-        return allOptions;
+        List<WebElement> allOptionsMotorizedType = options.getOptions();
+        return allOptionsMotorizedType;
     }
 
     public List<String> getMotorizedTypeSelectOptionsManually() {
         List<String> motorizedTypeList = Arrays.asList("Select Motorized Type", "AGRICULTURAL EQUIPMENT", "AIRCRAFT", "ATVs", "BOAT", "CARS & TRUCKS & VANS", "COMMERCIAL TRUCKS", "CONSTRUCTION EQUIPMENT", "DISMANTLED MACHINE", "GO KARTS & SCOOTERS", "LIGHT TRUCK", "MILITARY VEHICLES", "MOTORCYCLE", "OTHER", "PWC/ATV", "RVs & CAMPERS", "SAVING PLANS (CARS)", "SNOWMOBILES", "TRAILERS");
         return motorizedTypeList;
+    }
+
+    public List<WebElement> getMakeSelectOptions() {
+        WebElement select = makeSelect;
+        Select options = new Select(select);
+        List<WebElement> allOptionsMake = options.getOptions();
+        return allOptionsMake;
+    }
+
+    public List<WebElement> getModelSelectOptions() {
+        WebElement select = modelSelect;
+        Select options = new Select(select);
+        List<WebElement> allOptionsModel = options.getOptions();
+        return allOptionsModel;
+    }
+
+    public List<WebElement> getTrimSelectOptions() {
+        WebElement select = trimSelect;
+        Select options = new Select(select);
+        List<WebElement> allOptionsTrim = options.getOptions();
+        return allOptionsTrim;
     }
 
     /*methods for moving mouse on element*/
@@ -1357,11 +1469,57 @@ public class ContactUs extends Page {
         return trimSelect.isEnabled();
     }
 
+    public boolean isUploadBtnDisabled() {
+        return uploadBtnDiv.getAttribute("class").contains("disabled");
+    }
+
+    public boolean isRemoveBtnDisabled() {
+        return removeBtn.getAttribute("class").contains("disabled");
+    }
+
     /*get cursor kind in element*/
 
     public String getTradeInSubmitBtnCursorKind() {
         return tradeInSubmitButton.getCssValue("cursor");
     }
+
+    /*number of elements*/
+    public int getAstericsInputNumber() {
+        return astericsInputList.size();
+    }
+
+    /*methods for working with upload file*/
+
+    public void addImageToTradeIn(String path) {
+        uploadBtn.sendKeys(path);
+    }
+
+    public boolean uploadSuccessTextDisplayed() {
+        try {
+            uploadSuccessText.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public int getUploadImagesNumber() {
+        try {
+            return uploadedImage.size();
+        } catch (NoSuchElementException ex) {
+            return 0;
+        }
+    }
+
+    public void tradeInClickOnImage(int index) {
+        uploadedImage.get(index).click();
+    }
+
+    public void clickRemoveBtn() {
+        removeBtn.click();
+    }
+
+
 
 }
 

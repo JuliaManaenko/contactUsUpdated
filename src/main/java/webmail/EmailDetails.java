@@ -8,6 +8,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import page.Page;
 
+import java.util.List;
+
 /**
  * Created by Julia on 03.02.2017.
  */
@@ -73,14 +75,20 @@ public class EmailDetails extends Page {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Motorized Type:')]//../following-sibling::td//span")
     private WebElement motorizedType;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Make:'')]//../following-sibling::td//span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Make:')]//../following-sibling::td//span")
     private WebElement make;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Model:'')]//../following-sibling::td//span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Model:')]//../following-sibling::td//span")
     private WebElement model;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Trim:'')]//../following-sibling::td//span")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Trim:')]//../following-sibling::td//span")
     private WebElement trim;
+
+    @FindBy(how = How.XPATH, using = "(//b[contains(text(),'User Image')]/../../../../../../../../../../../following-sibling::tr)[2]//img")
+    private List<WebElement> userImage;
+
+    @FindBy(how = How.XPATH, using = "//b[contains(text(),'User Image')]/../../../../../../../../../../..")
+    private WebElement userImageTitle;
 
     public EmailsList backToList(){
         backBtn.click();
@@ -213,5 +221,22 @@ public class EmailDetails extends Page {
         }
     }
 
+    public int getUserImageNumber() {
+        driver.switchTo().frame(iframe);
+        try {
+            return userImage.size();
+        } catch (NoSuchElementException ex) {
+            return 0;
+        }
+    }
+
+    public boolean isUserImageTitleExist() {
+        try {
+            userImageTitle.isDisplayed();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
 
 }
