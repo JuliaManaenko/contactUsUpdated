@@ -97,6 +97,9 @@ public class LeadDetails extends Page {
     @FindBy(how = How.XPATH, using = "//b[contains(text(),'User Image')]/../../../../../../../../../../..")
     private WebElement userImageTitle;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Request Time:')]//../following-sibling::td//span")
+    private WebElement requestTime;
+
     /*methods for getting values of fields*/
 
     public String getFirstName(){
@@ -151,8 +154,7 @@ public class LeadDetails extends Page {
         return comments.getText();
     }
 
-    public String getTradeInComments()
-    {
+    public String getTradeInComments() {
         return tradeInComments.getText();
     }
 
@@ -180,6 +182,10 @@ public class LeadDetails extends Page {
 
     public String getTrim() {
         return trim.getText();
+    }
+
+    public String getRequestTime() {
+        return requestTime.getText();
     }
 
     public boolean isIntPhoneFieldExist(){

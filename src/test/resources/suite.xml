@@ -4,81 +4,170 @@
     <parameter name="browserName" value="chrome"/>
    <!-- <test name="ContactUsTest">
         <classes>
-             <class name="access.TurnOffAccessDealers"/>
-             <class name="access.TurnOnAccessDealers"/>
-             <class name="access.TurnOffAccessSites"/>
-             <class name="access.TurnOnAccessSites"/>
-             <class name="elements.IsElementsDisplayed"/>
-             <class name="requiredFields.RequiredFieldsHighlighted"/>
-             <class name="requiredFields.RequiredFieldsSelected"/>
-             <class name="elements.PhoneNumTest"/>
-             <class name="elements.PhoneNumInEmail"/>
-             <class name="elements.EmailInputTest"/>
-             <class name="elements.EmailInLead"/>
-             <class name="elements.EmailInEmail"/>
-             <class name="elements.IntPhoneNumTest"/>
-             <class name="elements.IntPhoneNumInEmail"/>
-             <class name="elements.StateProvinceTest"/>
-             <class name="elements.StateInEmail"/>
-             <class name="elements.FirstNameTest"/>
-             <class name="elements.FirstNameInEmail"/>
-             <class name="elements.LastNameTest"/>
-             <class name="elements.LastNameInEmail"/>
-             <class name="elements.StreetTest"/>
-             <class name="elements.StreetInEmail"/>
-             <class name="elements.CityTest"/>
-             <class name="elements.CityInEmail"/>
-             <class name="elements.ZipTest"/>
-             <class name="elements.ZipInLeadTest"/>
-             <class name="elements.ZipInEmail"/>
-             <class name="elements.CommentsTest"/>
-             <class name="elements.CommentsInEmail"/>
-             <class name="widgetSettings.WowAnimation"/>
-             <class name="widgetSettings.ColorVariationTest"/>
-             <class name="widgetSettings.PostFormNotification"/>
-             <class name="captcha.CaptchaTest"/>
-             <class name="captcha.ReCaptcha2Test"/>
-             <class name="captcha.MotionTest"/>
-             <class name="captcha.ReCaptcha"/>
+             <class name="contactUsForm.TurnOffAccessDealers"/>
+             <class name="contactUsForm.TurnOnAccessDealers"/>
+             <class name="contactUsForm.TurnOffAccessSites"/>
+             <class name="contactUsForm.TurnOnAccessSites"/>
+             <class name="contactUsForm.IsElementsDisplayed"/>
+             <class name="contactUsForm.RequiredFieldsHighlighted"/>
+             <class name="contactUsForm.RequiredFieldsSelected"/>
+             <class name="contactUsForm.PhoneNumTest"/>
+             <class name="contactUsForm.PhoneNumInEmail"/>
+             <class name="contactUsForm.EmailInputTest"/>
+             <class name="contactUsForm.EmailInLead"/>
+             <class name="contactUsForm.EmailInEmail"/>
+             <class name="contactUsForm.IntPhoneNumTest"/>
+             <class name="contactUsForm.IntPhoneNumInEmail"/>
+             <class name="contactUsForm.StateProvinceTest"/>
+             <class name="contactUsForm.StateInEmail"/>
+             <class name="contactUsForm.FirstNameTest"/>
+             <class name="contactUsForm.FirstNameInEmail"/>
+             <class name="contactUsForm.LastNameTest"/>
+             <class name="contactUsForm.LastNameInEmail"/>
+             <class name="contactUsForm.StreetTest"/>
+             <class name="contactUsForm.StreetInEmail"/>
+             <class name="contactUsForm.CityTest"/>
+             <class name="contactUsForm.CityInEmail"/>
+             <class name="contactUsForm.ZipTest"/>
+             <class name="contactUsForm.ZipInLeadTest"/>
+             <class name="contactUsForm.ZipInEmail"/>
+             <class name="contactUsForm.CommentsTest"/>
+             <class name="contactUsForm.CommentsInEmail"/>
+             <class name="contactUsForm.WowAnimation"/>
+             <class name="contactUsForm.ColorVariationTest"/>
+             <class name="contactUsForm.PostFormNotification"/>
+             <class name="contactUsForm.CaptchaTest"/>
+             <class name="contactUsForm.ReCaptcha2Test"/>
+             <class name="contactUsForm.MotionTest"/>
+             <class name="contactUsForm.ReCaptcha"/>
         </classes>
-    </test> -->
+    </test>-->
 
-    <test name="TradeInForm">
+    <!--<test name="TradeInForm">
         <classes>
-           <!-- <class name="TradeInForm.TradeInTurnOffAccessDealers"/>
-            <class name="TradeInForm.TradeInTurnOnAccessDealers"/>
-            <class name="TradeInForm.TradeInTurnOffAccessSites"/>
-            <class name="TradeInForm.TradeInTurnOnAccessSites"/>
-            <class name="TradeInForm.IsTradeInElementsDisplayed"/>
-            <class name="TradeInForm.TradeInRequiredFieldsHighlighted"/>
-            <class name="TradeInForm.TradeInRequiredFieldsSelected"/>
-            <class name="TradeInForm.TradeInWowAnimation"/>
-            <class name="TradeInForm.TradeInColorVariation"/>-->
-            <class name="TradeInForm.TradeInPostFormNotification"/>
-            <!--  <class name="TradeInForm.TradeInWidgetTitle"/>
+     <class name="TradeInForm.TradeInTurnOffAccessDealers"/>
+     <class name="TradeInForm.TradeInTurnOnAccessDealers"/>
+     <class name="TradeInForm.TradeInTurnOffAccessSites"/>
+     <class name="TradeInForm.TradeInTurnOnAccessSites"/>
+     <class name="TradeInForm.IsTradeInElementsDisplayed"/>
+     <class name="TradeInForm.TradeInRequiredFieldsHighlighted"/>
+     <class name="TradeInForm.TradeInRequiredFieldsSelected"/>
+     <class name="TradeInForm.TradeInWowAnimation"/>
+     <class name="TradeInForm.TradeInColorVariation"/>
+     <class name="TradeInForm.TradeInPostFormNotification"/>
+     <class name="TradeInForm.TradeInWidgetTitle"/>
+     <class name="TradeInForm.TradeInFirstName"/>
+     <class name="TradeInForm.TradeInFirstNameInEmail"/>
+     <class name="TradeInForm.TradeInLastName"/>
+     <class name="TradeInForm.TradeInLastNameInEmail"/>
+     <class name="TradeInForm.TradeInPhoneNumber"/>
+     <class name="TradeInForm.TradeInPhoneNumInEmail"/>
+     <class name="TradeInForm.TradeInEmailInput"/>
+     <class name="TradeInForm.TradeInEmailInLead"/>
+     <class name="TradeInForm.TradeInEmailInEmail"/>
+     <class name="TradeInForm.TradeInIntPhoneNum"/>
+     <class name="TradeInForm.TradeInIntPhoneNumInEmail"/>
+     <class name="TradeInForm.TradeInComments"/>
+     <class name="TradeInForm.TradeInCommentsInEmail"/>
+     <class name="TradeInForm.TradeInVINInput"/>
+     <class name="TradeInForm.TradeInVINinEmail"/>
+     <class name="TradeInForm.TradeInYearSelect"/>
+     <class name="TradeInForm.TradeInYearInEmail"/>
+     <class name="TradeInForm.TradeInAskingPrice"/>
+     <class name="TradeInForm.TradeInAskingPriceInEmail"/>
+     <class name="TradeInForm.TradeInOdometer"/>
+     <class name="TradeInForm.TradeInOdometerInEmail"/>
+     <class name="TradeInForm.TradeInSubmitBtn"/>
+     <class name="TradeInForm.TradeInMotorizedType"/>
+     <class name="TradeInForm.TradeInMotorizedTypeInEmail"/>
+     <class name="TradeInForm.TradeInMake"/>
+     <class name="TradeInForm.TradeInMakeInEmail"/>
+     <class name="TradeInForm.TradeInModel"/>
+     <class name="TradeInForm.TradeInModelInEmail"/>
+     <class name="TradeInForm.TradeInTrim"/>
+     <class name="TradeInForm.TradeInTrimInEmail"/>
+     <class name="TradeInForm.TradeInCaptcha"/>
+     <class name="TradeInForm.TradeInMotionCaptcha"/>
+     <class name="TradeInForm.TradeInReCaptcha"/>
+     <class name="TradeInForm.TradeInReCaptcha2"/>
+     <class name="TradeInForm.TradeInDisableCaptcha"/>
+     <class name="TradeInForm.TradeInUploadPhoto"/>
+     <class name="TradeInForm.TradeInUploadPhotoInEmail"/>
+     <class name="TradeInForm.TradeInPageActions"/>
+     <class name="TradeInForm.TradeInCustomPage"/>
+     <class name="TradeInForm.TradeInCustomPageEmail"/>
+     <class name="TradeInForm.TradeInComesInLead"/>
+     <class name="TradeInForm.TradeInComesInEmail"/>
+</classes>
+</test>-->
+
+    <!-- <test name="TradeInFormShort">
+         <classes>
+              <class name="TradeInForm.IsTradeInElementsDisplayed"/>
+              <class name="TradeInForm.TradeInRequiredFieldsHighlighted"/>
+              <class name="TradeInForm.TradeInRequiredFieldsSelected"/>
+              <class name="TradeInForm.TradeInPostFormNotification"/>
+              <class name="TradeInForm.TradeInWidgetTitle"/>
               <class name="TradeInForm.TradeInFirstName"/>
               <class name="TradeInForm.TradeInFirstNameInEmail"/>
               <class name="TradeInForm.TradeInLastName"/>
               <class name="TradeInForm.TradeInLastNameInEmail"/>
-              <class name="TradeInForm.TradeInPhoneNumber"/>
-              <class name="TradeInForm.TradeInPhoneNumInEmail"/>
+              <class name="TradeInForm.TradeInPhoneNumber">
+                 <methods>
+                     <exclude name="phInputMaskCheck"/>
+                     <exclude name="phIncorrectPhoneTest"/>
+                 </methods>
+              </class>
+              <class name="TradeInForm.TradeInPhoneNumInEmail">
+                 <methods>
+                     <exclude name="inputMaskCheck"/>
+                 </methods>
+              </class>
               <class name="TradeInForm.TradeInEmailInput"/>
               <class name="TradeInForm.TradeInEmailInLead"/>
               <class name="TradeInForm.TradeInEmailInEmail"/>
               <class name="TradeInForm.TradeInIntPhoneNum"/>
               <class name="TradeInForm.TradeInIntPhoneNumInEmail"/>
-              <class name="TradeInForm.TradeInComments"/>
-              <class name="TradeInForm.TradeInCommentsInEmail"/>
-              <class name="TradeInForm.TradeInVINInput"/>
-              <class name="TradeInForm.TradeInVINinEmail"/>
-              <class name="TradeInForm.TradeInYearSelect"/>
-              <class name="TradeInForm.TradeInYearInEmail"/>
-              <class name="TradeInForm.TradeInAskingPrice"/>
+              <class name="TradeInForm.TradeInComments">
+                 <methods>
+                     <exclude name="emptyCommentsInLead"/>
+                 </methods>
+              </class>
+              <class name="TradeInForm.TradeInCommentsInEmail">
+                 <methods>
+                     <exclude name="emptyCommentsInEmail"/>
+                 </methods>
+              </class>
+              <class name="TradeInForm.TradeInVINInput">
+                 <methods>
+                     <exclude name="incorrectValuesVINHighlight"/>
+                 </methods>
+              </class>
+                <class name="TradeInForm.TradeInVINinEmail"/>
+              <class name="TradeInForm.TradeInYearSelect">
+                 <methods>
+                     <exclude name="getAllYearValues()"/>
+                     <exclude name="yearInLead"/>
+                 </methods>
+              </class>
+              <class name="TradeInForm.TradeInAskingPrice">
+                 <methods>
+                     <exclude name="incorrectValuesAskingPriceHighlight"/>
+                 </methods>
+              </class>
               <class name="TradeInForm.TradeInAskingPriceInEmail"/>
-              <class name="TradeInForm.TradeInOdometer"/>
+              <class name="TradeInForm.TradeInOdometer">
+                 <methods>
+                     <exclude name="incorrectValuesOdometerHighlight"/>
+                 </methods>
+              </class>
               <class name="TradeInForm.TradeInOdometerInEmail"/>
               <class name="TradeInForm.TradeInSubmitBtn"/>
-              <class name="TradeInForm.TradeInMotorizedType"/>
+              <class name="TradeInForm.TradeInMotorizedType">
+                 <methods>
+                     <exclude name="motorTypeIsnotDependOfYear"/>
+                 </methods>
+              </class>
               <class name="TradeInForm.TradeInMotorizedTypeInEmail"/>
               <class name="TradeInForm.TradeInMake"/>
               <class name="TradeInForm.TradeInMakeInEmail"/>
@@ -86,15 +175,41 @@
               <class name="TradeInForm.TradeInModelInEmail"/>
               <class name="TradeInForm.TradeInTrim"/>
               <class name="TradeInForm.TradeInTrimInEmail"/>
-              <class name="TradeInForm.TradeInCaptcha"/>
-              <class name="TradeInForm.TradeInMotionCaptcha"/>
-              <class name="TradeInForm.TradeInReCaptcha"/>
-              <class name="TradeInForm.TradeInReCaptcha2"/>
-              <class name="TradeInForm.TradeInDisableCaptcha"/>
-              <class name="TradeInForm.TradeInUploadPhoto"/>
-              <class name="TradeInForm.TradeInUploadPhotoInEmail"/>-->
+              <class name="TradeInForm.TradeInUploadPhoto">
+                 <methods>
+                     <exclude name="noImagesInLead"/>
+                     <exclude name="noUserImagePartInLead"/>
+                     <exclude name="removeOneFromOneImage"/>
+                     <exclude name="removeThreeFromThreeImages"/>
+                     <exclude name="removeTwoFromTwoImages"/>
+                 </methods>
+              </class>
+              <class name="TradeInForm.TradeInUploadPhotoInEmail">
+                 <methods>
+                     <exclude name="noImagesInLead"/>
+                     <exclude name="noUserImagePartInLead"/>
+                 </methods>
+              </class>
+         </classes>
+     </test>-->
 
-
+    <test name="AdvancedSearchHorizontalMAP2">
+        <classes>
+            <!-- <class name="advancedSearchHorizontal.AdvSearchHorizTurnOnAccessDealers"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizTurnOffAccessDealers"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizTurnOffAccessSites"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizTurnOnAccessSites"/>
+                 <class name="advancedSearchHorizontal.AdvSearchElementsDisplayed"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizMakeSelect"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizMakeSelectOnInventory"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizMakeSelectOnCustom"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizModelSelect"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizModelOnInventory"/>
+                 <class name="advancedSearchHorizontal.AdvSearchModelOnCustom"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizStyleSelectt"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizStyleOnInventory"/>
+                 <class name="advancedSearchHorizontal.AdvSearchHorizStyleOnCustom"/>-->
+            <class name="advancedSearchHorizontal.AdvSearchHorizYearSlide"/>
         </classes>
     </test>
 

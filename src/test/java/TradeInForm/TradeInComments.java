@@ -3,12 +3,8 @@ package TradeInForm;
 import customers.LeadDetails;
 import customers.Leads;
 import dataProviders.DataProviderSet1;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
@@ -163,5 +159,12 @@ public class TradeInComments extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         leads.removeFirstLead();
         waitForJSandJQueryToLoad();
+    }
+
+    @Test
+    public void isCommentsEmptyByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.commentsGetValue(), "");
     }
 }

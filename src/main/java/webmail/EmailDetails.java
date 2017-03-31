@@ -90,6 +90,9 @@ public class EmailDetails extends Page {
     @FindBy(how = How.XPATH, using = "//b[contains(text(),'User Image')]/../../../../../../../../../../..")
     private WebElement userImageTitle;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Request Time:')]//../following-sibling::td//span")
+    private WebElement requestTime;
+
     public EmailsList backToList(){
         backBtn.click();
         return PageFactory.initElements(driver,EmailsList.class);
@@ -199,6 +202,11 @@ public class EmailDetails extends Page {
     public String getTrim() {
         driver.switchTo().frame(iframe);
         return trim.getText();
+    }
+
+    public String getRequestTime() {
+        driver.switchTo().frame(iframe);
+        return requestTime.getText();
     }
 
     public boolean isCommentsFieldExist(){

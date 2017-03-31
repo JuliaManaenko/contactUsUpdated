@@ -1,10 +1,9 @@
 package TradeInForm;
 
-import contactUsPage.ContactUs;
 import dataProviders.DataProviderSet1;
-import dms.dmsHome;
-import map2.ContactEditor;
+import dwsPages.FormsPage;
 import map2.MAP2;
+import map2.map2PageEditor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +26,7 @@ public class TradeInEmailInput {
 
     private WebDriver driver;
     private WebDriverWait wait;
-    private ContactUs tradeIn;
+    private FormsPage tradeIn;
     private dms.dmsHome dmsHome;
 
     @BeforeClass
@@ -47,7 +46,7 @@ public class TradeInEmailInput {
         map2.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(getConditionForTitle());
-        ContactEditor editor = map2.clickAddPage();
+        map2PageEditor editor = map2.clickAddPage();
         waitForJSandJQueryToLoad();
         wait.until(isMAP2EditorVisible());
         editor.addTradeInWidget();
@@ -67,7 +66,7 @@ public class TradeInEmailInput {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
-        tradeIn = PageFactory.initElements(driver, ContactUs.class);
+        tradeIn = PageFactory.initElements(driver, FormsPage.class);
     }
 
     @AfterClass
@@ -143,6 +142,13 @@ public class TradeInEmailInput {
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         Assert.assertEquals(tradeIn.getEmailLabelFontColor(), PropertyLoader.loadProperty("font_color_gray"));
+    }
+
+    @Test
+    public void isEmailEmptyByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.emailGetValue(), "");
     }
 
     protected ExpectedCondition<WebElement> isHomeBreadcrumbsVisible() {

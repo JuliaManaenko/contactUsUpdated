@@ -2,19 +2,21 @@ package TradeInForm;
 
 import customers.LeadDetails;
 import customers.Leads;
+import dataProviders.DataProviderSet1;
+import dmsInventory.UploadWizard;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Julia on 09.03.2017.
  */
 public class TradeInTrim extends TradeInTestBase2 {
 
-   /* @Test
+    @Test
     public void labelIsTrim() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
@@ -98,7 +100,7 @@ public class TradeInTrim extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         tradeIn.selectMotorizedType(PropertyLoader.loadProperty("CARS_TRUCKS_VANS"));
         Assert.assertFalse(tradeIn.isTrimSelectEnabled());
-    }*/
+    }
 
     @Test
     public void trimIsDisabledIfSelectMake() {
@@ -111,7 +113,7 @@ public class TradeInTrim extends TradeInTestBase2 {
         Assert.assertFalse(tradeIn.isTrimSelectEnabled());
     }
 
-  /*  @Test
+    @Test
     public void trimSelected(){
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
@@ -123,7 +125,7 @@ public class TradeInTrim extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         tradeIn.selectTrimByIndex(1);
         Assert.assertEquals(tradeIn.getTrimSelectValue(), tradeIn.getTrimSelectOptions().get(1).getText());
-    }*/
+    }
 
     @Test
     public void trimInLead() {
@@ -165,5 +167,37 @@ public class TradeInTrim extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         leads.removeFirstLead();
         waitForJSandJQueryToLoad();
+    }
+
+    /*TODO: trims are in diff order*/
+    @Test(dataProvider = "motorizedTypeWithoutSelect", dataProviderClass = DataProviderSet1.class)
+    public void trimsAreFromSelectedModel(String motorizedTypeForm, String motorizedTypeLead) {
+        driver.manage().deleteAllCookies();
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
+        waitForJSandJQueryToLoad();
+        wait.until(isHomeBreadcrumbsVisible());
+        UploadWizard uploadWizard = dmsHome2.clickOnUploadWizardMenu();
+        waitForJSandJQueryToLoad();
+        wait.until(isUWFormVisible());
+        uploadWizard.selectMotorizedType(motorizedTypeForm);
+        waitForJSandJQueryToLoad();
+        uploadWizard.selectMake(1);
+        waitForJSandJQueryToLoad();
+        uploadWizard.selectModel(1);
+        waitForJSandJQueryToLoad();
+        List<String> optionTrim = uploadWizard.getTrimSelectOptionsText();
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        tradeIn.selectMotorizedType(motorizedTypeForm);
+        waitForJSandJQueryToLoad();
+        tradeIn.selectMakeByIndex(1);
+        waitForJSandJQueryToLoad();
+        tradeIn.selectModelByIndex(1);
+        waitForJSandJQueryToLoad();
+        for (int i = 0; i < tradeIn.getTrimSelectOptions().size(); i++) {
+            Assert.assertEquals(tradeIn.getTrimSelectOptions().get(i).getText(), optionTrim.get(i));
+        }
     }
 }

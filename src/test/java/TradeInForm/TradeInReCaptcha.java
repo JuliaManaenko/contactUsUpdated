@@ -8,7 +8,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import settings.Website;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 /**

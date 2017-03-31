@@ -5,7 +5,6 @@ import customers.Leads;
 import dataProviders.DataProviderSet1;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
@@ -122,5 +121,12 @@ public class TradeInAskingPrice extends TradeInTestBase2 {
         tradeIn.clickAskingPriceInput();
         Thread.sleep(1000);
         Assert.assertEquals(tradeIn.getAskingPriceInputBorderColor(), PropertyLoader.loadProperty("border_color_gray2"));
+    }
+
+    @Test
+    public void isAskingPriceEmptyByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.askingPriceGetValue(), "");
     }
 }

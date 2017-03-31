@@ -5,7 +5,6 @@ import customers.Leads;
 import dataProviders.DataProviderSet1;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
@@ -136,6 +135,13 @@ public class TradeInVINInput extends TradeInTestBase2 {
         tradeIn.clickOnTradeInSubmit();
         waitForJSandJQueryToLoad();
         Assert.assertTrue(tradeIn.isPostFormDisplayed());
+    }
+
+    @Test
+    public void isVinEmptyByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.vinGetValue(), "");
     }
 
 }

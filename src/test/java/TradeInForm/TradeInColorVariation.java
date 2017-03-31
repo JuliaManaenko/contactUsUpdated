@@ -1,19 +1,17 @@
 package TradeInForm;
 
-import contactUsPage.ContactUs;
 import dataProviders.DataProviderSet1;
-import map2.ContactEditor;
+import dwsPages.FormsPage;
 import map2.ContactUsWidgetSettings;
 import map2.MAP2;
 import map2.PreviewPage;
+import map2.map2PageEditor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -29,9 +27,9 @@ import java.util.concurrent.TimeUnit;
 public class TradeInColorVariation {
     WebDriverWait wait;
     ArrayList<String> tabs2;
-    ContactEditor editor2;
+    map2PageEditor editor2;
     WebDriver driver;
-    ContactUs tradeIn;
+    FormsPage tradeIn;
     dms.dmsHome dmsHome;
     dms.dmsHome2 dmsHome2;
 
@@ -42,7 +40,7 @@ public class TradeInColorVariation {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dmsHome = PageFactory.initElements(driver, dms.dmsHome.class);
-        tradeIn = PageFactory.initElements(driver, ContactUs.class);
+        tradeIn = PageFactory.initElements(driver, FormsPage.class);
         dmsHome2 = dmsHome.loginToDms();
     }
 
@@ -56,7 +54,7 @@ public class TradeInColorVariation {
         map2.clickTradeInTab();
         wait.until(ExpectedConditions.textToBe(By.xpath("//div[@class='pull-left']/span"), "Trade_in"));
         Thread.sleep(1000);
-        ContactEditor editor = map2.clickAddPage();
+        map2PageEditor editor = map2.clickAddPage();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
         editor.addTradeInWidget();
@@ -81,12 +79,12 @@ public class TradeInColorVariation {
         tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
         Thread.sleep(1000);
-        ContactUs contactUs2 = previewPage.clickOnVisitWebsite();
+        FormsPage formsPage2 = previewPage.clickOnVisitWebsite();
         waitForJSandJQueryToLoad();
         ArrayList<String> tabs3 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs3.get(2));
         Thread.sleep(500);
-        Assert.assertEquals(contactUs2.getTradeinWidgetClassColor(), colorClass);
+        Assert.assertEquals(formsPage2.getTradeinWidgetClassColor(), colorClass);
     }
 
     @AfterMethod

@@ -5,7 +5,6 @@ import customers.Leads;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;

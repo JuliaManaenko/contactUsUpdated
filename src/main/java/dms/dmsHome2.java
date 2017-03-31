@@ -99,7 +99,7 @@ public class dmsHome2 extends Page {
     }
 
     public Website clickOnWebsiteMenu2() {
-        driver.get("http://www.tacker.ixloo.com/dms/settings/website#general");
+        driver.get("http://www.svtautotest.ixloo.com/dms/settings/website#general");
         return PageFactory.initElements(driver, Website.class);
     }
 
@@ -118,7 +118,7 @@ public class dmsHome2 extends Page {
         Action moveToElem = action.moveToElement(settingsMenuItem).build();
         moveToElem.perform();
         usersMenuItem.click();*/
-    driver.get("http://www.tacker.ixloo.com/dms/settings/users");
+        driver.get("http://www.svtautotest.ixloo.com/dms/settings/users");
         return PageFactory.initElements(driver, Users.class);
     }
 

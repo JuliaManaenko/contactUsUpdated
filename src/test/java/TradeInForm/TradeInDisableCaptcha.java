@@ -4,7 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import settings.Website;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 /**

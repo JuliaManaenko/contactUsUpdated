@@ -1,11 +1,11 @@
 package TradeInForm;
 
-import contactUsPage.ContactUs;
 import customers.LeadDetails;
 import customers.Leads;
 import dataProviders.DataProviderSet1;
-import map2.ContactEditor;
+import dwsPages.FormsPage;
 import map2.MAP2;
+import map2.map2PageEditor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -36,12 +36,12 @@ public class TradeInPhoneNumber {
 
     private static final Logger LOG = LogFactory.getLogger(TradeInPhoneNumber.class);
     private WebDriver driver;
-    private ContactUs tradeIn;
+    private FormsPage tradeIn;
     private dms.dmsHome dmsHome;
     private WebDriverWait wait;
     private LeadDetails leadDetails;
 
-    /*run browser, open dms link, initialize dmsHome and contactUs pages, add contact Us page in MAP2, close browser*/
+    /*run browser, open dms link, initialize dmsHome and formsPage pages, add contact Us page in MAP2, close browser*/
     @BeforeClass
     @Parameters({"browserName"})
     public void activatePage(String browserName) throws Exception {
@@ -58,13 +58,13 @@ public class TradeInPhoneNumber {
         map2.clickTradeInTab();
         wait.until(isLoadingInvisible());
         wait.until(isAddPageVisible());
-        ContactEditor editor = map2.clickAddPage();
+        map2PageEditor editor = map2.clickAddPage();
         wait.until(isLoadingInvisible());
         editor.addTradeInWidget();
         editor.activatePage();
         wait.until(isLoadingInvisible());
         wait.until(isPageActivatedTooltipVisible());
-        tradeIn = PageFactory.initElements(driver, ContactUs.class);
+        tradeIn = PageFactory.initElements(driver, FormsPage.class);
     }
 
     //close browser
@@ -315,6 +315,13 @@ public class TradeInPhoneNumber {
         leads.removeFirstLead();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+    }
+
+    @Test
+    public void isPhoneNumEmptyByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.phoneNumGetValue(), "");
     }
 
     protected ExpectedCondition<WebElement> isAddPageVisible() {

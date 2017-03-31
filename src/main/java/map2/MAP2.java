@@ -14,8 +14,6 @@ import page.Page;
 import settings.Sites;
 import settings.Website;
 
-import java.io.IOException;
-
 /**
  * Created by Julia on 04.01.2017.
  */
@@ -33,6 +31,15 @@ public class MAP2 extends Page {
 
     @FindBy(how = How.CSS, using = "div[data-page='vehicle']")
     private WebElement vehicleDetailsTab;
+
+    @FindBy(how = How.CSS, using = "div[data-page='custom']")
+    private WebElement customTab;
+
+    @FindBy(how = How.CSS, using = "div[data-page='index']")
+    private WebElement homePageTab;
+
+    @FindBy(how = How.CSS, using = "div[data-page='inventory']")
+    private WebElement inventoryPageTab;
 
     @FindBy(how = How.CSS, using = "div.map-link.pull-right")
     private WebElement addPageBtn;
@@ -69,10 +76,22 @@ public class MAP2 extends Page {
         vehicleDetailsTab.click();
     }
 
+    public void clickCustomTab() {
+        customTab.click();
+    }
+
+    public void clickHomePageTab() {
+        homePageTab.click();
+    }
+
+    public void clickInventoryPageTab() {
+        inventoryPageTab.click();
+    }
+
     /*click on Add Page button, that opens Contact Us editor*/
-    public ContactEditor clickAddPage() {
+    public map2PageEditor clickAddPage() {
         addPageBtn.click();
-        return PageFactory.initElements(driver, ContactEditor.class);
+        return PageFactory.initElements(driver, map2PageEditor.class);
     }
 
     /*click on Delete Page icon*/
@@ -83,9 +102,9 @@ public class MAP2 extends Page {
     }
 
     /*click on Edit last page icon*/
-    public ContactEditor editLastPage() {
+    public map2PageEditor editLastPage() {
         editLastPageBtn.click();
-        return PageFactory.initElements(driver, ContactEditor.class);
+        return PageFactory.initElements(driver, map2PageEditor.class);
     }
 
     /*check if a particular tab exists in pages tree*/

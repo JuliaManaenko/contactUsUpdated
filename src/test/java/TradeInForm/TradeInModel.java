@@ -2,12 +2,14 @@ package TradeInForm;
 
 import customers.LeadDetails;
 import customers.Leads;
+import dataProviders.DataProviderSet1;
+import dmsInventory.UploadWizard;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Julia on 09.03.2017.
@@ -149,5 +151,32 @@ public class TradeInModel extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         leads.removeFirstLead();
         waitForJSandJQueryToLoad();
+    }
+
+    @Test(dataProvider = "motorizedTypeWithoutSelect", dataProviderClass = DataProviderSet1.class)
+    public void modelsAreFromSelectedMake(String motorizedTypeForm, String motorizedTypeLead) {
+        driver.manage().deleteAllCookies();
+        driver.get(PropertyLoader.loadProperty("dms.url"));
+        waitForJSandJQueryToLoad();
+        dms.dmsHome2 dmsHome2 = dmsHome.loginToDms();
+        waitForJSandJQueryToLoad();
+        wait.until(isHomeBreadcrumbsVisible());
+        UploadWizard uploadWizard = dmsHome2.clickOnUploadWizardMenu();
+        waitForJSandJQueryToLoad();
+        wait.until(isUWFormVisible());
+        uploadWizard.selectMotorizedType(motorizedTypeForm);
+        waitForJSandJQueryToLoad();
+        uploadWizard.selectMake(1);
+        waitForJSandJQueryToLoad();
+        List<String> optionModel = uploadWizard.getModelSelectOptionsText();
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        tradeIn.selectMotorizedType(motorizedTypeForm);
+        waitForJSandJQueryToLoad();
+        tradeIn.selectMakeByIndex(1);
+        waitForJSandJQueryToLoad();
+        for (int i = 0; i < tradeIn.getModelSelectOptions().size(); i++) {
+            Assert.assertEquals(tradeIn.getModelSelectOptions().get(i).getText(), optionModel.get(i));
+        }
     }
 }

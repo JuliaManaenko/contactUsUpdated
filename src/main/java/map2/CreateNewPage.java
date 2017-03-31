@@ -1,6 +1,5 @@
 package map2;
 
-import dmsDealers.Dealers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,11 +28,11 @@ public class CreateNewPage extends Page {
         super(webDriver);
     }
 
-    public ContactEditor createPage(){
+    public map2PageEditor createPage() {
         nameInput.sendKeys("contactauto");
         pageURLInput.sendKeys("contactauto");
         titleInput.sendKeys("contactauto");
         createBtn.click();
-        return PageFactory.initElements(driver, ContactEditor.class);
+        return PageFactory.initElements(driver, map2PageEditor.class);
     }
 }

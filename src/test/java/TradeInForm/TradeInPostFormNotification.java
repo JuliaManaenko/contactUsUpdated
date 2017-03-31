@@ -1,13 +1,12 @@
 package TradeInForm;
 
-import contactUsPage.ContactUs;
+import dwsPages.FormsPage;
 import map2.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class TradeInPostFormNotification extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(isAddPageVisible());
-        ContactEditor mapEditor = map2.clickAddPage();
+        map2PageEditor mapEditor = map2.clickAddPage();
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         mapEditor.addTradeInWidget();
@@ -86,7 +85,7 @@ public class TradeInPostFormNotification extends TradeInTestBase2 {
         map2.clickTradeInTab();
         waitForJSandJQueryToLoad();
         Thread.sleep(500);
-        ContactEditor editor = map2.clickAddPage();
+        map2PageEditor editor = map2.clickAddPage();
         waitForJSandJQueryToLoad();
         Thread.sleep(500);
         editor.addTradeInWidget();
@@ -103,7 +102,7 @@ public class TradeInPostFormNotification extends TradeInTestBase2 {
         ContactUsWidgetSettings settings2 = htmlEditor.clickEditorOk();
         waitForJSandJQueryToLoad();
         Thread.sleep(500);
-        ContactEditor editor2 = settings2.clickOK();
+        map2PageEditor editor2 = settings2.clickOK();
         waitForJSandJQueryToLoad();
         Thread.sleep(500);
         editor2.activatePage();
@@ -114,7 +113,7 @@ public class TradeInPostFormNotification extends TradeInTestBase2 {
         Thread.sleep(500);
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
-        ContactUs tradeIn2 = previewPage.clickOnVisitWebsite();
+        FormsPage tradeIn2 = previewPage.clickOnVisitWebsite();
         waitForJSandJQueryToLoad();
         ArrayList<String> tabs3 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs3.get(2));
@@ -150,7 +149,7 @@ public class TradeInPostFormNotification extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(isAddPageVisible());
-        ContactEditor mapEditor = map2.clickAddPage();
+        map2PageEditor mapEditor = map2.clickAddPage();
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         mapEditor.addTradeInWidget();

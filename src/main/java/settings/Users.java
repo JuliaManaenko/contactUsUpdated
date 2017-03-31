@@ -51,7 +51,7 @@ public class Users extends Page {
         Action moveToElem = action.moveToElement(settingsMenuItem).build();
         moveToElem.perform();
         websiteMenuItem.click();*/
-        driver.get("http://www.tacker.ixloo.com/dms/settings/website#general");
+        driver.get("http://www.svtautotest.ixloo.com/dms/settings/website#general");
         return PageFactory.initElements(driver, Website.class);
     }
 

@@ -2,7 +2,6 @@
 package settings;
 
 import dms.SiteEditor;
-import dmsDealers.Dealers;
 import map2.MAP2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,7 +53,7 @@ public class Sites extends Page {
         Action moveToElem = action.moveToElement(toolsMenuItem).build();
         moveToElem.perform();
         map2MenuItem.click();*/
-        driver.get("http://www.tacker.ixloo.com/dms/tools/make_a_page_2");
+        driver.get("http://www.svtautotest.ixloo.com/dms/tools/make_a_page_2");
         return PageFactory.initElements(driver, MAP2.class);
     }
 
@@ -65,5 +64,11 @@ public class Sites extends Page {
         moveToElem.perform();
         websiteMenuItem.click();
         return PageFactory.initElements(driver, Website.class);
+    }
+
+    /*go to dms Users page*/
+    public Users clickOnUsersMenu() {
+        driver.get("http://www.svtautotest.ixloo.com/dms/settings/users");
+        return PageFactory.initElements(driver, Users.class);
     }
 }

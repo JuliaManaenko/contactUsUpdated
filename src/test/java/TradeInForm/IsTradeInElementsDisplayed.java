@@ -2,7 +2,6 @@ package TradeInForm;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 
 /**
  * Created by Julia on 14.02.2017.

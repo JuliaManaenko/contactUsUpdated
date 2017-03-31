@@ -1,11 +1,11 @@
 package TradeInForm;
 
-import contactUsPage.ContactUs;
 import dmsDealers.Dealers;
 import dmsDealers.SitePackage;
-import map2.ContactEditor;
+import dwsPages.FormsPage;
 import map2.MAP2;
 import map2.PreviewPage;
+import map2.map2PageEditor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
  */
 public class TradeInTurnOnAccessDealers extends TestBase {
 
-    private ContactEditor tradeInEditor;
+    private map2PageEditor tradeInEditor;
     private MAP2 map2;
     private WebDriverWait wait;
 
@@ -117,7 +117,7 @@ public class TradeInTurnOnAccessDealers extends TestBase {
 
     /*Contact Us widget should not be present in MAP2 in library*/
     @Test
-    public void tradeInWidgettExistsInLib() throws InterruptedException {
+    public void tradeInWidgetExistsInLib() throws InterruptedException {
         driver.manage().deleteAllCookies();
         driver.get(PropertyLoader.loadProperty("dms.url"));
         wait = new WebDriverWait(driver, 20);
@@ -257,7 +257,7 @@ public class TradeInTurnOnAccessDealers extends TestBase {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs.get(1));
         Thread.sleep(1000);
-        ContactUs dwsPage2 = previewPage.clickOnVisitWebsite();
+        FormsPage dwsPage2 = previewPage.clickOnVisitWebsite();
         waitForJSandJQueryToLoad();
         ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(2));

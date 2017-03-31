@@ -1,7 +1,6 @@
 /*Site Editor popup in Sites dms page*/
 package dms;
 
-import dmsDealers.Dealers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,6 +40,9 @@ public class SiteEditor extends Page {
 
     @FindBy(how = How.ID, using = "dws_form_trade_in")
     private WebElement tradeInWidgetCheckbox;
+
+    @FindBy(how = How.ID, using = "dws_search_advanced_horizontal")
+    private WebElement advSearchHorizWidgetCheckbox;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix']/a)[1]")
     private WebElement crossPage;
@@ -149,6 +151,30 @@ public class SiteEditor extends Page {
         /*click on Contact Us checkbox only if it is unchecked*/
         if (tradeInWidgetCheckbox.getAttribute("checked") == null) {
             tradeInWidgetCheckbox.click();
+        }
+        crossWidget.click();
+        okBtn.click();
+        return PageFactory.initElements(driver, Sites.class);
+    }
+
+    /*turn off Advanced Search Horizontal widget in access*/
+    public Sites turnOffAdvSearchHorizWidgetSite() {
+        widgetsBtn.click();
+        /*click on Contact Us checkbox only if it is checked*/
+        if (advSearchHorizWidgetCheckbox.isSelected()) {
+            advSearchHorizWidgetCheckbox.click();
+        }
+        crossWidget.click();
+        okBtn.click();
+        return PageFactory.initElements(driver, Sites.class);
+    }
+
+    /*turn on TradeIn widget in access*/
+    public Sites turnOnAdvSearchHorizWidgetSite() {
+        widgetsBtn.click();
+        /*click on Contact Us checkbox only if it is unchecked*/
+        if (advSearchHorizWidgetCheckbox.getAttribute("checked") == null) {
+            advSearchHorizWidgetCheckbox.click();
         }
         crossWidget.click();
         okBtn.click();

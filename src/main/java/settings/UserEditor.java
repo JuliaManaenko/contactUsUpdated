@@ -8,7 +8,6 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import page.Page;
-import utility.PropertyLoader;
 import utility.PropertyLoader2;
 
 /**
@@ -34,6 +33,9 @@ public class UserEditor extends Page {
 
     @FindBy(how = How.ID, using = "addon_make_a_page_2")
     private WebElement map2Checkbox;
+
+    @FindBy(how = How.ID, using = "addon_make_a_page_custom_pages")
+    private WebElement mapCustomCheckbox;
 
     @FindBy(how = How.ID, using = "settings_leads_email")
     private WebElement leadsEmailCheckbox;
@@ -87,6 +89,18 @@ public class UserEditor extends Page {
         Thread.sleep(500);
         if (map2Checkbox.getAttribute("checked") == null) {
             map2Checkbox.click();
+        }
+        Thread.sleep(500);
+        toolsItem.click();
+    }
+
+    /*turn on MAP2 checkbox in Access tab(if it is off)*/
+    public void turnOnMapCustomCheckbox() throws InterruptedException {
+        Thread.sleep(500);
+        toolsItem.click();
+        Thread.sleep(500);
+        if (mapCustomCheckbox.getAttribute("checked") == null) {
+            mapCustomCheckbox.click();
         }
         Thread.sleep(500);
         toolsItem.click();

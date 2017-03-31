@@ -5,7 +5,6 @@ import customers.Leads;
 import dataProviders.DataProviderSet1;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
@@ -129,7 +128,13 @@ public class TradeInMotorizedType extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         tradeIn.selectYear(yearForm);
         Assert.assertEquals(tradeIn.getMotorizedTypeSelectOptions().size(), 19);
+    }
 
+    @Test
+    public void motorizedTypeIsEnabledByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertTrue(tradeIn.isMotorizedTypeSelectEnabled());
     }
 
 

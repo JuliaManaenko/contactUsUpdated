@@ -1,7 +1,6 @@
 /*dms Dealers page*/
 package dmsDealers;
 
-import dms.dmsHome2;
 import map2.MAP2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -28,7 +27,7 @@ public class Dealers extends Page{
 
      /*declare elements on the page*/
 
-    @FindBy(how= How.ID, using ="dealer_282")
+    @FindBy(how = How.ID, using = "dealer_20")
     private WebElement domainInTree;
 
     @FindBy(how= How.ID, using ="site_package_editor_open")
@@ -83,7 +82,7 @@ public class Dealers extends Page{
         Action moveToElem = action.moveToElement(toolsMenuItem).build();
         moveToElem.perform();
         map2MenuItem.click();*/
-        driver.get("http://www.tacker.ixloo.com/dms/tools/make_a_page_2");
+        driver.get("http://www.svtautotest.ixloo.com/dms/tools/make_a_page_2");
         return PageFactory.initElements(driver, MAP2.class);
     }
 

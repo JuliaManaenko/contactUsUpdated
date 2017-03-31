@@ -5,7 +5,6 @@ import customers.Leads;
 import dataProviders.DataProviderSet1;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
@@ -133,5 +132,12 @@ public class TradeInOdometer extends TradeInTestBase2 {
         tradeIn.clickOdometerInput();
         Thread.sleep(1000);
         Assert.assertEquals(tradeIn.getOdometerInputBorderColor(), PropertyLoader.loadProperty("border_color_gray2"));
+    }
+
+    @Test
+    public void isOdometerEmptyByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.odometerGetValue(), "");
     }
 }

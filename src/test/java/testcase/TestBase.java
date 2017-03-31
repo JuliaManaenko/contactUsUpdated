@@ -1,8 +1,8 @@
 package testcase;
 
-import contactUsPage.ContactUs;
 import dms.dmsHome;
 import dms.dmsHome2;
+import dwsPages.FormsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,15 +11,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
 import org.testng.annotations.*;
-import settings.LeadsEmail;
 import settings.UserEditor;
 import settings.Users;
 import settings.Website;
 import utility.LogFactory;
 import utility.PropertyLoader;
 import webdriver.WebDriverFactory;
-import org.slf4j.Logger;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +29,7 @@ public class TestBase {
     private static final Logger LOG = LogFactory.getLogger(TestBase.class);
 
     protected WebDriver driver;
-    protected ContactUs dwsPage;
+    protected FormsPage dwsPage;
     protected dmsHome dmsHome;
     protected dmsHome2 dmsHome2;
 
@@ -81,7 +80,7 @@ public class TestBase {
         }
     }
 
-    /*run browser, open dms link, initialize dmsHome and contactUs pages*/
+    /*run browser, open dms link, initialize dmsHome and formsPage pages*/
     @BeforeClass
     @Parameters({"browserName"})
     public void setup(String browserName) throws Exception {
@@ -92,7 +91,7 @@ public class TestBase {
         driver.get(PropertyLoader.loadProperty("dms.url"));
         waitForJSandJQueryToLoad();
         dmsHome = PageFactory.initElements(driver, dmsHome.class);
-        dwsPage = PageFactory.initElements(driver, ContactUs.class);
+        dwsPage = PageFactory.initElements(driver, FormsPage.class);
 
     }
 
@@ -105,6 +104,7 @@ public class TestBase {
         }
     }
 
+    /*delete the last user in Users tree*/
     @AfterSuite
     @Parameters({"browserName"})
     public void backToDefaultSettings(String browserName) throws InterruptedException {

@@ -1,11 +1,11 @@
 package TradeInForm;
 
-import contactUsPage.ContactUs;
 import dataProviders.DataProviderSet1;
-import map2.ContactEditor;
+import dwsPages.FormsPage;
 import map2.ContactUsWidgetSettings;
 import map2.MAP2;
 import map2.PreviewPage;
+import map2.map2PageEditor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -30,9 +30,9 @@ public class TradeInWidgetTitle {
 
     WebDriverWait wait;
     ArrayList<String> tabs2;
-    ContactEditor editor2;
+    map2PageEditor editor2;
     WebDriver driver;
-    ContactUs tradeIn;
+    FormsPage tradeIn;
     dms.dmsHome dmsHome;
     dms.dmsHome2 dmsHome2;
 
@@ -83,7 +83,7 @@ public class TradeInWidgetTitle {
         wait = new WebDriverWait(driver, 10);
         driver.get(PropertyLoader.loadProperty("dms.url"));
         dmsHome = PageFactory.initElements(driver, dms.dmsHome.class);
-        tradeIn = PageFactory.initElements(driver, ContactUs.class);
+        tradeIn = PageFactory.initElements(driver, FormsPage.class);
         dmsHome2 = dmsHome.loginToDms();
         waitForJSandJQueryToLoad();
         MAP2 map2 = dmsHome2.clickOnMap2Menu();
@@ -93,7 +93,7 @@ public class TradeInWidgetTitle {
         wait.until(isLoadingInvisible());
         wait.until(getConditionForTitle());
         Thread.sleep(2000);
-        ContactEditor editor = map2.clickAddPage();
+        map2PageEditor editor = map2.clickAddPage();
         wait.until(isLoadingInvisible());
         Thread.sleep(1000);
         editor.addTradeInWidget();
@@ -115,12 +115,12 @@ public class TradeInWidgetTitle {
         tabs2 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs2.get(1));
         Thread.sleep(1000);
-        ContactUs contactUs2 = previewPage.clickOnVisitWebsite();
+        FormsPage formsPage2 = previewPage.clickOnVisitWebsite();
         waitForJSandJQueryToLoad();
         ArrayList<String> tabs3 = new ArrayList<String>(driver.getWindowHandles()); //switch between tabs
         driver.switchTo().window(tabs3.get(2));
         Thread.sleep(500);
-        Assert.assertEquals(contactUs2.getWidgetTitleText(), text);
+        Assert.assertEquals(formsPage2.getWidgetTitleText(), text);
     }
 
     protected ExpectedCondition<Boolean> isLoadingInvisible() {

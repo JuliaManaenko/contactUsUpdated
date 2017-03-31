@@ -1,7 +1,8 @@
 /*MAP2 preview page*/
 package map2;
 
-import contactUsPage.ContactUs;
+import dwsPages.FormsPage;
+import dwsPages.SearchesPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,8 +23,14 @@ public class PreviewPage extends Page {
     private WebElement visitWebsiteBtn;
 
     /*click on Visit Website button, that opens Contact Us dws page*/
-    public ContactUs clickOnVisitWebsite() {
+    public FormsPage clickOnVisitWebsite() {
         visitWebsiteBtn.click();
-        return PageFactory.initElements(driver, ContactUs.class);
+        return PageFactory.initElements(driver, FormsPage.class);
+    }
+
+    /*click on Visit Website button, that opens Home dws page*/
+    public SearchesPage clickOnVisitWebsiteHome() {
+        visitWebsiteBtn.click();
+        return PageFactory.initElements(driver, SearchesPage.class);
     }
 }

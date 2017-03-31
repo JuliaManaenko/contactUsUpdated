@@ -43,18 +43,19 @@ public class ContactUsWidgetSettings extends Page {
     @FindBy(how= How.XPATH, using ="//span[@class='ui-icon ui-icon-closethick']")
     private WebElement cross;
 
-    public ContactEditor clickOK(){
+    public map2PageEditor clickOK() {
       okBtn.click();
-      return PageFactory.initElements(driver, ContactEditor.class);
+        return PageFactory.initElements(driver, map2PageEditor.class);
     }
 
-    public ContactEditor clickCancel(){
+    public map2PageEditor clickCancel() {
         cancelBtn.click();
-        return PageFactory.initElements(driver, ContactEditor.class);
+        return PageFactory.initElements(driver, map2PageEditor.class);
     }
-    public ContactEditor clickCross(){
+
+    public map2PageEditor clickCross() {
         cross.click();
-        return PageFactory.initElements(driver, ContactEditor.class);
+        return PageFactory.initElements(driver, map2PageEditor.class);
     }
 
     public void setAnimationDisabled(){

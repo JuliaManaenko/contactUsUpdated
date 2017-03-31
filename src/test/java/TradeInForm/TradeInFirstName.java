@@ -3,11 +3,8 @@ package TradeInForm;
 import customers.LeadDetails;
 import customers.Leads;
 import dataProviders.DataProviderSet1;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
@@ -111,5 +108,12 @@ public class TradeInFirstName extends TradeInTestBase2 {
         leads.removeFirstLead();
         waitForJSandJQueryToLoad();
         Thread.sleep(1000);
+    }
+
+    @Test
+    public void isFirstNameEmptyByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertEquals(tradeIn.firstNameGetValue(), "");
     }
 }

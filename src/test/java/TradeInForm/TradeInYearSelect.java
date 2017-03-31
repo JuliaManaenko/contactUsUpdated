@@ -6,7 +6,6 @@ import dataProviders.DataProviderSet1;
 import org.slf4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.LogFactory;
 import utility.PropertyLoader;
 
@@ -107,5 +106,12 @@ public class TradeInYearSelect extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
         leads.removeFirstLead();
         waitForJSandJQueryToLoad();
+    }
+
+    @Test
+    public void yearIsEnabledByDefault() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
+        waitForJSandJQueryToLoad();
+        Assert.assertTrue(tradeIn.isYearSelectEnabled());
     }
 }

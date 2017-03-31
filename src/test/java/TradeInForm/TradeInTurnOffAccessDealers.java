@@ -2,8 +2,8 @@ package TradeInForm;
 
 import dmsDealers.Dealers;
 import dmsDealers.SitePackage;
-import map2.ContactEditor;
 import map2.MAP2;
+import map2.map2PageEditor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -23,7 +23,7 @@ import utility.PropertyLoader;
  */
 public class TradeInTurnOffAccessDealers extends TestBase {
 
-    private ContactEditor tradeInEditor;
+    private map2PageEditor tradeInEditor;
     private MAP2 map2;
     private WebDriverWait wait;
 
@@ -335,6 +335,7 @@ public class TradeInTurnOffAccessDealers extends TestBase {
         map22.clickTradeInTab();
         waitForJSandJQueryToLoad();
         wait.until(getConditionForTitle());
+        Thread.sleep(1000);
         map22.deletePage();
         waitForJSandJQueryToLoad();
     }

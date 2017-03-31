@@ -6,10 +6,10 @@ import dataProviders.DataProviderSet1;
 import dmsInventory.UploadWizard;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import testcase.TradeInTestBase2;
 import utility.PropertyLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Julia on 06.03.2017.
@@ -138,7 +138,6 @@ public class TradeInMake extends TradeInTestBase2 {
         waitForJSandJQueryToLoad();
     }
 
-    //TODO: assert in loop
     @Test(dataProvider = "motorizedTypeWithoutSelect", dataProviderClass = DataProviderSet1.class)
     public void makesAreFromSelectedMotorType(String motorizedTypeForm, String motorizedTypeLead) {
         driver.manage().deleteAllCookies();
@@ -152,15 +151,14 @@ public class TradeInMake extends TradeInTestBase2 {
         wait.until(isUWFormVisible());
         uploadWizard.selectMotorizedType(motorizedTypeForm);
         waitForJSandJQueryToLoad();
-        String optionMake = uploadWizard.getMakeSelectOptionsText();
+        List<String> optionMake = uploadWizard.getMakeSelectOptionsText();
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
         tradeIn.selectMotorizedType(motorizedTypeForm);
         waitForJSandJQueryToLoad();
         for (int i = 0; i < tradeIn.getMakeSelectOptions().size(); i++) {
-            Assert.assertEquals(tradeIn.getMakeSelectOptions().get(i).getText(), optionMake);
+            Assert.assertEquals(tradeIn.getMakeSelectOptions().get(i).getText(), optionMake.get(i));
         }
-
     }
 
 }

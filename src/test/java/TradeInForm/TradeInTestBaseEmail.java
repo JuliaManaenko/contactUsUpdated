@@ -1,9 +1,9 @@
 package TradeInForm;
 
-import contactUsPage.ContactUs;
 import customers.Leads;
-import map2.ContactEditor;
+import dwsPages.FormsPage;
 import map2.MAP2;
+import map2.map2PageEditor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -30,11 +30,11 @@ import java.util.concurrent.TimeUnit;
 public class TradeInTestBaseEmail {
 
     protected WebDriver driver;
-    protected ContactUs tradeIn;
+    protected FormsPage tradeIn;
     protected dms.dmsHome dmsHome;
     protected WebDriverWait wait;
 
-    /*run browser, add contact Us page in MAP2, initialize dmsHome and contactUs pages, open dws link*/
+    /*run browser, add contact Us page in MAP2, initialize dmsHome and formsPage pages, open dws link*/
     @BeforeClass
     @Parameters({"browserName"})
     public void setup(String browserName) throws Exception {
@@ -54,7 +54,7 @@ public class TradeInTestBaseEmail {
         waitForJSandJQueryToLoad();
         wait.until(isLoadingInvisible());
         wait.until(isAddPageVisible());
-        ContactEditor editor = map2.clickAddPage();
+        map2PageEditor editor = map2.clickAddPage();
         wait.until(isLoadingInvisible());
         editor.addTradeInWidget();
         waitForJSandJQueryToLoad();
@@ -74,7 +74,7 @@ public class TradeInTestBaseEmail {
         waitForJSandJQueryToLoad();
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("tradein.url"));
         waitForJSandJQueryToLoad();
-        tradeIn = PageFactory.initElements(driver, ContactUs.class);
+        tradeIn = PageFactory.initElements(driver, FormsPage.class);
     }
 
     @AfterMethod
