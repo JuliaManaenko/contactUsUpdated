@@ -208,8 +208,13 @@
                  <class name="advancedSearchHorizontal.AdvSearchModelOnCustom"/>
                  <class name="advancedSearchHorizontal.AdvSearchHorizStyleSelectt"/>
                  <class name="advancedSearchHorizontal.AdvSearchHorizStyleOnInventory"/>
-                 <class name="advancedSearchHorizontal.AdvSearchHorizStyleOnCustom"/>-->
+                 <class name="advancedSearchHorizontal.AdvSearchHorizStyleOnCustom"/>
             <class name="advancedSearchHorizontal.AdvSearchHorizYearSlide"/>
+            <class name="advancedSearchHorizontal.AdvSearchHorizYearSlideOnInventory"/>
+            <class name="advancedSearchHorizontal.AdvSearchHorizYearSlideOnCustom"/>
+            <class name="advancedSearchHorizontal.AdvSearchHorizOdometerSlide"/>
+            <class name="advancedSearchHorizontal.AdvSearchHorizOdometerSlideOnInventory"/>-->
+            <class name="advancedSearchHorizontal.AdvSearchHorizOdometerSlideOnCustom"/>
         </classes>
     </test>
 

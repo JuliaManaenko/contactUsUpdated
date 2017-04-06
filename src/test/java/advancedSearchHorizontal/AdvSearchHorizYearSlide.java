@@ -1,5 +1,6 @@
 package advancedSearchHorizontal;
 
+import dmsInventory.Inventory;
 import org.slf4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,7 +14,7 @@ public class AdvSearchHorizYearSlide extends AdvSearchTestBase2 {
 
     private static final Logger LOG = LogFactory.getLogger(AdvSearchHorizYearSlide.class);
 
-   /* @Test
+    @Test
     public void fromSliderIsEnabled() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
         waitForJSandJQueryToLoad();
@@ -84,7 +85,7 @@ public class AdvSearchHorizYearSlide extends AdvSearchTestBase2 {
         String minYear = inventory.getMinYear();
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
         waitForJSandJQueryToLoad();
-        searchesPage.moveYearFromSlider();
+        searchesPage.moveYearFromSlider(3);
         waitForJSandJQueryToLoad();
         Assert.assertEquals(searchesPage.getYearSlideMinValue(), minYear);
     }
@@ -106,7 +107,7 @@ public class AdvSearchHorizYearSlide extends AdvSearchTestBase2 {
         String maxYear = inventory.getMaxYear();
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
         waitForJSandJQueryToLoad();
-        searchesPage.moveYearToSlider();
+        searchesPage.moveYearToSlider(3);
         waitForJSandJQueryToLoad();
         Assert.assertEquals(searchesPage.getYearSlideMaxValue(), maxYear);
     }
@@ -155,14 +156,14 @@ public class AdvSearchHorizYearSlide extends AdvSearchTestBase2 {
     public void yearMinValueHidden() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
         waitForJSandJQueryToLoad();
-        Assert.assertEquals(searchesPage.getMinValueVisibility(), "hidden");
+        Assert.assertEquals(searchesPage.getYearMinValueVisibility(), "hidden");
     }
 
     @Test(description = "Year min value visibility is hidden by default")
     public void yearMaxValueHidden() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
         waitForJSandJQueryToLoad();
-        Assert.assertEquals(searchesPage.getMaxValueVisibility(), "hidden");
+        Assert.assertEquals(searchesPage.getYearMaxValueVisibility(), "hidden");
     }
 
     @Test(description = "Progress bar is blue")
@@ -176,8 +177,8 @@ public class AdvSearchHorizYearSlide extends AdvSearchTestBase2 {
     public void yearProgressBarDefaultWidth() {
         driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
         waitForJSandJQueryToLoad();
-        Assert.assertEquals(searchesPage.getYearProgressBarWidth(), "92.26");
-    }*/
+        Assert.assertEquals(searchesPage.getYearProgressBarWidth(0, 5), "92.26");
+    }
 
     @Test(description = "Click search without selecting year - in search results should be from min to max years")
     public void clickSearchWithoutYear() {
@@ -188,5 +189,135 @@ public class AdvSearchHorizYearSlide extends AdvSearchTestBase2 {
         searchesPage.clickSearchBtn();
         waitForJSandJQueryToLoad();
         Assert.assertTrue(driver.getCurrentUrl().contains(("_yearfrom_") + minYear + "_yearto_" + maxYear + "_"));
+    }
+
+    @Test(description = "Slide year from - min year should be visible")
+    public void yearMinValueVisible() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(3);
+        Assert.assertEquals(searchesPage.getYearMinValueVisibility(), "visible");
+    }
+
+    @Test(description = "Slide year to- max year should be visible")
+    public void yearMaxValueVisible() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearToSlider(3);
+        Assert.assertEquals(searchesPage.getYearMaxValueVisibility(), "visible");
+    }
+
+    @Test(description = "Slide year from - from value should change")
+    public void yearFromValueChanged() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        String yearChanged = searchesPage.getYearFromChanged(3);
+        searchesPage.moveYearFromSlider(3);
+        Assert.assertEquals(searchesPage.getYearSlideFromValue(), yearChanged);
+    }
+
+    @Test(description = "Slide year to - to value should change")
+    public void yearToValueChanged() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        String yearChanged = searchesPage.getYearToChanged(3);
+        searchesPage.moveYearToSlider(3);
+        Assert.assertEquals(searchesPage.getYearSlideToValue(), yearChanged);
+    }
+
+    @Test(description = "Slide year from - click search - in search result should be changed year from")
+    public void yearFromValueChangedInURL() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        String yearChanged = searchesPage.getYearFromChanged(3);
+        searchesPage.moveYearFromSlider(3);
+        searchesPage.clickSearchBtn();
+        waitForJSandJQueryToLoad();
+        Assert.assertTrue(driver.getCurrentUrl().contains(("_yearfrom_") + yearChanged));
+    }
+
+    @Test(description = "Slide year to - click search - in search result should be changed year to")
+    public void yearToValueChangedInURL() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        String yearChanged = searchesPage.getYearToChanged(3);
+        searchesPage.moveYearToSlider(3);
+        searchesPage.clickSearchBtn();
+        waitForJSandJQueryToLoad();
+        Assert.assertTrue(driver.getCurrentUrl().contains(("_yearto_") + yearChanged));
+    }
+
+    @Test(description = "Slide year from - progress bar width is changed")
+    public void progressBarWidthChangedFrom() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(3);
+        Assert.assertEquals(searchesPage.getYearProgressBarWidth(0, 5), "55.35");
+    }
+
+    @Test(description = "Slide year to - progress bar width is changed")
+    public void progressBarWidthChangedTo() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearToSlider(3);
+        Assert.assertEquals(searchesPage.getYearProgressBarWidth(0, 5), "55.35");
+    }
+
+    @Test(description = "Slide year from and year to on the same value - appears year primary value (yearFrom is visible) ")
+    public void yearPrimaryValueAppears() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(2);
+        searchesPage.moveYearToSlider(2);
+        Assert.assertEquals(searchesPage.getYearFromValueVisibility(), "visible");
+    }
+
+    @Test(description = "Slide year from and year to on the same value - appears year primary value (yearTo is invisible)")
+    public void yearPrimaryValueAppears2() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(2);
+        searchesPage.moveYearToSlider(2);
+        Assert.assertEquals(searchesPage.getYearToValueVisibility(), "hidden");
+    }
+
+    @Test(description = "Slide year from and year to on the same value - click search - year from and year to shoud be the same (ex. 2007)")
+    public void yearPrimaryValueInURL() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(2);
+        String yearFromValue = searchesPage.getYearSlideFromValue();
+        searchesPage.moveYearToSlider(2);
+        searchesPage.clickSearchBtn();
+        Assert.assertTrue(driver.getCurrentUrl().contains(("_yearfrom_") + yearFromValue + "_yearto_" + yearFromValue + "_"));
+    }
+
+    @Test(description = "Slide year from and year to to be 1 year between them - appears year single value (ex. 2007-2008)")
+    public void yearSingleValueAppears() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(2);
+        searchesPage.moveYearToSlider2(2);
+        Assert.assertEquals(searchesPage.getYearSingleValueVisibility(), "visible");
+    }
+
+    @Test(description = "Slide year from and year to to be 1 year between them - appears year single value (ex. 2007-2008)")
+    public void yearSingleValue() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(2);
+        String yearFromValue = searchesPage.getYearSlideFromValue();
+        String yearFromValuePlus = searchesPage.getYearSlideFromValuePlus(1);
+        searchesPage.moveYearToSlider2(2);
+        Assert.assertEquals(searchesPage.getYearSingleValue(), yearFromValue + " — " + yearFromValuePlus);
+    }
+
+    @Test(description = "Slide year from and year to on the same value - progress bar width is 0")
+    public void yearPrimaryProgressBar() {
+        driver.get(PropertyLoader.loadProperty("dws.url2") + PropertyLoader.loadProperty("home.url"));
+        waitForJSandJQueryToLoad();
+        searchesPage.moveYearFromSlider(2);
+        searchesPage.moveYearToSlider(2);
+        Assert.assertEquals(searchesPage.getYearProgressBarWidth(0, 1), "0");
     }
 }

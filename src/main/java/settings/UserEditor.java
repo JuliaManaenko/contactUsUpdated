@@ -49,7 +49,7 @@ public class UserEditor extends Page {
     @FindBy(how = How.ID, using = "addon_webmail")
     private WebElement webMailCheckbox;
 
-    @FindBy(how = How.XPATH, using = "(//a[@class='button-style b_save notranslate'])[7]")
+    @FindBy(how = How.XPATH, using = "//span[@id='user_editor_save']//a")
     private WebElement saveBtn;
 
     @FindBy(how = How.ID, using = "login")

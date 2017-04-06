@@ -1,6 +1,5 @@
 package dmsInventory;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,11 +46,20 @@ public class Inventory extends Page {
     @FindBy(how = How.ID, using = "jqgh_Body")
     private WebElement bodyColumnTitle;
 
+    @FindBy(how = How.ID, using = "inventory-list_Body")
+    private WebElement bodyColumnTitle2;
+
     @FindBy(how = How.ID, using = "jqgh_Year")
     private WebElement yearColumnTitle;
 
     @FindBy(how = How.ID, using = "inventory-list_Year")
     private WebElement yearColumnTitle2;
+
+    @FindBy(how = How.ID, using = "jqgh_mileage")
+    private WebElement odometerColumnTitle;
+
+    @FindBy(how = How.ID, using = "inventory-list_mileage")
+    private WebElement odometerColumnTitle2;
 
     @FindBy(how = How.XPATH, using = "//span[@id='edit_fields']//a")
     private WebElement editFieldsBtn;
@@ -62,6 +70,9 @@ public class Inventory extends Page {
     @FindBy(how = How.XPATH, using = "//li[@class='ui-state-default ui-element ui-draggable'][contains(text(), 'Year')]/a")
     private WebElement yearItemPlus;
 
+    @FindBy(how = How.XPATH, using = "//li[@class='ui-state-default ui-element ui-draggable'][contains(text(), 'Odometer')]/a")
+    private WebElement odometerItemPlus;
+
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'ui-button')]/span[contains(text(), 'Apply')]")
     private WebElement applyBtn;
 
@@ -70,6 +81,9 @@ public class Inventory extends Page {
 
     @FindBy(how = How.XPATH, using = "//td[@aria-describedby='inventory-list_Year']")
     private List<WebElement> yearCell;
+
+    @FindBy(how = How.XPATH, using = "//td[@aria-describedby='inventory-list_mileage']")
+    private List<WebElement> odometerCell;
 
     @FindBy(how = How.XPATH, using = "//input[@value='inv']")
     private WebElement invRadioBtn;
@@ -212,26 +226,31 @@ public class Inventory extends Page {
     /*add column*/
 
     public void addBodyColumn() {
-        try {
-            bodyColumnTitle.isDisplayed();
-        } catch (NoSuchElementException ex) {
+        if (bodyColumnTitle2.getCssValue("display").equals("none")) {
             editFieldsBtn.click();
             waitForJSandJQueryToLoad();
             bodyItemPlus.click();
             applyBtn.click();
-
         }
     }
 
     public void addYearColumn() {
         LOG.info("year title attribute is " + yearColumnTitle2.getCssValue("display"));
         if (yearColumnTitle2.getCssValue("display").equals("none")) {
-
             editFieldsBtn.click();
             waitForJSandJQueryToLoad();
             yearItemPlus.click();
             applyBtn.click();
+        }
+    }
 
+    public void addOdometerColumn() {
+        LOG.info("odometer title attribute is " + odometerColumnTitle2.getCssValue("display"));
+        if (odometerColumnTitle2.getCssValue("display").equals("none")) {
+            editFieldsBtn.click();
+            waitForJSandJQueryToLoad();
+            odometerItemPlus.click();
+            applyBtn.click();
         }
     }
 
@@ -357,5 +376,116 @@ public class Inventory extends Page {
         if (Integer.parseInt(firstYear1) > Integer.parseInt(firstYear2)) {
             return firstYear1;
         } else return firstYear2;
+    }
+
+    public String getMinOdometer() {
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String firstOdometer1 = odometerCell.get(0).getText();
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String firstOdometer2 = odometerCell.get(0).getText();
+        if (Integer.parseInt(firstOdometer1) < Integer.parseInt(firstOdometer2)) {
+            return firstOdometer1;
+        } else return firstOdometer2;
+    }
+
+    public String getMinOdometerWithoutSpace() {
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String stringValue1 = odometerCell.get(0).getText();
+        String[] nums1 = stringValue1.split(" ");
+        String firstOdometer1 = "";
+        for (int i = 0; i < nums1.length; i++) {
+            firstOdometer1 += nums1[i];
+        }
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String stringValue2 = odometerCell.get(0).getText();
+        String[] nums2 = stringValue2.split(" ");
+        String firstOdometer2 = "";
+        for (int i = 0; i < nums2.length; i++) {
+            firstOdometer2 += nums2[i];
+        }
+        Integer odo1 = Integer.parseInt(firstOdometer1);
+        Integer odo2 = Integer.parseInt(firstOdometer2);
+        if (odo1 % 10 != 0) {
+            firstOdometer1 = firstOdometer1.substring(0, (firstOdometer1.length() - 1)) + "0";
+        }
+        if (odo2 % 10 != 0) {
+            firstOdometer2 = firstOdometer2.substring(0, (firstOdometer2.length() - 1)) + "0";
+        }
+        LOG.info("firstOdometer1 is " + firstOdometer1);
+        LOG.info("firstOdometer2 is " + firstOdometer2);
+        if (Integer.parseInt(firstOdometer1) < Integer.parseInt(firstOdometer2)) {
+            return firstOdometer1;
+        } else return firstOdometer2;
+    }
+
+    public String getMaxOdometer() {
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String firstOdometer1 = odometerCell.get(0).getText();
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String firstOdometer2 = odometerCell.get(0).getText();
+        if (Integer.parseInt(firstOdometer1) > Integer.parseInt(firstOdometer2)) {
+            return firstOdometer1;
+        } else return firstOdometer2;
+    }
+
+    public String getMaxOdometerWithoutSpace() {
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String stringValue1 = odometerCell.get(0).getText(); //get String value of odometer (ex. "25 101")
+        String[] nums1 = stringValue1.split(" "); //get an array from string odometer, that is contained from digits, divided by space (ex. ["25", "101"])
+        String firstOdometer1 = ""; // declare a string variable for getting correct number here (ex. "25101")
+        for (int i = 0; i < nums1.length; i++) { // add elements of array to string (ex. "25" + "101" = "25101")
+            firstOdometer1 += nums1[i];
+        }
+        odometerColumnTitle.click();
+        waitForJSandJQueryToLoad();
+        String stringValue2 = odometerCell.get(0).getText();
+        String[] nums2 = stringValue2.split(" ");
+        String firstOdometer2 = "";
+        for (int i = 0; i < nums2.length; i++) {
+            firstOdometer2 += nums2[i];
+        }
+        Integer odo1 = Integer.parseInt(firstOdometer1);
+        Integer odo2 = Integer.parseInt(firstOdometer2);
+        /*
+        if (odo1 % 10 != 0) {
+            firstOdometer1 = firstOdometer1.substring(0, (firstOdometer1.length() - 1)) + "0";
+        }
+        if (odo2 % 10 != 0) {
+            firstOdometer2 = firstOdometer2.substring(0, (firstOdometer2.length() - 1)) + "0";
+        }*/
+        LOG.info("odo 1 is " + odo1);
+        int length1 = firstOdometer1.length();
+        Double temp1 = odo1 / (Math.pow(10, (length1 - 1)));
+        LOG.info("temp 1 is " + temp1.intValue());
+        Integer temp11 = temp1.intValue() + 1;
+        LOG.info("temp 11 is " + temp11);
+        Double result1 = temp11 * Math.pow(10, (length1 - 1));
+        LOG.info("result1 is " + result1.intValue());
+
+        LOG.info("odo 2 is " + odo2);
+        int length2 = firstOdometer2.length();
+        Double temp2 = odo2 / (Math.pow(10, (length2 - 1)));
+        LOG.info("temp 2 is " + temp2.intValue());
+        Integer temp21 = temp2.intValue() + 1;
+        LOG.info("temp 21 is " + temp21);
+        Double result2 = temp21 * Math.pow(10, (length2 - 1));
+        LOG.info("result2 is " + result2.intValue());
+
+        /*LOG.info("firstOdometer1 is " + firstOdometer1);
+        LOG.info("firstOdometer2 is " + firstOdometer2);
+        if (Integer.parseInt(firstOdometer1) > Integer.parseInt(firstOdometer2)) {
+            return firstOdometer1;
+        } else return firstOdometer2;*/
+
+        if (result1 > result2) {
+            return Integer.toString(result1.intValue());
+        } else return Integer.toString(result2.intValue());
     }
 }
